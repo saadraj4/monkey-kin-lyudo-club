@@ -110,7 +110,7 @@ function SignIn() {
               color="info"
               fontWeight="medium"
               textGradient
-              onClick={() => navigate("/authentication/sign-up")}
+              onClick={() => navigate("/authentication/Reset-Password")}
             >
               Click Here
             </SoftTypography>
