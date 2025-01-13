@@ -40,22 +40,22 @@ function OrdersOverview() {
         />
         <TimelineItem
           color="error"
-          title="You got 20 coins on winning of 2 player game"
+          title="You got 20 coins on winning of 2 player game"
           dateTime="21 DEC 11 PM"
         />
         <TimelineItem
           color="info"
-          title="You got 20 coins on winning of 2 player game"
+          title="You got 20 coins on winning of 2 player game"
           dateTime="21 DEC 9:34 PM"
         />
         <TimelineItem
           color="warning"
-          title="You got 20 coins on winning of 2 player game"
+          title="You got 20 coins on winning of 2 player game"
           dateTime="20 DEC 2:20 AM"
         />
         <TimelineItem
           color="primary"
-          title="You got 20 coins on winning of 2 player game"
+          title="You got 20 coins on winning of 2 player game"
           dateTime="18 DEC 4:54 AM"
         />
         
