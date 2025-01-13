@@ -29,7 +29,7 @@ import SoftAvatar from "components/SoftAvatar";
 import SoftButton from "components/SoftButton";
 
 function ProfilesList({ title, profiles }) {
-  const renderProfiles = profiles.map(({ image, name, description, action }) => (
+  const renderProfiles = profiles.map(({ image, name, id, date }) => (
     <SoftBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>
       <SoftBox mr={2}>
         <SoftAvatar src={image} alt="something here" variant="rounded" shadow="md" />
@@ -44,26 +44,15 @@ function ProfilesList({ title, profiles }) {
           {name}
         </SoftTypography>
         <SoftTypography variant="caption" color="text">
-          {description}
+          {id}
         </SoftTypography>
       </SoftBox>
       <SoftBox ml="auto">
-        {action.type === "internal" ? (
-          <SoftButton component={Link} to={action.route} variant="text" color="info">
-            {action.label}
+        
+          <SoftButton variant="text" color="info">
+            {date}
           </SoftButton>
-        ) : (
-          <SoftButton
-            component="a"
-            
-            target="_blank"
-            
-            variant="text"
-            
-          >
-            {action.label}
-          </SoftButton>
-        )}
+       
       </SoftBox>
     </SoftBox>
   ));
