@@ -47,7 +47,9 @@ import Users from "./components/recentRegistration"
 import Purchase from "./components/recentPurchase"
 import PurchaseData from "./data/PurchaseData"
 import profilesListData from "./data/RecentRegistrationData";
-import OrdersOverview from "./components/OrderOverview";
+import OrdersOverview from "./components/notifications";
+import TOP5Players from "./components/top5Players";
+import TOP5PlayersData from "./data/Top5PlayersData"
 
 function Dashboard() {
   const { size } = typography;
@@ -61,7 +63,7 @@ function Dashboard() {
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Number of Players Registered" }}
-                count="$53,000"
+                count="500"
                 percentage={{ color: "success", text: "+55%" }}
                 icon={{ color: "info", component: "paid" }}
               />
@@ -69,7 +71,7 @@ function Dashboard() {
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Total Winnig Coins of Admin" }}
-                count="2,300"
+                count="2300"
                 percentage={{ color: "success", text: "+3%" }}
                 icon={{ color: "info", component: "public" }}
               />
@@ -77,7 +79,7 @@ function Dashboard() {
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Number of Online Player" }}
-                count="+3,462"
+                count="+346"
                 percentage={{ color: "error", text: "-2%" }}
                 icon={{ color: "info", component: "emoji_events" }}
               />
@@ -85,7 +87,7 @@ function Dashboard() {
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Number of Affiliate Player" }}
-                count="$103,430"
+                count="103"
                 percentage={{ color: "success", text: "+5%" }}
                 icon={{
                   color: "info",
@@ -113,7 +115,7 @@ function Dashboard() {
           </Grid>
         </SoftBox>
 
-        <Users title="Top 5 Players" profiles={profilesListData} />
+        <TOP5Players title="Top 5 Players" profiles={TOP5PlayersData} />
 
 
 

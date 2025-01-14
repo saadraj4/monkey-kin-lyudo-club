@@ -22,7 +22,7 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
 // Soft UI Dashboard React examples
-import TimelineItem from "examples/Timeline/TimelineItem";
+import TimelineItem from "../../../../examples/Timeline/TimelineItem";
 
 function OrdersOverview() {
   return (
@@ -30,34 +30,43 @@ function OrdersOverview() {
       <SoftBox pt={3} px={3}>
         <SoftTypography variant="h6" fontWeight="medium">
           Notifications
-          
         </SoftTypography>
       </SoftBox>
       <SoftBox p={2}>
         <TimelineItem
           color="success"
-          title="You got 20 coins on winning of 2 player game"
-          dateTime="22 DEC 7:20 PM"
+          title="Congratulations!"
+          content="You got 20 coins on winning of 2 player game"
+          read = {true}
+          icon="notifications"
         />
         <TimelineItem
           color="error"
-          title="You got 20 coins on winning of 2 player game"
-          dateTime="21 DEC 11 PM"
+          title="Congratulations!"
+          content="You got 20 coins on winning of 2 player game"
+          read = {true}
+          icon="notifications"
         />
         <TimelineItem
           color="info"
-          title="You got 20 coins on winning of 2 player game"
-          dateTime="21 DEC 9:34 PM"
+          title="Congratulations!"
+          content="You got 20 coins on winning of 2 player game"
+          read = {false}
+          icon="notifications"
         />
         <TimelineItem
           color="warning"
-          title="You got 20 coins on winning of 2 player game"
-          dateTime="20 DEC 2:20 AM"
+          title="Congratulations!"
+          content="You got 20 coins on winning of 2 player game"
+          read = {false}
+          icon="notifications"
         />
         <TimelineItem
           color="primary"
-          title="You got 20 coins on winning of 2 player game"
-          dateTime="18 DEC 4:54 AM"
+          title="Congratulations!"
+          content="You got 20 coins on winning of 2 player game"
+          read = {false}
+          icon="notifications"
         />
         
       </SoftBox>
