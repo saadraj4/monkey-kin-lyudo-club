@@ -28,7 +28,13 @@ import SoftTypography from "components/SoftTypography";
 function MiniStatisticsCard({ bgColor = MiniStatisticsCard.defaultProps.bgColor, title, count, percentage, icon, direction }) {
    
   return (
-    <Card>
+    <Card
+    sx={{
+      boxShadow: "0px 4px 10px rgb(78, 78, 233)", // Custom shadow
+      borderRadius: "12px", // Optional: To make it look more prominent and modern
+    }}
+    elevation={4}
+    >
       <SoftBox bgColor={bgColor} variant="gradient">
         <SoftBox p={2}>
           <Grid container alignItems="center">

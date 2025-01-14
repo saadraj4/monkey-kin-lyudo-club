@@ -39,7 +39,7 @@ Coded by www.creative-tim.com
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
-import VirtualReality from "layouts/virtual-reality";
+import AssetsManagement from "./layouts/assetsManagement";
 import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
@@ -55,6 +55,7 @@ import SpaceShip from "examples/Icons/SpaceShip";
 import CustomerSupport from "examples/Icons/CustomerSupport";
 import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
+import UserManagement from "./layouts/userManagement"
 
 const routes = [
   {
@@ -69,10 +70,10 @@ const routes = [
   {
     type: "collapse",
     name: "User Management",
-    key: "tables",
-    route: "/tables",
+    key: "User Management",
+    route: "/UserManagement",
     icon: <Office size="12px" />,
-    component: <Tables />,
+    component: <UserManagement />,
     noCollapse: true,
   },
   {
@@ -87,16 +88,16 @@ const routes = [
   {
     type: "collapse",
     name: "Assets",
-    key: "virtual-reality",
-    route: "/virtual-reality",
+    key: "Assets",
+    route: "/assetsManagement",
     icon: <Cube size="12px" />,
-    component: <VirtualReality />,
+    component: <AssetsManagement />,
     noCollapse: true,
   },
   {
     type: "collapse",
     name: "Game Rules",
-    key: "billing",
+    key: "Game-Rules",
     route: "/billing",
     icon: <Settings size="12px" />,
     component: <RTL />,
@@ -105,7 +106,7 @@ const routes = [
   {
     type: "collapse",
     name: "Monetization",
-    key: "billing",
+    key: "Monetization",
     route: "/billing",
     icon: <Settings size="12px" />,
     component: <RTL />,
@@ -114,7 +115,7 @@ const routes = [
   {
     type: "collapse",
     name: "Notifications",
-    key: "billing",
+    key: "Notifications",
     route: "/billing",
     icon: <Settings size="12px" />,
     component: <RTL />,
@@ -123,7 +124,7 @@ const routes = [
   {
     type: "collapse",
     name: "Analytics",
-    key: "billing",
+    key: "Analytics",
     route: "/billing",
     icon: <Settings size="12px" />,
     component: <RTL />,

@@ -23,31 +23,31 @@ import team4 from "assets/images/team-4.jpg";
 const profilesListData = [
   {
     image: kal,
-    id: "Player123",
+    id: "Player1",
     description: "item name",
     date:"01-01-25",
   },
   {
     image: marie,
-    id: "Player123",
+    id: "Player2",
     description: "item name",
     date:"01-01-25",
   },
   {
     image: ivana,
-    id: "Player123",
+    id: "Player3",
     description: "item name",
     date:"01-01-25",
   },
   {
     image: team4,
-    id: "Player123",
+    id: "Player4",
     description: "item name",
     date:"01-01-25",
   },
   {
     image: team3,
-    id: "Player123",
+    id: "Player5",
     description: "item name",
     date:"01-01-25",
   },

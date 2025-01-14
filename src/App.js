@@ -42,6 +42,7 @@ import createCache from "@emotion/cache";
 // Soft UI Dashboard React routes
 import routes from "routes";
 import OTPVerification from "./layouts/authentication/components/OTP-Input";
+import UserProfile from "./layouts/userManagement/UserProfile";
 import ResetPassword from "./layouts/authentication/forget-password";
 // Soft UI Dashboard React contexts
 import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
@@ -182,6 +183,7 @@ export default function App() {
       <Route path="/authentication/otp-verification" element={<OTPVerification />} />
       <Route path="/NotFound" element={<NotFound />} />
       <Route path="/authentication/Reset-Password" element={<ResetPassword />} />
+      <Route path="/user-profile/:id" element={<UserProfile />} />
       
         {getRoutes(routes)}
         <Route path="*" element={<Navigate to="/NotFound" />} />

@@ -30,13 +30,14 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 function CoverLayout({ color, header, title, description, image, top, children }) {
   return (
     <PageLayout background="white">
-      
       <Grid
         container
-        justifyContent="center"
+        justifyContent="center"  // Center horizontally
+        alignItems="center"      // Center vertically
         sx={{
-          minHeight: "75vh",
+          minHeight: "100vh",     // Make sure it takes full screen height
           margin: 0,
+          
         }}
       >
         <Grid item xs={11} sm={8} md={5} xl={3}>
@@ -85,10 +86,10 @@ function CoverLayout({ color, header, title, description, image, top, children }
           </SoftBox>
         </Grid>
       </Grid>
-
     </PageLayout>
   );
 }
+
 
 // Setting default values for the props of CoverLayout
 CoverLayout.defaultProps = {
