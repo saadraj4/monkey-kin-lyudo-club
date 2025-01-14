@@ -30,6 +30,7 @@ function OrdersOverview() {
       <SoftBox pt={3} px={3}>
         <SoftTypography variant="h6" fontWeight="medium">
           Notifications
+          
         </SoftTypography>
       </SoftBox>
       <SoftBox p={2}>
