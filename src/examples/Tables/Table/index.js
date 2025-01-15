@@ -83,7 +83,6 @@ function Table({ columns, rows }) {
 
     const tableRow = columns.map(({ name, align }) => {
       let template;
-
       if (Array.isArray(row[name])) {
         template = (
           <SoftBox

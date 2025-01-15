@@ -37,8 +37,8 @@ Coded by www.creative-tim.com
 
 // Soft UI Dashboard React layouts
 import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
-import Billing from "layouts/billing";
+import PlatformSetting from './layouts/platformSetting'
+// import platformSetting from "./layouts/platformSetting";
 import AssetsManagement from "./layouts/assetsManagement";
 import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
@@ -79,10 +79,10 @@ const routes = [
   {
     type: "collapse",
     name: "Settings",
-    key: "billing",
-    route: "/billing",
+    key: "Settings",
+    route: "/Settings",
     icon: <CreditCard size="12px" />,
-    component: <Billing />,
+    component: <PlatformSetting />,
     noCollapse: true,
   },
   {
