@@ -43,9 +43,12 @@ function Table({ columns, rows }) {
   const { borderWidth } = borders;
 
   const renderColumns = columns.map(({ name, align, width }, key) => {
+    
     let pl;
     let pr;
-
+    if(name === "rate"){
+      name = "Win Rate";
+    }
     if (key === 0) {
       pl = 3;
       pr = 3;
@@ -56,6 +59,7 @@ function Table({ columns, rows }) {
       pl = 1;
       pr = 1;
     }
+    
 
     return (
       <SoftBox

@@ -16,7 +16,8 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
@@ -29,8 +30,34 @@ import homeDecor1 from "assets/images/home-decor-1.jpg";
 import homeDecor2 from "assets/images/home-decor-2.jpg";
 import homeDecor3 from "assets/images/home-decor-3.jpg";
 import Sidenav from "../SideNavbar";
+import Slider from "react-slick";
+
 
 function Overview() {
+    const settings = {
+        dots: true, // Show navigation dots
+        infinite: true, // Enable infinite looping
+        speed: 500, // Transition speed in ms
+        slidesToShow: 4, // Number of slides visible at a time
+        slidesToScroll: 1, // Number of slides to scroll per action
+        autoplay: true, // Enable autoplay
+  autoplaySpeed: 1000, // Time interval between transitions (in ms)
+//   pauseonh
+        responsive: [
+            { breakpoint: 1024, settings: { slidesToShow: 3 } },
+            { breakpoint: 768, settings: { slidesToShow: 2 } },
+            { breakpoint: 480, settings: { slidesToShow: 1 } },
+          ],
+    };
+    const cardData = [
+        { id: "1", image: homeDecor1, price: "100" },
+        { id: "2", image: homeDecor2, price: "100" },
+        { id: "3", image: homeDecor3, price: "100" },
+        { id: "4", image: homeDecor3, price: "100" },
+        { id: "19", image: homeDecor1, price: "100" },
+        { id: "20", image: homeDecor2, price: "100" },
+    ];
+
     return (
         <DashboardLayout>
             <Sidenav />
@@ -39,7 +66,7 @@ function Overview() {
                     <SoftBox pt={2} px={2}>
                         <SoftBox mb={0.5}>
                             <SoftTypography variant="h6" fontWeight="medium">
-                                Shop Management
+                                Assets Management
                             </SoftTypography>
                         </SoftBox>
                         <SoftBox mb={1}>
@@ -49,39 +76,23 @@ function Overview() {
                         </SoftBox>
                     </SoftBox>
                     <SoftBox p={2}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor1}
-                                    price="100"
-                                    id="1"
-
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor2}
-                                    price="100"
-                                    id="2"
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor3}
-                                    price="100"
-                                    id="3"
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor3}
-                                    price="100"
-                                    id="4"
-                                />
-                            </Grid>
-
-                        </Grid>
+                        <Slider {...settings}>
+                            {cardData.map((card) => (
+                                <Card key={card.id} style={{ padding: "0 10px" }}>
+                                   
+                                    <Grid item xs={12} md={6} xl={3}>
+                                    <DefaultProjectCard
+                                        image={card.image}
+                                        price={card.price}
+                                        id={card.id}
+                                    />
+                                    
+                                    </Grid>
+                                </Card>
+                            ))}
+                        </Slider>
                     </SoftBox>
+
 
                     <SoftBox pt={2} px={2}>
 
