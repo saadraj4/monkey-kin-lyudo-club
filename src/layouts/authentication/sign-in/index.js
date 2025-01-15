@@ -46,11 +46,7 @@ function SignIn() {
 
   return (
 
-    // <CoverLayout
-    //   title="Welcome back"
-    //   description="Enter your email and password to sign in"
 
-    // >
 
     <Card
       style={{
@@ -114,7 +110,6 @@ function SignIn() {
         </SoftBox>
       </SoftBox>
     </Card>
-    //  </CoverLayout >
 
   );
 }
