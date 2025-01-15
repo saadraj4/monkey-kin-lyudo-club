@@ -24,7 +24,6 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 // import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-
 // New Tasks
 import Users from "./components/recentRegistration"
 import Purchase from "./components/recentPurchase"
@@ -33,10 +32,14 @@ import profilesListData from "./data/RecentRegistrationData";
 import OrdersOverview from "./components/notifications";
 import TOP5Players from "./components/top5Players";
 import TOP5PlayersData from "./data/Top5PlayersData"
+import Sidenav from "../SideNavbar";
+
 
 function Dashboard() {
-
+  
   return (
+    <>
+    <Sidenav />
     <DashboardLayout>
       <SoftBox py={3}>
         <SoftBox mb={3}>
@@ -162,6 +165,7 @@ function Dashboard() {
       </SoftBox>
       {/* <Footer /> */}
     </DashboardLayout>
+    </>
   );
 }
 

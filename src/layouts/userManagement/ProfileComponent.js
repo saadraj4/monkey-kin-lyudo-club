@@ -13,66 +13,67 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleSubmit = (event) => {
-    console.log("Profile updated",event);
+    console.log("Profile updated", event);
     handleClose();
-  } 
-    return (
+  }
+  return (
     <>
-      <SoftBox>
-        <Card
-          sx={{
-            boxShadow: "0px 4px 10px rgb(78, 78, 233)", // Custom shadow
-            borderRadius: "12px",
-          }}
-          elevation={4}
-        >
-          <SoftBox
-            display="flex"
-            alignItems="center"
-            p={5}
-            sx={{
-              border: "1px solid #ccc",
-              borderRadius: "8px",
-              boxShadow: "0px 4px 8px rgb(78, 78, 233)",
-              maxWidth: "400px",
-              backgroundColor: "#fff",
-            }}
-          >
-            {/* Profile Image */}
-            <Avatar
-              src={image}
-              alt="User Profile"
-              sx={{
-                width: 100,
-                height: 100,
-                border: "2px solid #000",
-                marginRight: "16px",
-              }}
-            />
+      <SoftBox
+        // sx={{
+        //   boxShadow: "0px 4px 10px rgb(78, 78, 233)", // Custom shadow
+        //   borderRadius: "12px",
+        // }}
+        elevation={4}>
 
-            {/* User Details */}
-            <SoftBox>
-              <SoftTypography variant="h6" fontWeight="bold">
-                {name}
-              </SoftTypography>
-              <SoftTypography variant="body2" color="textSecondary">
-                Player ID: {playerId}
-              </SoftTypography>
-              <SoftTypography variant="body2" color="textSecondary">
-                Win Streak: {winStreak}
-              </SoftTypography>
-              <SoftTypography variant="body2" color="textSecondary">
-                Win Ratio: {winRatio}
-              </SoftTypography>
-              <SoftTypography variant="body2" color="textSecondary">
-                Level: {level}
-              </SoftTypography>
-            </SoftBox>
+        <SoftBox
+          display="flex"
+          alignItems="center"
+          p={5}
+          sx={{
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            boxShadow: "0px 4px 8px rgb(78, 78, 233)",
+            maxWidth: "400px",
+            backgroundColor: "#fff",
+          }}
+        >
+          {/* Profile Image */}
+          <Avatar
+            src={image}
+            alt="User Profile"
+            sx={{
+              width: 100,
+              height: 100,
+              border: "2px solid #000",
+              marginRight: "16px",
+            }}
+          />
+
+          {/* User Details */}
+          <SoftBox>
+            <SoftTypography variant="h6" fontWeight="bold">
+              {name}
+            </SoftTypography>
+            <SoftTypography variant="body2" color="textSecondary">
+              Player ID: {playerId}
+            </SoftTypography>
+            <SoftTypography variant="body2" color="textSecondary">
+              Win Streak: {winStreak}
+            </SoftTypography>
+            <SoftTypography variant="body2" color="textSecondary">
+              Win Ratio: {winRatio}
+            </SoftTypography>
+            <SoftTypography variant="body2" color="textSecondary">
+              Level: {level}
+            </SoftTypography>
+            <SoftButton variant="gradient" color="info" onClick={handleOpen}>
+              Edit Profile
+            </SoftButton>
           </SoftBox>
-          <SoftButton variant="gradient" color="info" onClick={handleOpen}>
-            Edit Profile
-          </SoftButton>
-        </Card>
+
+        </SoftBox>
+
+
       </SoftBox>
 
       {/* Modal for editing profile */}

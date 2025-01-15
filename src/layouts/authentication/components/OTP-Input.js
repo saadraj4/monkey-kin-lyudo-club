@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const OTPVerification = () => {
-    const [otp, setOtp] = useState(["", "", "", ""]);
+    const [otp, setOtp] = useState(["", "", "", "","",""]);
     const [isActive, setIsActive] = useState(false);
     const navigate = useNavigate();
 
@@ -82,7 +82,7 @@ const OTPVerification = () => {
         newOtp[index] = value;
         setOtp(newOtp);
 
-        if (value !== "" && index < 3) {
+        if (value !== "" && index < 5) {
             document.getElementById(`otp-input-${index + 1}`).focus();
         }
 
@@ -90,7 +90,7 @@ const OTPVerification = () => {
             document.getElementById(`otp-input-${index - 1}`).focus();
         }
 
-        if (!otp.includes("") && otp.length === 4) {
+        if (!otp.includes("") && otp.length === 6) {
             setIsActive(true);
         } else {
             setIsActive(false);
@@ -104,8 +104,7 @@ const OTPVerification = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const otpValue = otp.join("");
-        if (otpValue === "1234") {
-            alert("Verification successful");
+        if (otpValue === "123456") {
             navigate("/dashboard");
         } else {
             alert("Invalid OTP");

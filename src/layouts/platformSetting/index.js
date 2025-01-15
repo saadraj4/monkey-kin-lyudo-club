@@ -3,10 +3,11 @@ import { TextField, Button, Grid, Typography, Card } from "@mui/material";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
-
+import Sidenav from "../SideNavbar";
 const PlatformManagement = () => {
     return (
         <DashboardLayout>
+            <Sidenav />
             <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
                 <SoftTypography variant="h4" gutterBottom>
                     Platform Management

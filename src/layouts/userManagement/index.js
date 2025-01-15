@@ -13,7 +13,7 @@ import Table from "examples/Tables/Table";
 // Data
 import authorsTableData from "./data/UserTableData";
 import SoftButton from "components/SoftButton";
-
+import SideNav from "../SideNavbar"
 function UserManagement() {
   const { columns, rows } = authorsTableData;
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,6 +72,7 @@ function UserManagement() {
 
   return (
     <DashboardLayout>
+      <SideNav />
       <DashboardNavbar />
       <SoftBox py={3}>
         <SoftBox mb={3}>

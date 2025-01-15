@@ -105,9 +105,9 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Monetization",
-    key: "Monetization",
-    route: "/billing",
+    name: "Shop",
+    key: "shop",
+    route: "/shops",
     icon: <Settings size="12px" />,
     component: <RTL />,
     noCollapse: true,

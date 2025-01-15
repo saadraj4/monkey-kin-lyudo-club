@@ -18,7 +18,7 @@ import { Grid } from "@mui/material";
 import SoftButton from "../../components/SoftButton";
 import { useNavigate } from "react-router-dom";
 import Transactions from "./Transactions";
-
+import SideNavbar from "../SideNavbar";  
 function Tables() {
     const navigate = useNavigate();
     const { columns, rows } = AffiliateInvitees;
@@ -40,6 +40,7 @@ function Tables() {
 
     return (
         <DashboardLayout>
+            <SideNavbar />
             <SoftBox py={3}>
                 {/* Go Back Button */}
                 <SoftBox mb={3} display="flex" justifyContent="flex-start">
