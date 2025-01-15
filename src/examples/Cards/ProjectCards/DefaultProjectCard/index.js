@@ -1,178 +1,167 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// react-router-dom components
-import { Link } from "react-router-dom";
-
-// prop-types is a library for typechecking of props
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-
-// @mui material components
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import Tooltip from "@mui/material/Tooltip";
-
-// Soft UI Dashboard React components
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
-import SoftAvatar from "components/SoftAvatar";
 
-function DefaultProjectCard({ image, label, title, description, action, authors }) {
-  const renderAuthors = authors.map(({ image: media, name }) => (
-    <Tooltip key={name} title={name} placement="bottom">
-      <SoftAvatar
-        src={media}
-        alt={name}
-        size="xs"
-        sx={({ borders: { borderWidth }, palette: { white } }) => ({
-          border: `${borderWidth[2]} solid ${white.main}`,
-          cursor: "pointer",
-          position: "relative",
-          ml: -1.25,
+function DefaultProjectCard({ image, price, id }) {
+  const [open, setOpen] = useState(false);
+  const [formValues, setFormValues] = useState({
+    package: id||"",
+    price: price || "",
+  });
 
-          "&:hover, &:focus": {
-            zIndex: "10",
-          },
-        })}
-      />
-    </Tooltip>
-  ));
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = () => {
+    console.log("Updated Values:", formValues);
+    handleClose();
+  };
 
   return (
-    <Card
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: "transparent",
-        boxShadow: "none",
-        overflow: "visible",
-      }}
-    >
-      <SoftBox position="relative" width="100.25%" shadow="xl" borderRadius="xl">
-        <CardMedia
-          src={image}
-          component="img"
-          title={title}
+    <>
+      <Card
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "transparent",
+          boxShadow: "none",
+          overflow: "visible",
+        }}
+      >
+        <SoftBox position="relative" width="100.25%" shadow="xl" borderRadius="xl">
+          <CardMedia
+            src={image}
+            component="img"
+            sx={{
+              maxWidth: "100%",
+              margin: 0,
+              boxShadow: ({ boxShadows: { md } }) => md,
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
+          />
+        </SoftBox>
+        <SoftBox pt={3} px={0.5} mb={2}>
+          <SoftBox>
+            <SoftTypography
+              component="a"
+              rel="noreferrer"
+              variant="h5"
+              textTransform="capitalize"
+            >
+              {price}
+            </SoftTypography>
+            <SoftBox display="flex" justifyContent="space-between" alignItems="end">
+              <SoftButton
+                component="a"
+                rel="noreferrer"
+                variant="gradient"
+                size="small"
+                color="info"
+                onClick={handleOpen}
+              >
+                Edit
+              </SoftButton>
+            </SoftBox>
+          </SoftBox>
+        </SoftBox>
+      </Card>
+
+      {/* Modal */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="edit-modal-title"
+        aria-describedby="edit-modal-description"
+      >
+        <Box
           sx={{
-            maxWidth: "100%",
-            margin: 0,
-            boxShadow: ({ boxShadows: { md } }) => md,
-            objectFit: "cover",
-            objectPosition: "center",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            borderRadius: 2,
+            p: 4,
           }}
-        />
-      </SoftBox>
-      <SoftBox pt={3} px={0.5}>
-        <SoftBox mb={1}>
-          <SoftTypography
-            variant="button"
-            fontWeight="regular"
-            textTransform="capitalize"
-            textGradient
-          >
-            {label}
+        >
+          <SoftTypography id="edit-modal-title" variant="h6" component="h2" mb={2}>
+            Edit Details
           </SoftTypography>
-        </SoftBox>
-        <SoftBox mb={1}>
-          {action.type === "internal" ? (
-            <SoftTypography
-              component={Link}
-              to={action.route}
-              variant="h5"
-              textTransform="capitalize"
-            >
-              {title}
-            </SoftTypography>
-          ) : (
-            <SoftTypography
-              component="a"
-              href={action.route}
-              target="_blank"
-              rel="noreferrer"
-              variant="h5"
-              textTransform="capitalize"
-            >
-              {title}
-            </SoftTypography>
-          )}
-        </SoftBox>
-        <SoftBox mb={3} lineHeight={0}>
-          <SoftTypography variant="button" fontWeight="regular" color="text">
-            {description}
-          </SoftTypography>
-        </SoftBox>
-        <SoftBox display="flex" justifyContent="space-between" alignItems="center">
-          {action.type === "internal" ? (
+          <TextField
+            fullWidth
+            label="Package"
+            name="package"
+            value={formValues.package}
+            onChange={handleChange}
+            variant="outlined"
+            sx={{ mb: 2 }}
+            InputLabelProps={{
+              color: "black",
+              shrink: true, // Ensures the label is always shrunk
+            }}
+
+          />
+          <TextField
+            fullWidth
+            label="Price"
+            name="price"
+            value={formValues.price}
+            onChange={handleChange}
+            variant="outlined"
+            type="text"
+            sx={{ mb: 2 }}
+            InputLabelProps={{
+              color: "black",
+              shrink: true, // Ensures the label is always shrunk
+            }}
+          />
+          <SoftBox display="flex" justifyContent="space-between">
             <SoftButton
-              component={Link}
-              to={action.route}
+              variant="gradient"
+              size="small"
+              color="info"
+              onClick={handleSave}
+            >
+              Save
+            </SoftButton>
+            <SoftButton
               variant="outlined"
               size="small"
-              color={action.color}
+              color="secondary"
+              onClick={handleClose}
             >
-              {action.label}
+              Cancel
             </SoftButton>
-          ) : (
-            <SoftButton
-              component="a"
-              href={action.route}
-              target="_blank"
-              rel="noreferrer"
-              variant="outlined"
-              size="small"
-              color={action.color}
-            >
-              {action.label}
-            </SoftButton>
-          )}
-          <SoftBox display="flex">{renderAuthors}</SoftBox>
-        </SoftBox>
-      </SoftBox>
-    </Card>
+          </SoftBox>
+        </Box>
+      </Modal>
+    </>
   );
 }
 
-// Setting default values for the props of DefaultProjectCard
-DefaultProjectCard.defaultProps = {
-  authors: [],
-};
-
 // Typechecking props for the DefaultProjectCard
 DefaultProjectCard.propTypes = {
+  id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  action: PropTypes.shape({
-    type: PropTypes.oneOf(["external", "internal"]),
-    route: PropTypes.string.isRequired,
-    color: PropTypes.oneOf([
-      "primary",
-      "secondary",
-      "info",
-      "success",
-      "warning",
-      "error",
-      "light",
-      "dark",
-      "white",
-    ]).isRequired,
-    label: PropTypes.string.isRequired,
-  }).isRequired,
-  authors: PropTypes.arrayOf(PropTypes.object),
+  price: PropTypes.string.isRequired,
 };
 
 export default DefaultProjectCard;

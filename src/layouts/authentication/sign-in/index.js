@@ -23,7 +23,7 @@ function SignIn() {
   const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState(true);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");  
+  const [password, setPassword] = useState("");
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -45,17 +45,14 @@ function SignIn() {
   };
 
   return (
+
+    // <CoverLayout
+    //   title="Welcome back"
+    //   description="Enter your email and password to sign in"
+
+    // >
+
     <Card
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      minHeight: "100vh",  // Ensures the container takes full viewport height
-    }}
-    >
-    <CoverLayout
-      title="Welcome back"
-      description="Enter your email and password to sign in"
       style={{
         display: "flex",
         justifyContent: "center",
@@ -63,6 +60,11 @@ function SignIn() {
         minHeight: "100vh",  // Ensures the container takes full viewport height
       }}
     >
+      <SoftBox>
+        <SoftTypography>
+          Welcome Back
+        </SoftTypography>
+      </SoftBox>
       <SoftBox
         component="form"
         role="form"
@@ -111,8 +113,9 @@ function SignIn() {
           </SoftTypography>
         </SoftBox>
       </SoftBox>
-    </CoverLayout>
     </Card>
+    //  </CoverLayout >
+
   );
 }
 

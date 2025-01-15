@@ -17,6 +17,7 @@ import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCar
 import { Grid } from "@mui/material";
 import SoftButton from "../../components/SoftButton";
 import { useNavigate } from "react-router-dom";
+import Transactions from "./Transactions";
 
 function Tables() {
     const navigate = useNavigate();
@@ -53,13 +54,13 @@ function Tables() {
                 <SoftBox mb={3}>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6} xl={4}>
-                            <Profile 
-                             image="https://via.placeholder.com/150" // Replace with actual image URL
-                             name="John Doe"
-                             playerId="12345"
-                             winStreak="10"
-                             winRatio="75%"
-                             level="Gold"
+                            <Profile
+                                image="https://via.placeholder.com/150" // Replace with actual image URL
+                                name="John Doe"
+                                playerId="12345"
+                                winStreak="10"
+                                winRatio="75%"
+                                level="Gold"
                             />
                         </Grid>
                     </Grid>
@@ -93,6 +94,9 @@ function Tables() {
                         </Grid>
 
                     </Grid>
+                </SoftBox>
+                <SoftBox mb={3}>
+                    <Transactions />
                 </SoftBox>
                 <SoftBox mb={3}>
                     <Card>
