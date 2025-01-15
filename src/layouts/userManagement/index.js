@@ -14,6 +14,8 @@ import Table from "examples/Tables/Table";
 import authorsTableData from "./data/UserTableData";
 import SoftButton from "components/SoftButton";
 import SideNav from "../SideNavbar"
+import SoftInput from "components/SoftInput";
+import SoftTypographyRoot from "components/SoftTypography/SoftTypographyRoot";
 function UserManagement() {
   const { columns, rows } = authorsTableData;
   const [currentPage, setCurrentPage] = useState(1);
@@ -78,7 +80,7 @@ function UserManagement() {
         <SoftBox mb={3}>
           <Card>
             <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-              <SoftTypography variant="h6">USERS</SoftTypography>
+              <SoftTypography variant="h6">Player</SoftTypography>
               {/* Add New Player Button */}
               <SoftButton variant="gradient" color="info" onClick={handleOpenModal}>
                 Add New Player
@@ -113,55 +115,58 @@ function UserManagement() {
       <Dialog open={openModal} onClose={handleCloseModal}>
         <DialogTitle>Add New Player</DialogTitle>
         <DialogContent>
+          <SoftTypography
+            sx={{
+              marginTop: 4,
+
+            }}
+            variant="body2">
+            Player Name
+          </SoftTypography>
           {/* Player Name Field */}
-          <TextField
-            label="Player Name"
+          <SoftInput
+            placeholder="Player Name"
             variant="outlined"
             fullWidth
             value={newPlayer}
             onChange={handleInputChange}
-            InputLabelProps={{
-              color: "black",
-              shrink: true, // Ensures the label is always shrunk
-            }}
-            sx={{
-              marginTop: 4,
-            }}
-          />
 
+          />
+          <SoftTypography
+            sx={{ marginTop: 4, }}
+            variant="body2">
+            Email
+          </SoftTypography>
           {/* Email Field */}
-          <TextField
-            label="Email"
+          <SoftInput
+            placeholder="Email"
             variant="outlined"
             fullWidth
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)} // Use appropriate state update function
-            InputLabelProps={{
-              color: "black",
-              shrink: true,
-            }}
-            sx={{
-              marginTop: 4,
-            }}
+
+
           />
 
           {/* Image Upload Field */}
-          <TextField
-            label="Player Image"
+          <SoftTypography
+            sx={{
+              marginTop: 4,
+
+            }}
+            variant="body2">
+            Player Image
+          </SoftTypography>
+          <SoftInput
+            placeholder="Player Image"
             variant="outlined"
             type="file"
             fullWidth
             onChange={handleImageChange} // Function to handle the file input change
-            InputLabelProps={{
-              color: "black",
-              shrink: true,
-            }}
 
 
-            sx={{
-              marginTop: 4,
 
-            }}
+
           />
         </DialogContent>
 

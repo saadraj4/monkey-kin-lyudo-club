@@ -46,7 +46,7 @@ function Dashboard() {
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Number of Players Registered" }}
+                title={{ text: "No. of Players" }}
                 count="500"
                 percentage={{ color: "success", text: "+55%" }}
                 icon={{ color: "info", component: "paid" }}
@@ -55,7 +55,7 @@ function Dashboard() {
             </Grid>
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Total Winnig Coins of Admin" }}
+                title={{ text: "Fee Coins" }}
                 count="2300"
                 percentage={{ color: "success", text: "+3%" }}
                 icon={{ color: "info", component: "public" }}
@@ -63,7 +63,7 @@ function Dashboard() {
             </Grid>
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Number of Online Player" }}
+                title={{ text: "Online Player" }}
                 count="+346"
                 percentage={{ color: "error", text: "-2%" }}
                 icon={{ color: "info", component: "emoji_events" }}
@@ -71,7 +71,7 @@ function Dashboard() {
             </Grid>
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Number of Affiliate Player" }}
+                title={{ text: "Total Revenue" }}
                 count="103"
                 percentage={{ color: "success", text: "+5%" }}
                 icon={{
@@ -100,7 +100,7 @@ function Dashboard() {
           </Grid>
         </SoftBox>
 
-        <TOP5Players title="Top 5 Players" profiles={TOP5PlayersData} />
+        <TOP5Players title="Top 5 League Players" profiles={TOP5PlayersData} />
 
 
 

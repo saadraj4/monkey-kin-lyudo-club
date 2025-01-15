@@ -41,10 +41,11 @@ function ProfilesList({ title, profiles }) {
         justifyContent="center"
       >
         <SoftTypography variant="button" fontWeight="medium">
-          {id}
+          {description}
         </SoftTypography>
         <SoftTypography variant="caption" color="text">
-          {description}
+        {id}
+
         </SoftTypography>
       </SoftBox>
       <SoftBox ml="auto">

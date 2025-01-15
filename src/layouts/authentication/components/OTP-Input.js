@@ -2,9 +2,11 @@ import SoftBox from "components/SoftBox";
 import SoftButton from "components/SoftButton";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const OTPVerification = () => {
-    const [otp, setOtp] = useState(["", "", "", "","",""]);
+    const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     const [isActive, setIsActive] = useState(false);
     const navigate = useNavigate();
 
@@ -107,41 +109,55 @@ const OTPVerification = () => {
         if (otpValue === "123456") {
             navigate("/dashboard");
         } else {
-            alert("Invalid OTP");
+            toast.error("Invalid OTP", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+            setOtp(["", "", "", "", "", ""]);
         }
     };
 
     return (
-        <div style={styles.wrapper}>
-            <div style={styles.container}>
-                <header style={styles.header}>
-                    <i className="bx bxs-check-shield"></i>
-                </header>
-                <h4 style={styles.h4}>Enter OTP Code</h4>
-                <form onSubmit={handleSubmit}>
-                    <div style={styles.inputField}>
-                        {otp.map((value, index) => (
-                            <input
-                                key={index}
-                                id={`otp-input-${index}`}
-                                type="text"
-                                value={value}
-                                style={styles.input}
-                                onChange={(e) => handleInputChange(e, index)}
-                                onKeyUp={(e) => handleInputChange(e, index)}
-                                disabled={index > 0 && otp[index - 1] === ""}
-                            />
-                        ))}
-                    </div>
+        <>
+            <ToastContainer />
+            <div style={styles.wrapper}>
+                <div style={styles.container}>
+                    <header style={styles.header}>
+                        <i className="bx bxs-check-shield"></i>
+                    </header>
 
-                    <SoftBox mt={4} mb={1}>
-                        <SoftButton variant="gradient" color="info" fullWidth onClick={handleSubmit} type="submit" style={styles.button}>
-                            Verify OTP
-                        </SoftButton>
-                    </SoftBox>
-                </form>
+                    <h4 style={styles.h4}>Enter OTP Code</h4>
+                    <form onSubmit={handleSubmit}>
+                        <div style={styles.inputField}>
+                            {otp.map((value, index) => (
+                                <input
+                                    key={index}
+                                    id={`otp-input-${index}`}
+                                    type="text"
+                                    value={value}
+                                    style={styles.input}
+                                    onChange={(e) => handleInputChange(e, index)}
+                                    onKeyUp={(e) => handleInputChange(e, index)}
+                                    disabled={index > 0 && otp[index - 1] === ""}
+                                />
+                            ))}
+                        </div>
+
+                        <SoftBox mt={4} mb={1}>
+                            <SoftButton variant="gradient" color="info" fullWidth onClick={handleSubmit} type="submit" style={styles.button}>
+                                Verify OTP
+                            </SoftButton>
+                        </SoftBox>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
