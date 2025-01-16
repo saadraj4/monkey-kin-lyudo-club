@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import SoftBox from "components/SoftBox";
 
-function DefaultProjectCard({ image, price, id }) {
+function DefaultProjectCard({ image, price, id,flag }) {
 
   const onRemove = (id) => { 
     console.log(`Removing item with id: ${id}`);
@@ -35,7 +35,7 @@ function DefaultProjectCard({ image, price, id }) {
           }}
         />
         {/* Cross Icon Button */}
-        <IconButton
+        {flag && <IconButton
           sx={{
             position: "absolute",
             top: 8,
@@ -49,7 +49,7 @@ function DefaultProjectCard({ image, price, id }) {
           onClick={() => onRemove(id)}
         >
           <CloseIcon />
-        </IconButton>
+        </IconButton>}
       </SoftBox>
     </Card>
   );
@@ -60,7 +60,7 @@ DefaultProjectCard.propTypes = {
   id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  onRemove: PropTypes.func.isRequired, // New prop for remove handler
+  flag: PropTypes.bool.isRequired,
 };
 
 export default DefaultProjectCard;

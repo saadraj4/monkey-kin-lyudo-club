@@ -1,21 +1,39 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Avatar, Card, Modal, TextField } from "@mui/material";
+import { Box, Avatar, Card, Modal, TextField, MenuItem, Select, InputLabel, DialogActions, Dialog, DialogTitle, DialogContent, FormControl } from "@mui/material";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
+import SoftInput from "components/SoftInput";
 
 function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
   // State to manage the modal's visibility
-  const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openGift, setOpenGift] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState("");
+  const [selectedVariant, setSelectedVariant] = useState("");
+  const assets = ['Asset 1', 'Asset 2', 'Asset 3']; // Replace with your actual assets
+  const variants = ['Variant 1', 'Variant 2', 'Variant 3']; // Replace with your actual variants
+
 
   // Handlers to open and close the modal
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpenEdit = () => setOpenEdit(true);
+  const handleCloseEdit = () => setOpenEdit(false);
+  const handleOpenGift = () => setOpenGift(true);
+  const handleCloseGift = () => setOpenGift(false);
+
   const handleSubmit = (event) => {
-    console.log("Profile updated", event);
-    handleClose();
+    console.log("Gift updated", event);
+    handleCloseGift();
   }
+  const handleAssetChange = (event) => {
+    setSelectedAsset(event.target.value);
+  };
+
+  const handleVariantChange = (event) => {
+    setSelectedVariant(event.target.value);
+  };
+
   return (
     <>
       <SoftBox
@@ -63,12 +81,21 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
             <SoftTypography variant="body2" color="textSecondary">
               Win Ratio: {winRatio}
             </SoftTypography>
-            <SoftTypography variant="body2" color="textSecondary">
+            <SoftTypography variant="body2" color="textSecondary" mb={1}>
               Level: {level}
             </SoftTypography>
-            <SoftButton variant="gradient" color="info" onClick={handleOpen}>
-              Edit Profile
-            </SoftButton>
+
+            <SoftBox>
+              <SoftButton variant="gradient" color="info" onClick={handleOpenGift} mb={2}>
+                GIFT
+              </SoftButton>
+
+
+              <SoftButton variant="gradient" color="info" onClick={handleOpenEdit} mt={2}>
+                Edit Profile
+              </SoftButton>
+
+            </SoftBox>
           </SoftBox>
 
         </SoftBox>
@@ -77,7 +104,7 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
       </SoftBox>
 
       {/* Modal for editing profile */}
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={openEdit} onClose={handleCloseEdit}>
         <Box
           sx={{
             position: "absolute",
@@ -104,6 +131,7 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
                 color: "black",
                 shrink: true, // Ensures the label is always shrunk
               }}
+              disabled
             />
             <TextField
               fullWidth
@@ -114,6 +142,8 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
                 color: "black",
                 shrink: true, // Ensures the label is always shrunk
               }}
+              disabled
+
             />
             <TextField
               fullWidth
@@ -125,6 +155,8 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
                 color: "black",
                 shrink: true, // Ensures the label is always shrunk
               }}
+              disabled
+
             />
             <TextField
               fullWidth
@@ -136,6 +168,8 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
                 color: "black",
                 shrink: true, // Ensures the label is always shrunk
               }}
+              disabled
+
             />
             <TextField
               fullWidth
@@ -147,18 +181,91 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
                 color: "black",
                 shrink: true, // Ensures the label is always shrunk
               }}
+              disabled
+
             />
             <SoftBox mt={2} display="flex" justifyContent="flex-end">
-              <SoftButton variant="contained" color="secondary" onClick={handleClose}>
+              <SoftButton variant="contained" color="secondary" onClick={handleCloseEdit}>
                 Cancel
               </SoftButton>
-              <SoftButton variant="contained" color="info" sx={{ ml: 2 }} onClick={handleSubmit}>
-                Save
-              </SoftButton>
+
             </SoftBox>
           </SoftBox>
         </Box>
       </Modal>
+
+      {/* Modal for Gifting Section */}
+
+
+      {/* <Dialog open={openGift} onClose={handleCloseGift}>
+      <SoftBox>
+        <DialogTitle>Gift</DialogTitle>
+        <DialogContent>
+          <SoftTypography sx={{ marginTop: 4 }} variant="body2">
+            Select Asset
+          </SoftTypography>
+          <FormControl fullWidth variant="outlined" sx={{ marginBottom: 2 }}>
+            <InputLabel>Asset</InputLabel>
+            <Select
+              value={selectedAsset}
+              onChange={handleAssetChange}
+              label="Asset"
+              defaultValue=""
+              open={false} // Make sure the dropdown opens on click
+            >
+              {assets.map((asset, index) => (
+                <MenuItem key={index} value={asset}>
+                  {asset}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <SoftTypography sx={{ marginTop: 4 }} variant="body2">
+            Select Variant
+          </SoftTypography>
+          <FormControl fullWidth variant="outlined" sx={{ marginBottom: 2 }}>
+            <InputLabel>Variant</InputLabel>
+            <Select
+              value={selectedVariant}
+              onChange={handleVariantChange}
+              label="Variant"
+              defaultValue=""
+            >
+              {variants.map((variant, index) => (
+                <MenuItem key={index} value={variant}>
+                  {variant}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <SoftTypography sx={{ marginTop: 4 }} variant="body2">
+            Quantity
+          </SoftTypography>
+          <SoftInput placeholder="Quantity" variant="outlined" type="number" fullWidth />
+
+          <SoftTypography sx={{ marginTop: 4 }} variant="body2">
+            Message
+          </SoftTypography>
+          <SoftInput placeholder="Message" variant="outlined" type="text" fullWidth />
+        </DialogContent>
+
+        <DialogActions>
+          <SoftBox mt={4} mb={1}>
+            <SoftButton variant="gradient" color="secondary" fullWidth onClick={handleCloseGift} sx={{ color: "black" }}>
+              Cancel
+            </SoftButton>
+          </SoftBox>
+
+          <SoftBox mt={4} mb={1}>
+            <SoftButton variant="gradient" color="info" fullWidth onClick={handleSubmit} sx={{ color: "black" }}>
+              Send
+            </SoftButton>
+          </SoftBox>
+        </DialogActions>
+      </SoftBox>
+    </Dialog> */}
     </>
   );
 }

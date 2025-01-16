@@ -26,6 +26,7 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
 function DefaultInfoCard({ color, icon, title, description, value }) {
+
   return (
     <Card>
       <SoftBox p={2} mx={3} display="flex" justifyContent="center">
@@ -35,14 +36,21 @@ function DefaultInfoCard({ color, icon, title, description, value }) {
           alignItems="center"
           bgColor={color}
           color="white"
-          width="4rem"
-          height="4rem"
           shadow="md"
           borderRadius="lg"
           variant="gradient"
         >
-          <Icon fontSize="default">{icon}</Icon>
+          {/* Conditional rendering for icon */}
+          {typeof icon === "string" ? (
+            <img src={icon} alt={title} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+          ) : (
+            <Icon fontSize="default">{icon}</Icon>
+          )}
+
+
         </SoftBox>
+
+
       </SoftBox>
       <SoftBox pb={2} px={2} textAlign="center" lineHeight={1.25}>
         <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
@@ -74,7 +82,7 @@ DefaultInfoCard.defaultProps = {
 // Typechecking props for the DefaultInfoCard
 DefaultInfoCard.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
-  icon: PropTypes.node.isRequired,
+  icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

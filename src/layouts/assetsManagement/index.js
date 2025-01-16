@@ -14,8 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import { Card, Grid, IconButton } from "@mui/material";
+import { Upload } from '@mui/icons-material';
+
+// import Card from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // Soft UI Dashboard React components
@@ -34,6 +36,10 @@ import Slider from "react-slick";
 
 
 function Overview() {
+    const handleUpload = () => {
+
+        console.log("Image upload triggered");
+    };
     const settings = {
         dots: true, // Show navigation dots
         infinite: true, // Enable infinite looping
@@ -41,13 +47,13 @@ function Overview() {
         slidesToShow: 4, // Number of slides visible at a time
         slidesToScroll: 1, // Number of slides to scroll per action
         autoplay: true, // Enable autoplay
-  autoplaySpeed: 1000, // Time interval between transitions (in ms)
-//   pauseonh
+        autoplaySpeed: 1000, // Time interval between transitions (in ms)
+        //   pauseonh
         responsive: [
             { breakpoint: 1024, settings: { slidesToShow: 3 } },
             { breakpoint: 768, settings: { slidesToShow: 2 } },
             { breakpoint: 480, settings: { slidesToShow: 1 } },
-          ],
+        ],
     };
     const cardData = [
         { id: "1", image: homeDecor1, price: "100" },
@@ -58,177 +64,64 @@ function Overview() {
         { id: "20", image: homeDecor2, price: "100" },
     ];
 
+    const sections = [
+        { name: "Coins", assetType: "Coins" },
+        { name: "Diamonds", assetType: "Diamonds" },
+        { name: "Boosters", assetType: "Boosters" },
+        { name: "Avatars", assetType: "Avatars" },
+        { name: "Dice", assetType: "Dice" },
+        { name: "Frames", assetType: "Frames" },
+        { name: "Bounty", assetType: "Bounty" },
+    ];
+
+
     return (
         <DashboardLayout>
             <Sidenav />
-            <SoftBox mb={3}>
-                <Card>
-                    <SoftBox pt={2} px={2}>
-                        <SoftBox mb={0.5}>
-                            <SoftTypography variant="h6" fontWeight="medium">
-                                Assets Management
-                            </SoftTypography>
-                        </SoftBox>
-                        <SoftBox mb={1}>
-                            <SoftTypography variant="button" fontWeight="regular" color="text">
-                                Coins
-                            </SoftTypography>
-                        </SoftBox>
-                    </SoftBox>
-                    <SoftBox p={2}>
-                        <Slider {...settings}>
-                            {cardData.map((card) => (
-                                <Card key={card.id} style={{ padding: "0 10px" }}>
-                                   
-                                    <Grid item xs={12} md={6} xl={3}>
-                                    <DefaultProjectCard
-                                        image={card.image}
-                                        price={card.price}
-                                        id={card.id}
-                                    />
-                                    
-                                    </Grid>
-                                </Card>
-                            ))}
-                        </Slider>
-                    </SoftBox>
+            <SoftBox mb={5}>
+                <Card mb={3}>
+                    {sections.map((section, index) => (
+                        <div key={index}>
+                            <SoftBox pt={2} px={2} position="relative">
+                                {/* Title and Upload Button */}
+                                <SoftBox mb={1}>
+                                    <SoftTypography variant="button" fontWeight="regular" color="text">
+                                        {section.name}
+                                    </SoftTypography>
+                                </SoftBox>
 
+                                {/* Upload Button */}
+                                <IconButton
+                                    onClick={() => handleUpload(section.assetType)}
+                                    sx={{
+                                        position: 'absolute',
+                                        top: '10px',
+                                        right: '10px',
+                                        fontSize: '2rem',
+                                    }}
+                                >
+                                    <Upload />
+                                </IconButton>
+                            </SoftBox>
 
-                    <SoftBox pt={2} px={2}>
-
-                        <SoftBox mb={1}>
-                            <SoftTypography variant="button" fontWeight="regular" color="text">
-                                Diamonds
-                            </SoftTypography>
-                        </SoftBox>
-                    </SoftBox>
-                    <SoftBox p={2}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor1}
-                                    price="100"
-                                    id="5"
-
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor2}
-                                    price="100"
-                                    id="6"
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor3}
-                                    price="100"
-                                    id="7"
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor3}
-                                    price="100"
-                                    id="8"
-                                />
-                            </Grid>
-
-                        </Grid>
-                    </SoftBox>
-                    <SoftBox pt={2} px={2}>
-
-                        <SoftBox mb={1}>
-                            <SoftTypography variant="button" fontWeight="regular" color="text">
-                                Boosters
-                            </SoftTypography>
-                        </SoftBox>
-                    </SoftBox>
-                    <SoftBox p={2}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor1}
-                                    price="100"
-                                    id="9"
-
-
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor2}
-                                    price="100"
-                                    id="10"
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor3}
-                                    price="100"
-                                    id="11"
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor3}
-                                    price="100"
-                                    id="12"
-                                />
-                            </Grid>
-
-                        </Grid>
-                    </SoftBox>
-                </Card>
-            </SoftBox>
-            <SoftBox mb={3}>
-                <Card>
-                    <SoftBox pt={2} px={2}>
-                        <SoftBox mb={0.5}>
-                            <SoftTypography variant="h6" fontWeight="medium">
-                                Reward Management
-                            </SoftTypography>
-                        </SoftBox>
-                        <SoftBox mb={1}>
-                            <SoftTypography variant="button" fontWeight="regular" color="text">
-                                Coins
-                            </SoftTypography>
-                        </SoftBox>
-                    </SoftBox>
-                    <SoftBox p={2}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor1}
-                                    price="100"
-                                    id="13"
-
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor2}
-                                    price="100"
-                                    id="14"
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor3}
-                                    price="100"
-                                    id="15"
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6} xl={3}>
-                                <DefaultProjectCard
-                                    image={homeDecor3}
-                                    price="100"
-                                    id="16"
-                                />
-                            </Grid>
-
-                        </Grid>
-                    </SoftBox>
+                            {/* Slider */}
+                            <SoftBox p={2}>
+                                <Slider {...settings}>
+                                    {cardData.map((card, index) => (
+                                        <Card key={index} style={{ padding: "0 10px" }}>
+                                            <Grid item xs={12} md={6} xl={3}>
+                                                <DefaultProjectCard
+                                                    image={card.image}
+                                                    price={card.price}
+                                                    id={card.id}
+                                                />
+                                            </Grid>
+                                        </Card>
+                                    ))}
+                                </Slider>
+                            </SoftBox>
+                        </div>
+                    ))}
                 </Card>
             </SoftBox>
         </DashboardLayout>

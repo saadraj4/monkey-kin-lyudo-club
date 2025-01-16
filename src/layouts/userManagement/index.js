@@ -75,7 +75,6 @@ function UserManagement() {
   return (
     <DashboardLayout>
       <SideNav />
-      <DashboardNavbar />
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Card>

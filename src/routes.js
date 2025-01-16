@@ -56,6 +56,9 @@ import CustomerSupport from "examples/Icons/CustomerSupport";
 import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
 import UserManagement from "./layouts/userManagement"
+import GameRules from "./layouts/gameRules"
+import ShopComponent from "./layouts/shop"
+import Notifications from "./layouts/notifications"
 
 const routes = [
   {
@@ -98,9 +101,9 @@ const routes = [
     type: "collapse",
     name: "Game Rules",
     key: "Game-Rules",
-    route: "/billing",
+    route: "/gamerules",
     icon: <Settings size="12px" />,
-    component: <RTL />,
+    component: <GameRules />,
     noCollapse: true,
   },
   {
@@ -109,16 +112,16 @@ const routes = [
     key: "shop",
     route: "/shops",
     icon: <Settings size="12px" />,
-    component: <RTL />,
+    component: <ShopComponent />,
     noCollapse: true,
   },
   {
     type: "collapse",
     name: "Notifications",
     key: "Notifications",
-    route: "/billing",
+    route: "/notifications",
     icon: <Settings size="12px" />,
-    component: <RTL />,
+    component: <Notifications />,
     noCollapse: true,
   },
   {
