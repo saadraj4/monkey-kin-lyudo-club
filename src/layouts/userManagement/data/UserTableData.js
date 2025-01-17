@@ -321,6 +321,40 @@ const authorsTableData = {
 
     },
 
+    {
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
+      rate: <Function rate={"35%"} />,
+
+      reward: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+          14/09/20
+        </SoftTypography>
+      ),
+      streak: (
+        <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
+      ),
+      action: (
+        <SoftBox display="flex" justifyContent="space-between">
+          {/* View Action */}
+       
+
+          {/* Edit Action */}
+          <SoftButton
+            component="a"
+            href="#"
+            variant="contained"
+            color="info"
+            fontWeight="medium"
+            sx={{ marginLeft: 2 }}
+            >
+            Gift
+          </SoftButton>
+        </SoftBox>
+      ),
+      status: <StatusButton id={1} />,
+
+    },
+
   ]
 };
 function StatusButton(id) {

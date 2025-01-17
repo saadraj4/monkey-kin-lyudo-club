@@ -95,36 +95,59 @@ function UserManagement() {
       <SideNav />
       <SoftBox py={3}>
         <SoftBox mb={3}>
-          <Card>
-            <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-              <SoftTypography variant="h6">Player</SoftTypography>
+
+          <SoftBox p={3}>
+            {/* Player Header */}
+            <SoftTypography variant="h6" gutterBottom>
+              Player
+            </SoftTypography>
+
+            {/* Search Bar and Add New Player Button */}
+            <SoftBox display="flex" justifyContent="space-between" alignItems="center">
+              {/* Search Bar */}
+              <SoftBox sx={{ width: "82%" }}>
+                <SoftInput
+                  fullWidth
+                  variant="outlined"
+                  placeholder="Search Player"
+                // Add your onChange or value logic for search here
+                />
+              </SoftBox>
+
               {/* Add New Player Button */}
-              <SoftButton variant="gradient" color="info" onClick={handleOpenModal}>
+              <SoftButton
+                variant="gradient"
+                color="info"
+                onClick={handleOpenModal}
+                sx={{ marginLeft: 2 }}
+              >
                 Add New Player
               </SoftButton>
             </SoftBox>
-            <SoftBox
-              sx={{
-                "& .MuiTableRow-root:not(:last-child)": {
-                  "& td": {
-                    borderBottom: ({ borders: { borderWidth, borderColor } }) =>
-                      `${borderWidth[1]} solid ${borderColor}`,
-                  },
+          </SoftBox>
+
+          <SoftBox
+            sx={{
+              "& .MuiTableRow-root:not(:last-child)": {
+                "& td": {
+                  borderBottom: ({ borders: { borderWidth, borderColor } }) =>
+                    `${borderWidth[1]} solid ${borderColor}`,
                 },
-              }}
-            >
-              <Table columns={columns} rows={currentRows} />
-            </SoftBox>
-            {/* Pagination */}
-            <SoftBox display="flex" justifyContent="center" mt={3}>
-              <Pagination
-                count={Math.ceil(rows.length / rowsPerPage)} // Calculate number of pages
-                page={currentPage}
-                onChange={handlePageChange}
-                color="info"
-              />
-            </SoftBox>
-          </Card>
+              },
+            }}
+          >
+            <Table columns={columns} rows={currentRows} />
+          </SoftBox>
+          {/* Pagination */}
+          <SoftBox display="flex" justifyContent="center" mt={3}>
+            <Pagination
+              count={Math.ceil(rows.length / rowsPerPage)} // Calculate number of pages
+              page={currentPage}
+              onChange={handlePageChange}
+              color="info"
+            />
+          </SoftBox>
+
         </SoftBox>
       </SoftBox>
 
