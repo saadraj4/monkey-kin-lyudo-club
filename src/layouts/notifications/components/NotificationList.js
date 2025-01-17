@@ -18,7 +18,7 @@ function NotificationList({ title, Notifications }) {
   };
 
   return (
-    <Card sx={{ height: "100%" }}>
+    <>
       <SoftBox pt={2} px={2}>
         <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
@@ -75,7 +75,7 @@ function NotificationList({ title, Notifications }) {
           </Table>
         </TableContainer>
       </SoftBox>
-    </Card>
+   </>
   );
 }
 

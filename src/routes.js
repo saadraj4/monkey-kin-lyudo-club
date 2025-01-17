@@ -43,8 +43,6 @@ import AssetsManagement from "./layouts/assetsManagement";
 import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
-// import OTPInput from "layouts/authentication/otp-input";
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -77,15 +75,6 @@ const routes = [
     route: "/UserManagement",
     icon: <Office size="12px" />,
     component: <UserManagement />,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
-    name: "Settings",
-    key: "Settings",
-    route: "/Settings",
-    icon: <CreditCard size="12px" />,
-    component: <PlatformSetting />,
     noCollapse: true,
   },
   {
@@ -133,6 +122,16 @@ const routes = [
     component: <RTL />,
     noCollapse: true,
   },
+  {
+    type: "collapse",
+    name: "Settings",
+    key: "Settings",
+    route: "/Settings",
+    icon: <CreditCard size="12px" />,
+    component: <PlatformSetting />,
+    noCollapse: true,
+  },
+
   { type: "title", title: "Account Pages", key: "account-pages" },
   {
     type: "collapse",

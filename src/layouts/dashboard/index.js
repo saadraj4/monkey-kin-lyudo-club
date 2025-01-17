@@ -1,19 +1,4 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard React components
@@ -22,20 +7,22 @@ import SoftBox from "components/SoftBox";
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 // import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 // New Tasks
 import Users from "./components/recentRegistration"
 import Purchase from "./components/recentPurchase"
 import PurchaseData from "./data/PurchaseData"
 import profilesListData from "./data/RecentRegistrationData";
-import OrdersOverview from "./components/notifications";
+import Notifications from "./components/notifications";
 import TOP5Players from "./components/top5Players";
 import TOP5PlayersData from "./data/Top5PlayersData"
 import Sidenav from "../SideNavbar";
-
+import Player from "assets/players.png"
 
 function Dashboard() {
+  
+
+
   
   return (
     <>
@@ -49,7 +36,7 @@ function Dashboard() {
                 title={{ text: "No. of Players" }}
                 count="500"
                 percentage={{ color: "success", text: "+55%" }}
-                icon={{ color: "info", component: "paid" }}
+                icon={{ color: "info", component: Player }}
                 
               />
             </Grid>
@@ -58,25 +45,25 @@ function Dashboard() {
                 title={{ text: "Fee Coins" }}
                 count="2300"
                 percentage={{ color: "success", text: "+3%" }}
-                icon={{ color: "info", component: "public" }}
+                icon={{ color: "info", component: Player }}
               />
             </Grid>
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Online Player" }}
-                count="+346"
+                count="346"
                 percentage={{ color: "error", text: "-2%" }}
-                icon={{ color: "info", component: "emoji_events" }}
+                icon={{ color: "info", component: Player }}
               />
             </Grid>
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Total Revenue" }}
-                count="103"
+                count="$103"
                 percentage={{ color: "success", text: "+5%" }}
                 icon={{
                   color: "info",
-                  component: "shopping_cart",
+                  component: Player,
                 }}
               />
             </Grid>
@@ -93,14 +80,14 @@ function Dashboard() {
               <Purchase title="Recent Purchases" profiles={PurchaseData} />
 
             </Grid>
-            <Grid item xs={12} xl={4}>
+            <Grid item xs={12} xl={4}>  
               {/* Another Item need to be here*/}
-              <OrdersOverview />
+              <Notifications />
             </Grid>
           </Grid>
         </SoftBox>
-
-        <TOP5Players title="Top 5 League Players" profiles={TOP5PlayersData} />
+        
+        <TOP5Players title="League Players" profiles={TOP5PlayersData} />
 
 
 

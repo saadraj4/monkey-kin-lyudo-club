@@ -25,31 +25,31 @@ const profilesListData = [
     image: kal,
     name: "Sophie",
     id: "Player1",
-    date: "01-01-25",
+    
   },
   {
     image: marie,
     name: "Anne Marie",
     id: "Player2",
-    date: "01-01-25",
+    
   },
   {
     image: ivana,
     name: "Ivanna",
     id: "Player3",
-    date: "01-01-25",
+    
   },
   {
     image: team4,
     name: "Peterson",
     id: "Player4", 
-    date: "01-01-25",
+ 
   },
   {
     image: team3,
     name: "Nick Daniel",
     id: "Player5", 
-    date: "01-01-25",
+   
   },
 ];
 

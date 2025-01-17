@@ -4,6 +4,7 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import Pagination from "@mui/material/Pagination";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from "@mui/material";
+import { useDropzone } from "react-dropzone";
 
 // Soft UI Dashboard React components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -15,8 +16,10 @@ import authorsTableData from "./data/UserTableData";
 import SoftButton from "components/SoftButton";
 import SideNav from "../SideNavbar"
 import SoftInput from "components/SoftInput";
-import SoftTypographyRoot from "components/SoftTypography/SoftTypographyRoot";
+
+
 function UserManagement() {
+
   const { columns, rows } = authorsTableData;
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5; // Show 5 rows per page
@@ -24,11 +27,24 @@ function UserManagement() {
   const [newPlayer, setNewPlayer] = useState(""); // State to store the new player's name
   const [newImage, setNewImage] = useState(null);
   const [newEmail, setNewEmail] = useState("");
+  const [previewImage, setPreviewImage] = useState(null);
 
   // Calculate the index for slicing the rows
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
+  const onDrop = (acceptedFiles) => {
+    if (acceptedFiles.length > 0) {
+      const file = acceptedFiles[0];
+      const previewUrl = URL.createObjectURL(file);
+      setPreviewImage(previewUrl);
+
+      // Trigger callback to parent component (if needed)
+      handleImageChange(file);
+    }
+  };
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: "image/*", multiple: false });
 
   // Handle page change
   const handlePageChange = (event, value) => {
@@ -49,10 +65,12 @@ function UserManagement() {
   const handleInputChange = (event) => {
     setNewPlayer(event.target.value);
   };
-  const handleImageChange = (e) => {
-    const file = e.target.files[0]; // Get the selected file
+  const handleImageChange = (file) => {
+    // Get the selected file
     setNewImage(file);
   };
+
+
 
   // Handle Add New Player
   const handleAddPlayer = () => {
@@ -110,16 +128,18 @@ function UserManagement() {
         </SoftBox>
       </SoftBox>
 
-      {/* Add New Player Modal */}
-      <Dialog open={openModal} onClose={handleCloseModal}>
-        <DialogTitle>Add New Player</DialogTitle>
-        <DialogContent>
-          <SoftTypography
-            sx={{
-              marginTop: 4,
 
-            }}
-            variant="body2">
+
+      {/* Add New Player Modal */}
+      <Dialog open={openModal} onClose={handleCloseModal} maxWidth="sm" fullWidth>
+        <DialogTitle
+          display="flex" alignItems="center" justifyContent="center"
+          fontWeight="bold" fontSize="20px"
+        >Add New Player
+
+        </DialogTitle>
+        <DialogContent>
+          <SoftTypography sx={{ marginTop: 2 }} variant="body2">
             Player Name
           </SoftTypography>
           {/* Player Name Field */}
@@ -129,11 +149,9 @@ function UserManagement() {
             fullWidth
             value={newPlayer}
             onChange={handleInputChange}
-
           />
-          <SoftTypography
-            sx={{ marginTop: 4, }}
-            variant="body2">
+
+          <SoftTypography sx={{ marginTop: 2 }} variant="body2">
             Email
           </SoftTypography>
           {/* Email Field */}
@@ -142,49 +160,80 @@ function UserManagement() {
             variant="outlined"
             fullWidth
             value={newEmail}
-            onChange={(e) => setNewEmail(e.target.value)} // Use appropriate state update function
-
-
+            onChange={(e) => setNewEmail(e.target.value)}
           />
 
           {/* Image Upload Field */}
-          <SoftTypography
-            sx={{
-              marginTop: 4,
-
-            }}
-            variant="body2">
+          <SoftTypography sx={{ marginTop: 2 }} variant="body2">
             Player Image
           </SoftTypography>
-          <SoftInput
-            placeholder="Player Image"
-            variant="outlined"
-            type="file"
-            fullWidth
-            onChange={handleImageChange} // Function to handle the file input change
 
-
-
-
-          />
+          <div
+            {...getRootProps()}
+            style={{
+              border: "2px dashed #3a3bf1",
+              padding: "20px",
+              textAlign: "center",
+              borderRadius: "8px",
+              cursor: "pointer",
+              background: isDragActive ? "#f0f4ff" : "white",
+              position: "relative",
+              height: "190px",
+              width: "100%",
+              overflow: "hidden",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <input {...getInputProps()} />
+            {previewImage ? (
+              <img
+                src={previewImage}
+                alt="Preview"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain", // Ensure image doesn't overflow and stays within bounds
+                  borderRadius: "8px",
+                }}
+              />
+            ) : isDragActive ? (
+              <p>Drop the image here...</p>
+            ) : (
+              <p>Drag & drop an image, or click to select one</p>
+            )}
+          </div>
         </DialogContent>
-
         <DialogActions>
-
           <SoftBox mt={4} mb={1}>
-            <SoftButton variant="gradient" color="secondary" fullWidth onClick={handleCloseModal} sx={{ color: "black" }}>
+            <SoftButton
+              variant="gradient"
+              color="secondary"
+              fullWidth
+              onClick={handleCloseModal}
+              sx={{ color: "black" }}
+            >
               Cancel
             </SoftButton>
           </SoftBox>
 
           <SoftBox mt={4} mb={1}>
-            <SoftButton variant="gradient" color="info" fullWidth onClick={handleAddPlayer} sx={{ color: "black" }}>
+            <SoftButton
+              variant="gradient"
+              color="info"
+              fullWidth
+              onClick={handleAddPlayer}
+              sx={{ color: "black" }}
+            >
               Add Player
             </SoftButton>
           </SoftBox>
         </DialogActions>
       </Dialog>
+
     </DashboardLayout>
+
   );
 }
 

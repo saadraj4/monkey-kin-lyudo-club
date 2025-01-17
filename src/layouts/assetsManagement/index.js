@@ -26,19 +26,25 @@ import SoftTypography from "components/SoftTypography";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 
 import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
-
-// Images
-import homeDecor1 from "assets/images/home-decor-1.jpg";
-import homeDecor2 from "assets/images/home-decor-2.jpg";
-import homeDecor3 from "assets/images/home-decor-3.jpg";
+import { useRef,useState } from "react";
+import Coin from "assets/images/Coins.jpeg";
 import Sidenav from "../SideNavbar";
 import Slider from "react-slick";
 
 
 function Overview() {
+    const fileInputRef = useRef(null);  // Reference to the hidden file input
+    const [image, setImage] = useState(null);  // State to store the selected image
     const handleUpload = () => {
 
         console.log("Image upload triggered");
+        fileInputRef.current.click();  // Trigger file input click
+    };
+    const handleFileChange = (event) => {
+        const file = event.target.files[0]; // Get the selected file
+        if (file) {
+            setImage(URL.createObjectURL(file)); // Create a temporary URL for the image
+        }
     };
     const settings = {
         dots: true, // Show navigation dots
@@ -56,12 +62,12 @@ function Overview() {
         ],
     };
     const cardData = [
-        { id: "1", image: homeDecor1, price: "100" },
-        { id: "2", image: homeDecor2, price: "100" },
-        { id: "3", image: homeDecor3, price: "100" },
-        { id: "4", image: homeDecor3, price: "100" },
-        { id: "19", image: homeDecor1, price: "100" },
-        { id: "20", image: homeDecor2, price: "100" },
+        { id: "1", image: Coin, price: "100" },
+        { id: "2", image: Coin, price: "100" },
+        { id: "3", image: Coin, price: "100" },
+        { id: "4", image: Coin, price: "100" },
+        { id: "19", image: Coin, price: "100" },
+        { id: "20", image: Coin, price: "100" },
     ];
 
     const sections = [
@@ -91,8 +97,15 @@ function Overview() {
                                 </SoftBox>
 
                                 {/* Upload Button */}
+                                <input
+                                    ref={fileInputRef}
+                                    type="file"
+                                    accept="image/*"
+                                    style={{ display: 'none' }} // Hide the input
+                                    onChange={handleFileChange}
+                                />
                                 <IconButton
-                                    onClick={() => handleUpload(section.assetType)}
+                                    onClick={() => handleUpload()}
                                     sx={{
                                         position: 'absolute',
                                         top: '10px',

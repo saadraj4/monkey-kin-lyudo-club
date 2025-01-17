@@ -1,26 +1,36 @@
 /* eslint-disable react/prop-types */
 // Soft UI Dashboard React components
+import { useState } from "react";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
 import SoftBadge from "components/SoftBadge";
-import { useNavigate } from "react-router-dom";
 // Images
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
+import SoftButton from "components/SoftButton";
+import Gift from "../gift";
 
-function Author({ image, name, email }) {
+function Author({ image, name, email, id }) {
   return (
     <SoftBox display="flex" alignItems="center" px={1} py={0.5}>
       <SoftBox mr={2}>
-        <SoftAvatar src={image} alt={name} size="sm" variant="rounded" />
+        <SoftAvatar src={image} alt={name} size="sm" variant="rounded"
+        sx={{cursor: "pointer"}}
+        onClick={()=>handleViewClick(id)}/>
       </SoftBox>
       <SoftBox display="flex" flexDirection="column">
-        <SoftTypography variant="button" fontWeight="medium">
+        <SoftTypography variant="button" fontWeight="medium"
+         onClick={()=>handleViewClick(id)}
+         sx={{cursor: "pointer"}}
+        >
           {name}
         </SoftTypography>
-        <SoftTypography variant="caption" color="secondary">
+        <SoftTypography variant="caption" color="secondary"
+         onClick={()=>handleViewClick(id)}
+         sx={{cursor: "pointer"}}
+        >
           {email}
         </SoftTypography>
       </SoftBox>
@@ -40,15 +50,17 @@ function Function({ rate }) {
 
 const handleViewClick = (row) => {
   window.location.href = `/user-profile/${row}`;
-}; 
+};
+
 
 const authorsTableData = {
-  
+
   columns: [
     { name: "user", align: "left" },
     { name: "rate", align: "left" },
     { name: "streak", align: "center" },
     { name: "action", align: "center" },
+    { name: "status", align: "center" }
   ],
 
   rows: [
@@ -62,30 +74,23 @@ const authorsTableData = {
       action: (
         <SoftBox display="flex" justifyContent="space-between">
           {/* View Action */}
-          <SoftTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="black"
-            fontWeight="medium"
-            onClick={() => handleViewClick(1)}>
-          
-            View
-          </SoftTypography>
+         
 
           {/* Edit Action */}
-          <SoftTypography
+          <SoftButton
             component="a"
             href="#"
-            variant="caption"
-            color="black"
+            variant="contained"
+            color="info"
             fontWeight="medium"
-            sx={{ marginLeft: 2 }} // Adding some margin between the actions
-          >
-            
-          </SoftTypography>
+            sx={{ marginLeft: 2}}
+            >
+            Gift
+          </SoftButton>
         </SoftBox>
       ),
+      status: <StatusButton id={1} />,
+
     },
     {
       user: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
@@ -97,30 +102,23 @@ const authorsTableData = {
       action: (
         <SoftBox display="flex" justifyContent="space-between">
           {/* View Action */}
-          <SoftTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="black"
-            fontWeight="medium"
-            onClick={() => handleViewClick(2)}>
-          
-            View
-          </SoftTypography>
+        
 
           {/* Edit Action */}
-          <SoftTypography
+          <SoftButton
             component="a"
             href="#"
-            variant="caption"
-            color="black"
+            variant="contained"
+            color="info"
             fontWeight="medium"
-            sx={{ marginLeft: 2 }} // Adding some margin between the actions
-          >
-            
-          </SoftTypography>
+            sx={{ marginLeft: 2 }}
+            >
+            Gift
+          </SoftButton>
         </SoftBox>
       ),
+      status: <StatusButton id={1} />,
+
     },
     {
       user: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" />,
@@ -132,30 +130,23 @@ const authorsTableData = {
       action: (
         <SoftBox display="flex" justifyContent="space-between">
           {/* View Action */}
-          <SoftTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="black"
-            fontWeight="medium"
-            onClick={() => handleViewClick(3)}
-          >
-            View
-          </SoftTypography>
+      
 
           {/* Edit Action */}
-          <SoftTypography
+          <SoftButton
             component="a"
             href="#"
-            variant="caption"
-            color="black"
+            variant="contained"
+            color="info"
             fontWeight="medium"
-            sx={{ marginLeft: 2 }} // Adding some margin between the actions
-          >
-            
-          </SoftTypography>
+            sx={{ marginLeft: 2 }}
+            >
+            Gift
+          </SoftButton>
         </SoftBox>
       ),
+      status: <StatusButton id={1} />,
+
     },
     {
       user: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" />,
@@ -167,30 +158,23 @@ const authorsTableData = {
       action: (
         <SoftBox display="flex" justifyContent="space-between">
           {/* View Action */}
-          <SoftTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="black"
-            fontWeight="medium"
-            onClick={() => handleViewClick(4)}
-          >
-            View
-          </SoftTypography>
+        
 
           {/* Edit Action */}
-          <SoftTypography
+          <SoftButton
             component="a"
             href="#"
-            variant="caption"
-            color="black"
+            variant="contained"
+            color="info"
             fontWeight="medium"
-            sx={{ marginLeft: 2 }} // Adding some margin between the actions
-          >
-            
-          </SoftTypography>
+            sx={{ marginLeft: 2 }}
+            >
+            Gift
+          </SoftButton>
         </SoftBox>
       ),
+      status: <StatusButton id={1} />,
+
     },
     {
       user: <Author image={team2} name="Richard Gran" email="richard@creative-tim.com" />,
@@ -202,66 +186,50 @@ const authorsTableData = {
       action: (
         <SoftBox display="flex" justifyContent="space-between">
           {/* View Action */}
-          <SoftTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="black"
-            fontWeight="medium"
-            onClick={() => handleViewClick(5)}
-          >
-            View
-          </SoftTypography>
-
+        
           {/* Edit Action */}
-          <SoftTypography
+          <SoftButton
             component="a"
             href="#"
-            variant="caption"
-            color="black"
+            variant="contained"
+            color="info"
             fontWeight="medium"
-            sx={{ marginLeft: 2 }} // Adding some margin between the actions
-          >
-            
-          </SoftTypography>
+            sx={{ marginLeft: 2 }}
+            >
+            Gift
+          </SoftButton>
         </SoftBox>
       ),
+      status: <StatusButton id={1} />,
+
     },
     {
       user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
       rate: <Function rate={"35%"} />,
 
-      
+
       streak: (
         <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
       ),
       action: (
         <SoftBox display="flex" justifyContent="space-between">
           {/* View Action */}
-          <SoftTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="black"
-            fontWeight="medium"
-            onClick={() => handleViewClick(6)}
-          >
-            View
-          </SoftTypography>
-
+        
           {/* Edit Action */}
-          <SoftTypography
+          <SoftButton
             component="a"
             href="#"
-            variant="caption"
-            color="black"
+            variant="contained"
+            color="info"
             fontWeight="medium"
-            sx={{ marginLeft: 2 }} // Adding some margin between the actions
-          >
-            
-          </SoftTypography>
+            sx={{ marginLeft: 2 }}
+            >
+            Gift
+          </SoftButton>
         </SoftBox>
       ),
+      status: <StatusButton id={1} />,
+
     },
     {
       user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
@@ -273,30 +241,23 @@ const authorsTableData = {
       action: (
         <SoftBox display="flex" justifyContent="space-between">
           {/* View Action */}
-          <SoftTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="black"
-            fontWeight="medium"
-            onClick={() => handleViewClick(7)}
-          >
-            View
-          </SoftTypography>
+      
 
           {/* Edit Action */}
-          <SoftTypography
+          <SoftButton
             component="a"
             href="#"
-            variant="caption"
-            color="black"
+            variant="contained"
+            color="info"
             fontWeight="medium"
-            sx={{ marginLeft: 2 }} // Adding some margin between the actions
-          >
-            
-          </SoftTypography>
+            sx={{ marginLeft: 2 }}
+            >
+            Gift
+          </SoftButton>
         </SoftBox>
       ),
+      status: <StatusButton id={1} />,
+
     },
     {
       user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
@@ -308,30 +269,23 @@ const authorsTableData = {
       action: (
         <SoftBox display="flex" justifyContent="space-between">
           {/* View Action */}
-          <SoftTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="black"
-            fontWeight="medium"
-            onClick={() => handleViewClick(8)}
-          >
-            View
-          </SoftTypography>
+     
 
           {/* Edit Action */}
-          <SoftTypography
+          <SoftButton
             component="a"
             href="#"
-            variant="caption"
-            color="black"
+            variant="contained"
+            color="info"
             fontWeight="medium"
-            sx={{ marginLeft: 2 }} // Adding some margin between the actions
-          >
-            
-          </SoftTypography>
+            sx={{ marginLeft: 2 }}
+            >
+            Gift
+          </SoftButton>
         </SoftBox>
       ),
+      status: <StatusButton id={1} />,
+
     },
     {
       user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
@@ -348,32 +302,53 @@ const authorsTableData = {
       action: (
         <SoftBox display="flex" justifyContent="space-between">
           {/* View Action */}
-          <SoftTypography
-            component="a"
-            href="#"
-            variant="caption"
-            color="black"
-            fontWeight="medium"
-            onClick={() => handleViewClick(9)}
-          >
-            View
-          </SoftTypography>
+       
 
           {/* Edit Action */}
-          <SoftTypography
+          <SoftButton
             component="a"
             href="#"
-            variant="caption"
-            color="black"
+            variant="contained"
+            color="info"
             fontWeight="medium"
-            sx={{ marginLeft: 2 }} // Adding some margin between the actions
-          >
-            
-          </SoftTypography>
+            sx={{ marginLeft: 2 }}
+            >
+            Gift
+          </SoftButton>
         </SoftBox>
       ),
+      status: <StatusButton id={1} />,
+
     },
+
   ]
 };
+function StatusButton(id) {
+  const [status, setStatus] = useState("Active");
+ 
+
+  const toggleStatus = (id) => {
+    console.log(id);
+    if (status === "Active") {
+      setStatus("Blocked");
+    } else {
+      setStatus("Active");
+    }
+  };
+
+  return (
+    <SoftButton
+      variant="contained"
+      color={status === "Active" ? "info" : "error"} // Color based on status
+      onClick={toggleStatus}
+      sx={{
+        minWidth: 100, // Ensure the button width remains the same
+        padding: "6px 16px", // Consistent padding
+      }}  
+    >
+      {status === "Active" ? "Block" : "Unblock"}
+    </SoftButton>
+  );
+}
 
 export default authorsTableData;

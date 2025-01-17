@@ -9,13 +9,14 @@ import homeDecor1 from "assets/images/home-decor-1.jpg";
 import homeDecor2 from "assets/images/home-decor-2.jpg";
 import homeDecor3 from "assets/images/home-decor-3.jpg";
 import DefaultInfoCard from 'examples/Cards/InfoCards/DefaultInfoCard'
+import Coins from "assets/images/Coins.jpeg";
 
 function index() {
     const Data = [
-        { id: 1, image: homeDecor1, price: "10", coins: "10k" },
-        { id: 2, image: homeDecor2, price: "10", coins: "10k" },
-        { id: 3, image: homeDecor3, price: "10", coins: "10k" },
-        { id: 4, image: homeDecor1, price: "10", coins: "10k" },
+        { id: 1, image: Coins, price: "$10", coins: "10k" },
+        { id: 2, image: Coins, price: "$10", coins: "10k" },
+        { id: 3, image: Coins, price: "$10", coins: "10k" },
+        { id: 4, image: Coins, price: "$10", coins: "10k" },
     ];
     return (
         <DashboardLayout>
@@ -34,9 +35,9 @@ function index() {
 
 
             <SoftBox mb={3} mt={5}>
-                <Card>
+            
                     <SoftBox pt={2} px={2}>
-                        <SoftBox mb={0.5}>
+                        <SoftBox mb={1}>
                             <SoftTypography variant="h6" fontWeight="medium">
                                 Coins
                             </SoftTypography>
@@ -57,11 +58,10 @@ function index() {
                         </Grid>
                     </SoftBox>
 
-                </Card>
+               
             </SoftBox>
 
             <SoftBox mb={3} >
-                <Card>
                     <SoftBox pt={2} px={2}>
                         <SoftBox mb={0.5}>
                             <SoftTypography variant="h6" fontWeight="medium">
@@ -84,12 +84,10 @@ function index() {
                         </Grid>
                     </SoftBox>
 
-                </Card>
             </SoftBox>
 
 
             <SoftBox mb={3}>
-                <Card>
                     <SoftBox pt={2} px={2}>
                         <SoftBox mb={0.5}>
                             <SoftTypography variant="h6" fontWeight="medium">
@@ -112,7 +110,6 @@ function index() {
                         </Grid>
                     </SoftBox>
 
-                </Card>
             </SoftBox>
 
         </DashboardLayout>

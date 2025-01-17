@@ -29,6 +29,7 @@
     "react-chartjs-2": "3.0.5",
     "react-countup": "6.4.2",
     "react-dom": ">=16.8.0",
+    "react-dropzone": "^14.3.5",
     "react-flatpickr": "3.10.13",
     "react-otp-input": "^3.1.1",
     "react-router-dom": "6.11.1",

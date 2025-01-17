@@ -8,6 +8,7 @@ import PlaceholderCard from 'examples/Cards/PlaceholderCard';
 import homeDecor1 from "assets/images/home-decor-1.jpg";
 import homeDecor2 from "assets/images/home-decor-2.jpg";
 import homeDecor3 from "assets/images/home-decor-3.jpg";
+import Coins from 'assets/images/Coins.jpeg';
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import SoftButton from 'components/SoftButton';
 import SoftInput from 'components/SoftInput';
@@ -18,15 +19,15 @@ function index() {
     const [updatedCoins, setUpdatedCoins] = useState("");
 
     const Data = [
-        { id: 1, image: homeDecor1, title: "Game", coins: "30 Coins" },
-        { id: 2, image: homeDecor2, title: "Game", coins: "30 Coins" },
-        { id: 3, image: homeDecor3, title: "Game", coins: "30 Coins" },
-        { id: 4, image: homeDecor1, title: "Game", coins: "30 Coins" },
-        { id: 5, image: homeDecor2, title: "Game", coins: "30 Coins" },
-        { id: 6, image: homeDecor3, title: "Game", coins: "30 Coins" },
-        { id: 7, image: homeDecor1, title: "Game", coins: "30 Coins" },
-        { id: 8, image: homeDecor2, title: "Game", coins: "30 Coins" },
-        { id: 9, image: homeDecor3, title: "Game", coins: "30 Coins" },
+        { id: 1, image: Coins, title: "Game", coins: "30 Coins" },
+        { id: 2, image: Coins, title: "Game", coins: "30 Coins" },
+        { id: 3, image: Coins, title: "Game", coins: "30 Coins" },
+        { id: 4, image: Coins, title: "Game", coins: "30 Coins" },
+        { id: 5, image: Coins, title: "Game", coins: "30 Coins" },
+        { id: 6, image: Coins, title: "Game", coins: "30 Coins" },
+        { id: 7, image: Coins, title: "Game", coins: "30 Coins" },
+        { id: 8, image: Coins, title: "Game", coins: "30 Coins" },
+        { id: 9, image: Coins, title: "Game", coins: "30 Coins" },
     ];
 
     const handleGridClick = (card) => {
@@ -56,7 +57,7 @@ function index() {
         <DashboardLayout>
             <Sidenav />
             <SoftBox mb={3}>
-                <Card>
+               
                     <SoftBox pt={2} px={2}>
                         <SoftBox mb={0.5}>
                             <SoftTypography variant="h6" fontWeight="medium">
@@ -87,7 +88,7 @@ function index() {
                         </Grid>
                     </SoftBox>
 
-                </Card>
+                
             </SoftBox>
             {/* Modal */}
             <Modal open={modalOpen} onClose={() => handleCloseModal}>
@@ -121,9 +122,11 @@ function index() {
                                 onChange={handleCoinChange}
                                 type="number"
                                 margin="normal"
+                                onWheel={(e) => e.target.blur()} 
+                                
                             />
                             <SoftBox display="flex" justifyContent="space-between" mt={3}>
-                                <SoftButton onClick={handleCloseModal} color="secondary">
+                                <SoftButton onClick={handleCloseModal} color="secondary" variant="gradient">
                                     Cancel
                                 </SoftButton>
                                 <SoftButton onClick={handleSaveChanges} color="info" variant="gradient">

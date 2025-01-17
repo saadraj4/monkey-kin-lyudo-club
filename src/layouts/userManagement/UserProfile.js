@@ -48,7 +48,7 @@ function Tables() {
         },
         {
             title: { text: "Boosters" },
-            count: "+346",
+            count: "5 hours",
             percentage: { color: "error", text: "-2%" },
             icon: { color: "info", component: "emoji_events" },
         },
@@ -80,133 +80,144 @@ function Tables() {
             <DashboardLayout>
                 <SideNavbar />
                 <SoftBox py={3}>
-                    {/* Go Back Button */}
-                    <SoftBox mb={3} display="flex" justifyContent="flex-start">
-                        <SoftButton
-                            variant="contained"
-                            color="info"
-                            onClick={() => navigate("/UserManagement")} // Replace "/some-route" with your desired route
-                        >
-                            Go Back
-                        </SoftButton>
+
+                    <SoftBox mb={3}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} sm={6} xl={6}>
+                                <Profile
+                                    image="https://via.placeholder.com/150" // Replace with actual image URL
+                                    name="John Doe"
+                                    playerId="12345"
+                                    winStreak="10"
+                                    winRatio="75%"
+                                    level="Gold"
+                                />
+                            </Grid>
+                        </Grid>
                     </SoftBox>
-                    <Card>
-                        <SoftBox mb={3}>
-                            <Grid container spacing={3}>
-                                <Grid item xs={12} sm={6} xl={4}>
-                                    <Profile
-                                        image="https://via.placeholder.com/150" // Replace with actual image URL
-                                        name="John Doe"
-                                        playerId="12345"
-                                        winStreak="10"
-                                        winRatio="75%"
-                                        level="Gold"
+
+
+                    <SoftBox mb={3} mt={5}>
+                        <Grid container spacing={3}>
+                            {data.map((item, index) => (
+                                <Grid item xs={12} sm={6} xl={4} key={index}>
+                                    <MiniStatisticsCard
+                                        title={item.title}
+                                        count={item.count}
+                                        percentage={item.percentage}
+                                        icon={item.icon}
                                     />
                                 </Grid>
-                                <SoftBox mb={3} mt={5} ml={5}>
-                                    <Grid container spacing={3}>
-                                        {data.map((item, index) => (
-                                            <Grid item xs={12} sm={6} xl={6} width={150} key={index}>
-                                                <MiniStatisticsCard
-                                                    title={item.title}
-                                                    count={item.count}
-                                                    percentage={item.percentage}
-                                                    icon={item.icon}
-                                                />
-                                            </Grid>
-                                        ))}
-                                    </Grid>
-                                </SoftBox>
-                            </Grid>
-
-                        </SoftBox>
-
-                    </Card>
-                    <SoftBox mb={3}>
-                        <Transactions />
-                    </SoftBox>
-                    <SoftBox mb={3}>
-                        <Card>
-                            <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-                                <SoftTypography variant="h6">Affiliate Invitees</SoftTypography>
-                                <SoftButton variant="gradient" color="info" sx={{ marginLeft: "auto" }}
-                                    onClick={handleOpenModal}
-                                >
-                                    Affiliate Settings
-                                </SoftButton>
-                            </SoftBox>
-
-                            <SoftBox
-                                sx={{
-                                    "& .MuiTableRow-root:not(:last-child)": {
-                                        "& td": {
-                                            borderBottom: ({ borders: { borderWidth, borderColor } }) =>
-                                                `${borderWidth[1]} solid ${borderColor}`,
-                                        },
-                                    },
-                                }}
-                            >
-                                <Table columns={columns} rows={currentRows} />
-                            </SoftBox>
-                            <SoftBox display="flex" justifyContent="center" mt={3}>
-                                <Pagination
-                                    count={Math.ceil(rows.length / rowsPerPage)} // Calculate number of pages
-                                    page={currentPage}
-                                    onChange={handlePageChange}
-                                    color="info"
-                                />
-                            </SoftBox>
-                        </Card>
+                            ))}
+                        </Grid>
                     </SoftBox>
                 </SoftBox>
-            </DashboardLayout>
 
-            <Dialog open={openModal} onClose={handleCloseModal}>
-                <DialogTitle>Affiliate Setting</DialogTitle>
+
+
+                <SoftBox mb={3}>
+                    <Transactions />
+                </SoftBox>
+                <SoftBox mb={3}>
+                    <Card>
+                        <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+                            <SoftTypography variant="h6">Affiliate Invitees</SoftTypography>
+                            <SoftButton variant="gradient" color="info" sx={{ marginLeft: "auto" }}
+                                onClick={handleOpenModal}
+                            >
+                                Affiliate Settings
+                            </SoftButton>
+                        </SoftBox>
+
+                        <SoftBox
+                            sx={{
+                                "& .MuiTableRow-root:not(:last-child)": {
+                                    "& td": {
+                                        borderBottom: ({ borders: { borderWidth, borderColor } }) =>
+                                            `${borderWidth[1]} solid ${borderColor}`,
+                                    },
+                                },
+                            }}
+                        >
+                            <Table columns={columns} rows={currentRows} />
+                        </SoftBox>
+                        <SoftBox display="flex" justifyContent="center" mt={3}>
+                            <Pagination
+                                count={Math.ceil(rows.length / rowsPerPage)} // Calculate number of pages
+                                page={currentPage}
+                                onChange={handlePageChange}
+                                color="info"
+                            />
+                        </SoftBox>
+                    </Card>
+                </SoftBox>
+            </DashboardLayout >
+
+            <Dialog
+                open={openModal}
+                onClose={handleCloseModal}
+                sx={{
+                    "& .MuiDialog-container": {
+                        display: "flex",
+                        justifyContent: "center", // Center the modal in the screen
+                    },
+                    "& .MuiDialog-paper": {
+                        minWidth: "400px", // Set minimum width (or any desired width)
+                        maxWidth: "600px", // Optionally set max-width for larger screens
+                        minHeight: "300px", // Set minimum height for the modal
+                        padding: "20px", // Add padding inside the dialog
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                    },
+                }}
+            >
+                <DialogTitle
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    fontSize={"20px"}
+                    fontWeight={"bold"}
+                >Affiliate Setting</DialogTitle>
                 <DialogContent>
-                    <SoftTypography
-                        sx={{
-                            marginTop: 4,
-
-                        }}
-                        variant="body2">
+                    <SoftTypography sx={{ marginTop: 4 }} variant="body2">
                         Number of Games Win
                     </SoftTypography>
                     {/* Games Win Field */}
-                    <SoftInput
-                        placeholder="Games Win"
-                        variant="outlined"
-                        fullWidth
-
-
-                    />
-                    <SoftTypography
-                        sx={{ marginTop: 4, }}
-                        variant="body2">
+                    <SoftInput placeholder="Games Win" variant="outlined" fullWidth />
+                    <SoftTypography sx={{ marginTop: 4 }} variant="body2">
                         Bonus percentage
                     </SoftTypography>
                     {/* Percentage Field */}
-                    <SoftInput
-                        placeholder="Percentage"
-                        variant="outlined"
-                        fullWidth
-
-                    />
+                    <SoftInput placeholder="Percentage" variant="outlined" fullWidth />
                 </DialogContent>
                 <DialogActions>
                     <SoftBox mt={4} mb={1}>
-                        <SoftButton variant="gradient" color="secondary" fullWidth onClick={handleCloseModal} sx={{ color: "black" }}>
+                        <SoftButton
+                            variant="gradient"
+                            color="secondary"
+                            fullWidth
+                            onClick={handleCloseModal}
+                            sx={{ color: "black" }}
+                        >
                             Cancel
                         </SoftButton>
                     </SoftBox>
 
                     <SoftBox mt={4} mb={1}>
-                        <SoftButton variant="gradient" color="info" fullWidth onClick={handleSubmit} sx={{ color: "black" }}>
+                        <SoftButton
+                            variant="gradient"
+                            color="info"
+                            fullWidth
+                            onClick={handleSubmit}
+                            sx={{ color: "black" }}
+                        >
                             Save
                         </SoftButton>
                     </SoftBox>
                 </DialogActions>
-            </Dialog>
+            </Dialog>;
+
         </>
     );
 }

@@ -30,23 +30,8 @@ import { useTimeline } from "examples/Timeline/context";
 // Custom styles for the TimelineItem
 import { timelineItem, timelineItemIcon } from "examples/Timeline/TimelineItem/styles";
 
-function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem,read,content }) {
+function TimelineItem({ color, icon, title, date, description, badges, lastItem, read, content }) {
   const isDark = useTimeline();
-  // const renderBadges =
-  //   badges.length > 0
-  //     ? badges.map((badge, key) => {
-  //         const badgeKey = `badge-${key}`;
-
-  //         return (
-  //           <SoftBox key={badgeKey} mr={key === badges.length - 1 ? 0 : 0.5}>
-  //             <SoftBadge color={color} size="xs" badgeContent={badge} container />
-  //           </SoftBox>
-  //         );
-  //       })
-  //     : null;
-
-
-
 
   return (
     <SoftBox position="relative" sx={(theme) => timelineItem(theme, { lastItem })}>
@@ -63,13 +48,21 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
         <Icon sx={(theme) => timelineItemIcon(theme, { color })}>{icon}</Icon>
       </SoftBox>
       <SoftBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
-        <SoftTypography variant="button" fontWeight={read ? "regular" :"medium"} color={isDark ? "white" : "dark"}>
-          {title}
-        </SoftTypography>
+
+        <SoftBox display="flex" justifyContent="space-between" alignItems="center">
+          <SoftTypography variant="button" fontWeight={read ? "regular" : "medium"} color={isDark ? "white" : "dark"}>
+            {title}
+          </SoftTypography>
+          <SoftTypography variant="caption" fontWeight={read ? "regular" : "medium"} color={isDark ? "white" : "dark"} 
+          display = "flex" alignItems = "end" justifyContent = "flex-end">
+            {date}
+          </SoftTypography>
+        </SoftBox>
+
         <SoftBox mt={0.5}>
           <SoftTypography
             variant="caption"
-            fontWeight={read ? "regular": "medium"}
+            fontWeight={read ? "regular" : "medium"}
             color={isDark ? "secondary" : "text"}
           >
             {content}
@@ -114,7 +107,7 @@ TimelineItem.propTypes = {
   ]),
   icon: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
-  dateTime: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
   description: PropTypes.string,
   badges: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   lastItem: PropTypes.bool,

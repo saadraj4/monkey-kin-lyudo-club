@@ -26,14 +26,14 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
 function MiniStatisticsCard({ bgColor = MiniStatisticsCard.defaultProps.bgColor, title, count, percentage, icon, direction }) {
-   
+
   return (
     <Card
-    sx={{
-      boxShadow: "0px 4px 10px rgb(78, 78, 233)", // Custom shadow
-      borderRadius: "12px", // Optional: To make it look more prominent and modern
-    }}
-    elevation={4}
+      sx={{
+        boxShadow: "0px 4px 10px rgb(78, 78, 233)", // Custom shadow
+        borderRadius: "12px", // Optional: To make it look more prominent and modern
+      }}
+      elevation={4}
     >
       <SoftBox bgColor={bgColor} variant="gradient">
         <SoftBox p={2}>
@@ -52,9 +52,19 @@ function MiniStatisticsCard({ bgColor = MiniStatisticsCard.defaultProps.bgColor,
                   alignItems="center"
                   shadow="md"
                 >
-                  <Icon fontSize="small" color="inherit">
-                    {icon.component}
-                  </Icon>
+                  {typeof icon.component !== "string" ? (
+                    // Render the React component or anything other than a string
+                    <Icon fontSize="small" color="inherit">
+                      {icon.component}
+                    </Icon>
+                  ) : (
+                    // If it's a string, render the image
+                    <img
+                      src={icon.component}
+                      alt="icon"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  )}
                 </SoftBox>
               </Grid>
             ) : null}
@@ -76,7 +86,7 @@ function MiniStatisticsCard({ bgColor = MiniStatisticsCard.defaultProps.bgColor,
                   color={bgColor === "white" ? "dark" : "white"}
                 >
                   {count}{" "}
-                  
+
                 </SoftTypography>
               </SoftBox>
             </Grid>
@@ -95,9 +105,13 @@ function MiniStatisticsCard({ bgColor = MiniStatisticsCard.defaultProps.bgColor,
                   alignItems="center"
                   shadow="md"
                 >
-                  <Icon fontSize="small" color="inherit">
-                    {icon.component}
-                  </Icon>
+                  {typeof icon.component === "string" ? (
+                    <img src={icon.component} alt="icon" style={{ width: "100%", height: "100%" }} />
+                  ) : (
+                    <Icon fontSize="small" color="inherit">
+                      {icon.component}
+                    </Icon>
+                  )}
                 </SoftBox>
               </Grid>
             ) : null}
@@ -154,7 +168,7 @@ MiniStatisticsCard.propTypes = {
   }),
   icon: PropTypes.shape({
     color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
-    component: PropTypes.node.isRequired,
+    component: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   }).isRequired,
   direction: PropTypes.oneOf(["right", "left"]),
 };
