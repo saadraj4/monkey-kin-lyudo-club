@@ -6,7 +6,6 @@ import SoftBox from "components/SoftBox";
 
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-// import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 // New Tasks
 import Users from "./components/recentRegistration"
@@ -17,7 +16,9 @@ import Notifications from "./components/notifications";
 import TOP5Players from "./components/top5Players";
 import TOP5PlayersData from "./data/Top5PlayersData"
 import Sidenav from "../SideNavbar";
-import Player from "assets/players.png"
+// import Player from "assets/players.png"
+import Player from "assets/images/team-1.jpg"
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 function Dashboard() {
   
@@ -28,6 +29,7 @@ function Dashboard() {
     <>
     <Sidenav />
     <DashboardLayout>
+      <DashboardNavbar />
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>

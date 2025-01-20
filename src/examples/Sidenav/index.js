@@ -70,7 +70,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           sx={{ textDecoration: "none" }}
         >
           <SidenavCollapse
-            color={color}
+            color="info"
             name={name}
             icon={icon}
             active={key === collapseName}
@@ -80,7 +80,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       ) : (
         <NavLink to={route} key={key}>
           <SidenavCollapse
-            color={color}
+            color="info"
             key={key}
             name={name}
             icon={icon}
@@ -129,8 +129,8 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             <Icon sx={{ fontWeight: "bold" }}>close</Icon>
           </SoftTypography>
         </SoftBox>
-        <SoftBox component={NavLink} to="/" display="flex" alignItems="center">
-          {brand && <SoftBox component="img" src={brand} alt="Soft UI Logo" width="2rem" />}
+        <SoftBox component={NavLink} to="/dashboard" display="flex" alignItems="center">
+          {brand && <SoftBox component="img" src={brand} alt="Monkey King Logo" width="2rem" />}
           <SoftBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}

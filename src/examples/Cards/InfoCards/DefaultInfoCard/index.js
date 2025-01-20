@@ -56,14 +56,9 @@ function DefaultInfoCard({ color, icon, title, description, value }) {
         <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
         </SoftTypography>
-        {description && (
-          <SoftTypography variant="caption" color="text" fontWeight="regular">
-            {description}
-          </SoftTypography>
-        )}
-        {description && !value ? null : <Divider />}
+       
         {value && (
-          <SoftTypography variant="h5" fontWeight="medium">
+          <SoftTypography variant="h5" fontWeight="medium" shadow="sm" mt={1} borderRadius="lg">
             {value}
           </SoftTypography>
         )}

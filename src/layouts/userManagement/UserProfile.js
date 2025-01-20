@@ -82,8 +82,12 @@ function Tables() {
                 <SoftBox py={3}>
 
                     <SoftBox mb={3}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} sm={6} xl={6}>
+                        {/* <Grid container spacing={3}> */}
+                            <Grid item xs={12} sm={6} sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}>
                                 <Profile
                                     image="https://via.placeholder.com/150" // Replace with actual image URL
                                     name="John Doe"
@@ -93,7 +97,7 @@ function Tables() {
                                     level="Gold"
                                 />
                             </Grid>
-                        </Grid>
+                        {/* </Grid> */}
                     </SoftBox>
 
 

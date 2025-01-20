@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
 import Sidenav from "../SideNavbar";
 import SoftBox from "components/SoftBox";
-import { Card, Grid, Modal, TextField } from '@mui/material';
+import { Grid, Modal } from '@mui/material';
 import SoftTypography from 'components/SoftTypography';
 import DefaultProjectCard from 'examples/Cards/ProjectCards/DefaultProjectCard';
-import PlaceholderCard from 'examples/Cards/PlaceholderCard';
-import homeDecor1 from "assets/images/home-decor-1.jpg";
-import homeDecor2 from "assets/images/home-decor-2.jpg";
-import homeDecor3 from "assets/images/home-decor-3.jpg";
+
 import Coins from 'assets/images/Coins.jpeg';
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import SoftButton from 'components/SoftButton';
 import SoftInput from 'components/SoftInput';
+import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 
 function index() {
     const [modalOpen, setModalOpen] = useState(false);
@@ -56,6 +54,7 @@ function index() {
     return (
         <DashboardLayout>
             <Sidenav />
+            <DashboardNavbar />
             <SoftBox mb={3}>
                
                     <SoftBox pt={2} px={2}>

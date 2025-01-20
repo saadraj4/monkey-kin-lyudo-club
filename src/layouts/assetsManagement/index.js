@@ -30,6 +30,7 @@ import { useRef,useState } from "react";
 import Coin from "assets/images/Coins.jpeg";
 import Sidenav from "../SideNavbar";
 import Slider from "react-slick";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 
 function Overview() {
@@ -83,9 +84,11 @@ function Overview() {
 
     return (
         <DashboardLayout>
+            <DashboardNavbar />
             <Sidenav />
+            
             <SoftBox mb={5}>
-                <Card mb={3}>
+                
                     {sections.map((section, index) => (
                         <div key={index}>
                             <SoftBox pt={2} px={2} position="relative">
@@ -121,21 +124,21 @@ function Overview() {
                             <SoftBox p={2}>
                                 <Slider {...settings}>
                                     {cardData.map((card, index) => (
-                                        <Card key={index} style={{ padding: "0 10px" }}>
-                                            <Grid item xs={12} md={6} xl={3}>
+                                        
+                                            <Grid item xs={12} md={6} xl={3} key={index}>
                                                 <DefaultProjectCard
                                                     image={card.image}
                                                     price={card.price}
                                                     id={card.id}
                                                 />
                                             </Grid>
-                                        </Card>
+
                                     ))}
                                 </Slider>
                             </SoftBox>
                         </div>
                     ))}
-                </Card>
+
             </SoftBox>
         </DashboardLayout>
     );

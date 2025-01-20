@@ -3,13 +3,11 @@ import SideNav from '../SideNavbar'
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout'
 import SoftButton from 'components/SoftButton'
 import SoftBox from 'components/SoftBox'
-import { Card, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import SoftTypography from 'components/SoftTypography'
-import homeDecor1 from "assets/images/home-decor-1.jpg";
-import homeDecor2 from "assets/images/home-decor-2.jpg";
-import homeDecor3 from "assets/images/home-decor-3.jpg";
 import DefaultInfoCard from 'examples/Cards/InfoCards/DefaultInfoCard'
 import Coins from "assets/images/Coins.jpeg";
+import DashboardNavbar from 'examples/Navbars/DashboardNavbar'
 
 function index() {
     const Data = [
@@ -21,7 +19,8 @@ function index() {
     return (
         <DashboardLayout>
             <SideNav />
-            <SoftBox
+            <DashboardNavbar />
+            <SoftBox    
                 sx={{
                     position: "absolute", // Makes the button position relative to the viewport
                     top: "16px", // Distance from the top

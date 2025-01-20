@@ -1,4 +1,5 @@
 
+import "./index.css";
 import { useState, useEffect, useMemo } from "react";
 
 // react-router components
@@ -34,7 +35,7 @@ import ResetPassword from "./layouts/authentication/forget-password";
 import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
 // Images
-import brand from "assets/images/logo-ct.png";
+import brand from "assets/images/logo.jpeg";
 import NotFound from "components/NotFound";
 
 export default function App() {
@@ -114,9 +115,7 @@ export default function App() {
       sx={{ cursor: "pointer" }}
       onClick={handleConfiguratorOpen}
     >
-      <Icon fontSize="default" color="inherit">
-        settings
-      </Icon>
+    
     </SoftBox>
   );
 

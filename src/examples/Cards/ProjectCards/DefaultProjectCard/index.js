@@ -22,7 +22,7 @@ function DefaultProjectCard({ image, price, id,flag }) {
         overflow: "visible",
       }}
     >
-      <SoftBox position="relative" width="100.25%" shadow="xl" borderRadius="xl">
+      <SoftBox position="relative" width="100.25%"  borderRadius="xl">
         <CardMedia
           src={image}
           component="img"

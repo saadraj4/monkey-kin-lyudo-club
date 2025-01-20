@@ -73,8 +73,8 @@ function ProfilesList({ title, profiles }) {
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>
-                <th style={styles.th}>Badge</th>
-                <th style={styles.th}>Name</th>
+                <th style={styles.th}>  </th>
+                <th style={styles.thname}>Name</th>
                 <th style={styles.th}>Player ID</th>
                 <th style={styles.th}>Image</th>
                 <th style={styles.th}>Win Amount</th>
@@ -83,7 +83,7 @@ function ProfilesList({ title, profiles }) {
             <tbody>
               {displayedProfiles.map(({ image, name, id, badge, winAmount },index) => (
                 <tr key={index}>
-                  <td style={styles.td}>
+                  <td style={styles.td1}>
                     {badge === 1 ? (
                       <SoftAvatar src={badge1} alt="Badge1" variant="rounded" shadow="md" /> // Replace with your actual image source for badge 1
                     ) : badge === 2 ? (
@@ -94,7 +94,7 @@ function ProfilesList({ title, profiles }) {
                       <span  >{badge}</span> // For badge > 3, display the number
                     )}
                   </td>
-                  <td style={styles.td}>
+                  <td style={styles.tdname}>
                     <SoftTypography variant="button" fontWeight="medium">
                       {name}
                     </SoftTypography>
@@ -156,6 +156,29 @@ const styles = {
     padding: "10px",
     borderBottom: "1px solid #ddd",
   },
+  thname:{
+    textAlign: "left",
+    paddingRight: "10px",
+    borderBottom: "1px solid #ddd",
+    color: "#3a3bf1",
+    fontWeight: "bold",
+
+  },
+  tdname:{
+    textAlign: "left",
+    paddingRight: "10px",
+    borderBottom: "1px solid #ddd",
+      
+  },
+  td1: {
+    display: "flex",
+    textAlign: "center",
+    paddingTop: "10px",
+    marginLeft: "10 px",
+    color: "#3a3bf1",
+    fontWeight: "bold",
+    alignItems: "center", 
+  }
 };
 
 // Typechecking props for the ProfilesList

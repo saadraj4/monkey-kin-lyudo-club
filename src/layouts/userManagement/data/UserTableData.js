@@ -65,7 +65,7 @@ const authorsTableData = {
 
   rows: [
     {
-      user: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
+      user: <Author image={team2} name="John Michael" email="john@creative-tim.com" id={1}/>,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="4" color="success" container />
@@ -93,7 +93,7 @@ const authorsTableData = {
 
     },
     {
-      user: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
+      user: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" id={2}/>,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
@@ -121,7 +121,7 @@ const authorsTableData = {
 
     },
     {
-      user: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" />,
+      user: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" id={3}/>,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="7" color="success" container />
@@ -149,7 +149,7 @@ const authorsTableData = {
 
     },
     {
-      user: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" />,
+      user: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" id={4}/>,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="10" color="success" container />
@@ -177,7 +177,7 @@ const authorsTableData = {
 
     },
     {
-      user: <Author image={team2} name="Richard Gran" email="richard@creative-tim.com" />,
+      user: <Author image={team2} name="Richard Gran" email="richard@creative-tim.com" id={5}/>,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
@@ -204,7 +204,7 @@ const authorsTableData = {
 
     },
     {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={6}/>,
       rate: <Function rate={"35%"} />,
 
 
@@ -232,7 +232,7 @@ const authorsTableData = {
 
     },
     {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={7}/>,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="10" color="success" container />
@@ -260,7 +260,7 @@ const authorsTableData = {
 
     },
     {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={8}/>,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
@@ -288,7 +288,7 @@ const authorsTableData = {
 
     },
     {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={9}/>,
       rate: <Function rate={"35%"} />,
 
       reward: (
@@ -322,7 +322,7 @@ const authorsTableData = {
     },
 
     {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={10}/>,
       rate: <Function rate={"35%"} />,
 
       reward: (

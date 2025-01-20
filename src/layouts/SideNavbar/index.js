@@ -1,7 +1,7 @@
 import Sidenav from 'examples/Sidenav'
 import React, { useState } from 'react'
 import routes from 'routes'
-import brand from "assets/images/logo-ct.png";
+import brand from "assets/images/logo.jpeg";
 import { useSoftUIController, setMiniSidenav } from "context";
 
 function index() {
@@ -28,7 +28,7 @@ const [controller, dispatch] = useSoftUIController();
     <Sidenav
             color={sidenavColor}
             brand={brand}
-            brandName="Soft UI Dashboard"
+            brandName="Monkey King"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}

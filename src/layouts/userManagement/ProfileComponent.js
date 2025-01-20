@@ -37,7 +37,7 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
             color="info"
             sx={{
               position: "absolute",
-              right: "-500px",
+              right: "-200px",
               top: "0px",
 
               zIndex: 1,

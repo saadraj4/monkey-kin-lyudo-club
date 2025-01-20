@@ -9,6 +9,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material
 import SoftTypography from 'components/SoftTypography'
 import SoftInput from 'components/SoftInput'
 import { useDropzone } from "react-dropzone";
+import DashboardNavbar from 'examples/Navbars/DashboardNavbar'
 
 
 function index() {
@@ -61,12 +62,13 @@ function index() {
     return (
         <DashboardLayout>
             <SideNav />
+            <DashboardNavbar />
             <SoftBox
                 sx={{
                     position: "absolute",
                     top: "16px",
                     right: "16px",
-                    zIndex: 1000,
+                    zIndex: 2000,
                 }}>
                 <SoftButton color="info" variant="contained" alignItem="right" onClick={handleOpenModal}>
                     Create Notifications
