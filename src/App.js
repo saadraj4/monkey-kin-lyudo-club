@@ -144,13 +144,13 @@ export default function App() {
   )  : (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {layout === "dashboard" && (
-        <>
-         
-          <Configurator />
-          {configsButton}
-        </>
-      )}
+        {/* {layout === "dashboard" && (
+          <>
+          
+            <Configurator />
+            {configsButton}
+          </>
+        )} */}
       {layout === "vr" && <Configurator />}
       <Routes>
       <Route path="/" element={<Navigate to="/authentication/sign-in" />} />

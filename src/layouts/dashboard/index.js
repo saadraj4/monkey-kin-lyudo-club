@@ -16,9 +16,9 @@ import Notifications from "./components/notifications";
 import TOP5Players from "./components/top5Players";
 import TOP5PlayersData from "./data/Top5PlayersData"
 import Sidenav from "../SideNavbar";
-// import Player from "assets/players.png"
-import Player from "assets/images/team-1.jpg"
+import Player from "assets/players.png"
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
 
 function Dashboard() {
   
@@ -38,7 +38,7 @@ function Dashboard() {
                 title={{ text: "No. of Players" }}
                 count="500"
                 percentage={{ color: "success", text: "+55%" }}
-                icon={{ color: "info", component: Player }}
+                icon={{ color: "info", component: PeopleAltSharpIcon }}
                 
               />
             </Grid>

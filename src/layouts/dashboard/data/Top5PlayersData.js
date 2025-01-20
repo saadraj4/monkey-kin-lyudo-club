@@ -1,19 +1,4 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Images
 import kal from "assets/images/kal-visuals-square.jpg";
 import marie from "assets/images/marie.jpg";
 import ivana from "assets/images/ivana-square.jpg";
@@ -26,73 +11,101 @@ const Top5PlayersData = [
     name: "John Doe",
     id: "Player1",
     badge: 1,
-    winAmount: 15000,
+    winAmount: {
+      type: "coins",
+      quantity: 15000,
+    },
   },
   {
-    image: kal,
-    name: "John Doe",
-    id: "Player1",
+    image: marie,
+    name: "Jane Smith",
+    id: "Player2",
     badge: 2,
-    winAmount: 15000,
+    winAmount: {
+      type: "diamonds",
+      quantity: 5000,
+    },
   },
   {
-    image: kal,
-    name: "John Doe",
-    id: "Player1",
+    image: ivana,
+    name: "Alice Johnson",
+    id: "Player3",
     badge: 3,
-    winAmount: 15000,
+    winAmount: {
+      type: "booster",
+      quantity: 3,
+    },
   },
   {
-    image: kal,
-    name: "John Doe",
-    id: "Player1",
+    image: team3,
+    name: "Robert Brown",
+    id: "Player4",
     badge: 4,
-    winAmount: 15000,
+    winAmount: {
+      type: "dice",
+      quantity: 2,
+    },
   },
   {
-    image: kal,
-    name: "John Doe",
-    id: "Player1",
+    image: team4,
+    name: "Emily Davis",
+    id: "Player5",
     badge: 5,
-    winAmount: 15000,
+    winAmount: {
+      type: "coins",
+      quantity: 10000,
+    },
   },
   {
     image: kal,
-    name: "John Doe",
-    id: "Player1",
+    name: "Chris Wilson",
+    id: "Player6",
     badge: 6,
-    winAmount: 15000,
+    winAmount: {
+      type: "diamonds",
+      quantity: 3000,
+    },
   },
   {
-    image: kal,
-    name: "John Doe",
-    id: "Player1",
+    image: marie,
+    name: "Sophia Martinez",
+    id: "Player7",
     badge: 7,
-    winAmount: 15000,
+    winAmount: {
+      type: "booster",
+      quantity: 4,
+    },
   },
   {
-    image: kal,
-    name: "John Doe",
-    id: "Player1",
+    image: ivana,
+    name: "Daniel Garcia",
+    id: "Player8",
     badge: 8,
-    winAmount: 15000,
+    winAmount: {
+      type: "dice",
+      quantity: 5,
+    },
   },
   {
-    image: kal,
-    name: "John Doe",
-    id: "Player1",
+    image: team3,
+    name: "Emma White",
+    id: "Player9",
     badge: 9,
-    winAmount: 15000,
+    winAmount: {
+      type: "coins",
+      quantity: 8000,
+    },
   },
-  { 
-    image: kal,
-    name: "John Doe",
-    id: "Player1",
+  {
+    image: team4,
+    name: "Liam Harris",
+    id: "Player10",
     badge: 10,
-    winAmount: 15000,
+    winAmount: {
+      type: "diamonds",
+      quantity: 2000,
+    },
   },
-  
 ];
-
 
 export default Top5PlayersData;

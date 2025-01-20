@@ -55,7 +55,14 @@ function UserManagement() {
   const handleOpenModal = () => {
     setOpenModal(true);
   };
+  const [searchText, setSearchText] = useState("");
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && searchText.trim()) {
+      handleSearch();
+    }
+
+  };
   // Close Modal
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -69,6 +76,10 @@ function UserManagement() {
     // Get the selected file
     setNewImage(file);
   };
+
+const handleSearch = () => {
+  console.log("Search Triggered:", searchText);
+};
 
 
 
@@ -96,37 +107,55 @@ function UserManagement() {
       <DashboardNavbar />
       <SoftBox py={3}>
         <SoftBox mb={3}>
-
           <SoftBox p={3}>
-            {/* Player Header */}
-            <SoftTypography variant="h6" gutterBottom>
-              Player
-            </SoftTypography>
-
-            {/* Search Bar and Add New Player Button */}
-            <SoftBox display="flex" justifyContent="space-between" alignItems="center">
-              {/* Search Bar */}
-              <SoftBox sx={{ width: "82%" }}>
-                <SoftInput
-                  fullWidth
-                  variant="outlined"
-                  placeholder="Search Player"
-                // Add your onChange or value logic for search here
-                />
-              </SoftBox>
+            {/* Player Header with Add New Player Button */}
+            <SoftBox
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              {/* Heading */}
+              <SoftTypography variant="h4" gutterBottom>
+                Player
+              </SoftTypography>
 
               {/* Add New Player Button */}
               <SoftButton
                 variant="gradient"
                 color="info"
                 onClick={handleOpenModal}
-                sx={{ marginLeft: 2 }}
               >
                 Add New Player
               </SoftButton>
             </SoftBox>
+
+            {/* Search Bar with Search Button */}
+            <SoftBox display="flex" alignItems="center" mt={2}>
+              {/* Search Bar */}
+              <SoftBox sx={{ width: "90%" }}>
+                <SoftInput
+                  fullWidth
+                  variant="outlined"
+                  placeholder="Search Player"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+              </SoftBox>
+
+              {/* Search Button */}
+              <SoftButton
+                variant="gradient"
+                color="info"
+                onClick={handleSearch}
+                sx={{ marginLeft: 2 }}
+              >
+                Search
+              </SoftButton>
+            </SoftBox>
           </SoftBox>
 
+          {/* Table */}
           <SoftBox
             sx={{
               "& .MuiTableRow-root:not(:last-child)": {
@@ -139,6 +168,7 @@ function UserManagement() {
           >
             <Table columns={columns} rows={currentRows} />
           </SoftBox>
+
           {/* Pagination */}
           <SoftBox display="flex" justifyContent="center" mt={3}>
             <Pagination
@@ -148,9 +178,10 @@ function UserManagement() {
               color="info"
             />
           </SoftBox>
-
         </SoftBox>
       </SoftBox>
+
+
 
 
 

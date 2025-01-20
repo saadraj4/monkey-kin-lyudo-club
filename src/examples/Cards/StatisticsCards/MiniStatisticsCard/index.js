@@ -20,6 +20,7 @@ import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
+import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -49,7 +50,7 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
                   alt="icon" style={{ width: "100%" }} /> 
                   :
                     <Icon fontSize="small" color="inherit">
-                      {icon.component}
+                      {PeopleAltSharpIcon}
                     </Icon>}
                 </SoftBox>
               </Grid>
@@ -69,7 +70,6 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
                   variant="h5"
                   fontWeight="bold"
                   color="black"
-
                 >
                   {count}{" "}
 
@@ -94,7 +94,7 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
                   { typeof icon.component === "string" ? <img src={icon.component}
                   alt="icon" style={{ width: "100%" }} />:
                     <Icon fontSize="small" color="inherit">
-                    {icon.component}
+                    {PeopleAltSharpIcon}
                   </Icon>}
                 </SoftBox>
               </Grid>
@@ -152,7 +152,7 @@ MiniStatisticsCard.propTypes = {
   }),
   icon: PropTypes.shape({
     color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
-    component: PropTypes.oneOfType([PropTypes.node.isRequired, PropTypes.string])
+    component: PropTypes.oneOfType([PropTypes.node, PropTypes.string])
   }).isRequired,
   direction: PropTypes.oneOf(["right", "left"]),
 };

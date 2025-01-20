@@ -17,19 +17,19 @@ function Author({ image, name, email, id }) {
     <SoftBox display="flex" alignItems="center" px={1} py={0.5}>
       <SoftBox mr={2}>
         <SoftAvatar src={image} alt={name} size="sm" variant="rounded"
-        sx={{cursor: "pointer"}}
-        onClick={()=>handleViewClick(id)}/>
+          sx={{ cursor: "pointer" }}
+          onClick={() => handleViewClick(id)} />
       </SoftBox>
       <SoftBox display="flex" flexDirection="column">
         <SoftTypography variant="button" fontWeight="medium"
-         onClick={()=>handleViewClick(id)}
-         sx={{cursor: "pointer"}}
+          onClick={() => handleViewClick(id)}
+          sx={{ cursor: "pointer" }}
         >
           {name}
         </SoftTypography>
         <SoftTypography variant="caption" color="secondary"
-         onClick={()=>handleViewClick(id)}
-         sx={{cursor: "pointer"}}
+          onClick={() => handleViewClick(id)}
+          sx={{ cursor: "pointer" }}
         >
           {email}
         </SoftTypography>
@@ -53,6 +53,33 @@ const handleViewClick = (row) => {
 };
 
 
+function GiftComponent({ id }) {
+  // State to manage the modal's visibility
+  const [openGift, setOpenGift] = useState(false);
+console.log("id",id)
+  const handleOpenGift = () => setOpenGift(true); // Open the Gift modal
+  const handleCloseGift = () => setOpenGift(false); // Close the Gift modal
+
+  return (
+    <>
+      <SoftBox display="flex" justifyContent="space-between">
+        <SoftButton
+          component="a"
+          href="#"
+          variant="contained"
+          color="info"
+          fontWeight="medium"
+          sx={{ marginLeft: 2 }}
+          onClick={() => handleOpenGift()}
+        >
+          Gift
+        </SoftButton>
+      </SoftBox>
+      <Gift openGift={openGift} handleCloseGift={handleCloseGift} />
+    </>
+  );
+}
+
 const authorsTableData = {
 
   columns: [
@@ -65,230 +92,95 @@ const authorsTableData = {
 
   rows: [
     {
-      user: <Author image={team2} name="John Michael" email="john@creative-tim.com" id={1}/>,
+      user: <Author image={team2} name="John Michael" email="john@creative-tim.com" id={1} />,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="4" color="success" container />
       ),
-
-      action: (
-        <SoftBox display="flex" justifyContent="space-between">
-          {/* View Action */}
-         
-
-          {/* Edit Action */}
-          <SoftButton
-            component="a"
-            href="#"
-            variant="contained"
-            color="info"
-            fontWeight="medium"
-            sx={{ marginLeft: 2}}
-            >
-            Gift
-          </SoftButton>
-        </SoftBox>
-      ),
+      action: <GiftComponent id={1} />,
       status: <StatusButton id={1} />,
 
     },
     {
-      user: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" id={2}/>,
+      user: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" id={2} />,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
       ),
 
-      action: (
-        <SoftBox display="flex" justifyContent="space-between">
-          {/* View Action */}
-        
-
-          {/* Edit Action */}
-          <SoftButton
-            component="a"
-            href="#"
-            variant="contained"
-            color="info"
-            fontWeight="medium"
-            sx={{ marginLeft: 2 }}
-            >
-            Gift
-          </SoftButton>
-        </SoftBox>
-      ),
-      status: <StatusButton id={1} />,
+      action: <GiftComponent id={2} />,
+      status: <StatusButton id={2} />,
 
     },
     {
-      user: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" id={3}/>,
+      user: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" id={3} />,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="7" color="success" container />
       ),
 
-      action: (
-        <SoftBox display="flex" justifyContent="space-between">
-          {/* View Action */}
-      
-
-          {/* Edit Action */}
-          <SoftButton
-            component="a"
-            href="#"
-            variant="contained"
-            color="info"
-            fontWeight="medium"
-            sx={{ marginLeft: 2 }}
-            >
-            Gift
-          </SoftButton>
-        </SoftBox>
-      ),
-      status: <StatusButton id={1} />,
+      action: <GiftComponent id={3} />,
+      status: <StatusButton id={3} />,
 
     },
     {
-      user: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" id={4}/>,
+      user: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" id={4} />,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="10" color="success" container />
       ),
 
-      action: (
-        <SoftBox display="flex" justifyContent="space-between">
-          {/* View Action */}
-        
-
-          {/* Edit Action */}
-          <SoftButton
-            component="a"
-            href="#"
-            variant="contained"
-            color="info"
-            fontWeight="medium"
-            sx={{ marginLeft: 2 }}
-            >
-            Gift
-          </SoftButton>
-        </SoftBox>
-      ),
-      status: <StatusButton id={1} />,
+      action: <GiftComponent id={4} />,
+      status: <StatusButton id={4} />,
 
     },
     {
-      user: <Author image={team2} name="Richard Gran" email="richard@creative-tim.com" id={5}/>,
+      user: <Author image={team2} name="Richard Gran" email="richard@creative-tim.com" id={5} />,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
       ),
 
-      action: (
-        <SoftBox display="flex" justifyContent="space-between">
-          {/* View Action */}
-        
-          {/* Edit Action */}
-          <SoftButton
-            component="a"
-            href="#"
-            variant="contained"
-            color="info"
-            fontWeight="medium"
-            sx={{ marginLeft: 2 }}
-            >
-            Gift
-          </SoftButton>
-        </SoftBox>
-      ),
-      status: <StatusButton id={1} />,
+      action: <GiftComponent id={5} />,
+      status: <StatusButton id={5} />,
 
     },
     {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={6}/>,
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={6} />,
       rate: <Function rate={"35%"} />,
 
 
       streak: (
         <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
       ),
-      action: (
-        <SoftBox display="flex" justifyContent="space-between">
-          {/* View Action */}
-        
-          {/* Edit Action */}
-          <SoftButton
-            component="a"
-            href="#"
-            variant="contained"
-            color="info"
-            fontWeight="medium"
-            sx={{ marginLeft: 2 }}
-            >
-            Gift
-          </SoftButton>
-        </SoftBox>
-      ),
-      status: <StatusButton id={1} />,
+      action: <GiftComponent id={6} />,
+      status: <StatusButton id={6} />,
 
     },
     {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={7}/>,
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={7} />,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="10" color="success" container />
       ),
 
-      action: (
-        <SoftBox display="flex" justifyContent="space-between">
-          {/* View Action */}
-      
-
-          {/* Edit Action */}
-          <SoftButton
-            component="a"
-            href="#"
-            variant="contained"
-            color="info"
-            fontWeight="medium"
-            sx={{ marginLeft: 2 }}
-            >
-            Gift
-          </SoftButton>
-        </SoftBox>
-      ),
-      status: <StatusButton id={1} />,
+      action: <GiftComponent id={7} />,
+      status: <StatusButton id={7} />,
 
     },
     {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={8}/>,
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={8} />,
       rate: <Function rate={"35%"} />,
       streak: (
         <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
       ),
 
-      action: (
-        <SoftBox display="flex" justifyContent="space-between">
-          {/* View Action */}
-     
-
-          {/* Edit Action */}
-          <SoftButton
-            component="a"
-            href="#"
-            variant="contained"
-            color="info"
-            fontWeight="medium"
-            sx={{ marginLeft: 2 }}
-            >
-            Gift
-          </SoftButton>
-        </SoftBox>
-      ),
-      status: <StatusButton id={1} />,
+      action: <GiftComponent id={8} />,
+      status: <StatusButton id={8} />,
 
     },
     {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={9}/>,
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={9} />,
       rate: <Function rate={"35%"} />,
 
       reward: (
@@ -299,30 +191,13 @@ const authorsTableData = {
       streak: (
         <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
       ),
-      action: (
-        <SoftBox display="flex" justifyContent="space-between">
-          {/* View Action */}
-       
-
-          {/* Edit Action */}
-          <SoftButton
-            component="a"
-            href="#"
-            variant="contained"
-            color="info"
-            fontWeight="medium"
-            sx={{ marginLeft: 2 }}
-            >
-            Gift
-          </SoftButton>
-        </SoftBox>
-      ),
-      status: <StatusButton id={1} />,
+      action: <GiftComponent id={9} />,
+      status: <StatusButton id={9} />,
 
     },
 
     {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={10}/>,
+      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={10} />,
       rate: <Function rate={"35%"} />,
 
       reward: (
@@ -333,25 +208,8 @@ const authorsTableData = {
       streak: (
         <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
       ),
-      action: (
-        <SoftBox display="flex" justifyContent="space-between">
-          {/* View Action */}
-       
-
-          {/* Edit Action */}
-          <SoftButton
-            component="a"
-            href="#"
-            variant="contained"
-            color="info"
-            fontWeight="medium"
-            sx={{ marginLeft: 2 }}
-            >
-            Gift
-          </SoftButton>
-        </SoftBox>
-      ),
-      status: <StatusButton id={1} />,
+      action: <GiftComponent id={10} />,
+      status: <StatusButton id={10} />,
 
     },
 
@@ -359,10 +217,9 @@ const authorsTableData = {
 };
 function StatusButton(id) {
   const [status, setStatus] = useState("Active");
- 
+
 
   const toggleStatus = (id) => {
-    console.log(id);
     if (status === "Active") {
       setStatus("Blocked");
     } else {
@@ -378,7 +235,7 @@ function StatusButton(id) {
       sx={{
         minWidth: 100, // Ensure the button width remains the same
         padding: "6px 16px", // Consistent padding
-      }}  
+      }}
     >
       {status === "Active" ? "Block" : "Unblock"}
     </SoftButton>

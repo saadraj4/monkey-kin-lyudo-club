@@ -5,7 +5,6 @@ import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
 import SoftAvatar from "components/SoftAvatar";
 import Gift from "./gift"
-import image1 from "assets/images/team-1.jpg";
 
 function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
   // State to manage the modal's visibility
@@ -23,7 +22,7 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
           p={5}
           sx={{
             // maxWidth: "700px",
-            backgroundColor: "#fff",
+            // backgroundColor: "#fff",
             position: "relative", // To allow positioning of the button
             display: "flex",
             alignItems: "center",
@@ -37,7 +36,7 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
             color="info"
             sx={{
               position: "absolute",
-              right: "-200px",
+              right: "-500px",
               top: "0px",
 
               zIndex: 1,
@@ -49,7 +48,7 @@ function UserProfile({ image, name, playerId, winStreak, winRatio, level }) {
 
           {/* Profile Image */}
           <SoftAvatar
-            src={image1}
+            src={image}
             alt="User Profile"
             sx={{
               width: 200,

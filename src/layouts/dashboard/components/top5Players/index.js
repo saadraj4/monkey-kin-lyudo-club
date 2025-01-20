@@ -5,9 +5,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
-import badge1 from "assets/images/Badges/1.jpg";
-import badge2 from "assets/images/Badges/2.jpg";
-import badge3 from "assets/images/Badges/3.jpg";
+import badge1 from "assets/images/Badges/1.png";
+import badge2 from "assets/images/Badges/2.png";
+import badge3 from "assets/images/Badges/3.png";
+import CoinImage from "assets/images/coins.png"
+import DiamondImage from "assets/images/diamond.png"
+import BoosterImage from "assets/images/booster.png"
+import Dice from "assets/images/dice.png"
 
 function ProfilesList({ title, profiles }) {
   const [displayedProfiles, setDisplayedProfiles] = useState([]);
@@ -70,33 +74,37 @@ function ProfilesList({ title, profiles }) {
       </SoftBox>
       <SoftBox p={2}>
         <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <table style={styles.table}>
             <thead>
               <tr>
-                <th style={styles.th}>  </th>
                 <th style={styles.thname}>Name</th>
-                <th style={styles.th}>Player ID</th>
                 <th style={styles.th}>Image</th>
+                <th style={styles.th}>Player ID</th>
                 <th style={styles.th}>Win Amount</th>
               </tr>
             </thead>
             <tbody>
-              {displayedProfiles.map(({ image, name, id, badge, winAmount },index) => (
+              {displayedProfiles.map(({ image, name, id, badge, winAmount }, index) => (
                 <tr key={index}>
-                  <td style={styles.td1}>
-                    {badge === 1 ? (
-                      <SoftAvatar src={badge1} alt="Badge1" variant="rounded" shadow="md" /> // Replace with your actual image source for badge 1
-                    ) : badge === 2 ? (
-                      <SoftAvatar src={badge2} alt="Badge2" variant="rounded" shadow="md" /> // Replace with your actual image source for badge 1
-                    ) : badge === 3 ? (
-                      <SoftAvatar src={badge3} alt="Badge3" variant="rounded" shadow="md" /> // Replace with your actual image source for badge 1
-                    ) : (
-                      <span  >{badge}</span> // For badge > 3, display the number
-                    )}
-                  </td>
                   <td style={styles.tdname}>
-                    <SoftTypography variant="button" fontWeight="medium">
-                      {name}
+                    <SoftBox display="flex" alignItems="center">
+                      {badge === 1 ? (
+                        <SoftAvatar src={badge1} alt="Badge1"  />
+                      ) : badge === 2 ? (
+                        <SoftAvatar src={badge2} alt="Badge2"  />
+                      ) : badge === 3 ? (
+                        <SoftAvatar src={badge3} alt="Badge3"   />
+                      ) : (
+                        <span style={styles.badgeText}>{badge}</span>
+                      )}
+                      <SoftTypography variant="button" fontWeight="medium" ml={2}>
+                        {name}
+                      </SoftTypography>
+                    </SoftBox>
+                  </td>
+                  <td style={styles.td}>
+                    <SoftTypography variant="button" fontWeight="regular">
+                      <SoftAvatar src={image} alt={name} variant="rounded" shadow="md" />
                     </SoftTypography>
                   </td>
                   <td style={styles.td}>
@@ -105,16 +113,54 @@ function ProfilesList({ title, profiles }) {
                     </SoftTypography>
                   </td>
                   <td style={styles.td}>
-                    <SoftTypography variant="button" fontWeight="regular">
-                      <SoftAvatar src={image} alt={name} variant="rounded" shadow="md" />
+                    <SoftBox display="flex" alignItems="center">
+                      {winAmount.type === "coins" && (
+                        <>
+                          <SoftAvatar
+                            src={CoinImage} // Replace with the actual path to the coins image
+                            alt="Coins"
+                          />
+                          <SoftTypography variant="button" fontWeight="regular" ml={1}>
+                            {winAmount.quantity.toLocaleString()}
+                          </SoftTypography>
+                        </>
+                      )}
+                      {winAmount.type === "diamonds" && (
+                        <>
+                          <SoftAvatar
+                            src={DiamondImage} // Replace with the actual path to the diamonds image
+                            alt="Diamonds"
+                          />
+                          <SoftTypography variant="button" fontWeight="regular" ml={1}>
+                            {winAmount.quantity.toLocaleString()}
+                          </SoftTypography>
+                        </>
+                      )}
+                      {winAmount.type === "booster" && (
+                        <>
+                          <SoftAvatar
+                            src={BoosterImage} // Replace with the actual path to the booster image
+                            alt="Booster"
+                          />
+                          <SoftTypography variant="button" fontWeight="regular" ml={1}>
+                            {winAmount.quantity.toLocaleString()}
+                          </SoftTypography>
+                        </>
+                      )}
+                      {winAmount.type === "dice" && (
+                        <>
+                          <SoftAvatar
+                            src={Dice} // Replace with the actual path to the dice image
+                            alt="Dice"
+                          />
+                          <SoftTypography variant="button" fontWeight="regular" ml={1}>
+                            {winAmount.quantity.toLocaleString()}
+                          </SoftTypography>
+                        </>
+                      )}
+                    </SoftBox>
+                  </td>
 
-                    </SoftTypography>
-                  </td>
-                  <td style={styles.td}>
-                    <SoftTypography variant="button" fontWeight="regular">
-                      ${winAmount.toLocaleString()}
-                    </SoftTypography>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -144,44 +190,53 @@ function ProfilesList({ title, profiles }) {
 }
 
 const styles = {
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+    fontSize: "14px",
+  },
   th: {
     textAlign: "left",
     padding: "10px",
     borderBottom: "1px solid #ddd",
     fontWeight: "bold",
-    color: "#3a3bf1",
+    color: "#333",
   },
   td: {
     textAlign: "left",
     padding: "10px",
     borderBottom: "1px solid #ddd",
   },
-  thname:{
+  thname: {
     textAlign: "left",
     paddingRight: "10px",
     borderBottom: "1px solid #ddd",
-    color: "#3a3bf1",
+    color: "#333",
     fontWeight: "bold",
-
   },
-  tdname:{
+  tdname: {
     textAlign: "left",
     paddingRight: "10px",
     borderBottom: "1px solid #ddd",
-      
   },
-  td1: {
-    display: "flex",
-    textAlign: "center",
-    paddingTop: "10px",
-    marginLeft: "10 px",
-    color: "#3a3bf1",
-    fontWeight: "bold",
-    alignItems: "center", 
-  }
+  badgeText: {
+    color: "black",
+    paddingLeft: "20px",
+    paddingRight: "17px",
+  },
+  "@media (max-width: 480px)": {
+    table: {
+      fontSize: "12px",
+    },
+    th: {
+      padding: "5px",
+    },
+    td: {
+      padding: "5px",
+    },
+  },
 };
 
-// Typechecking props for the ProfilesList
 ProfilesList.propTypes = {
   title: PropTypes.string.isRequired,
   profiles: PropTypes.arrayOf(

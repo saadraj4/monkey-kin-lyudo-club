@@ -20,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 import Transactions from "./Transactions";
 import SideNavbar from "../SideNavbar";
 import SoftInput from "components/SoftInput";
+import image1 from "assets/images/team-1.jpg";
+
 function Tables() {
     const navigate = useNavigate();
     const { columns, rows } = AffiliateInvitees;
@@ -82,14 +84,10 @@ function Tables() {
                 <SoftBox py={3}>
 
                     <SoftBox mb={3}>
-                        {/* <Grid container spacing={3}> */}
-                            <Grid item xs={12} sm={6} sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} sm={6} xl={6}>
                                 <Profile
-                                    image="https://via.placeholder.com/150" // Replace with actual image URL
+                                    image={image1} // Replace with actual image URL
                                     name="John Doe"
                                     playerId="12345"
                                     winStreak="10"
@@ -97,8 +95,10 @@ function Tables() {
                                     level="Gold"
                                 />
                             </Grid>
-                        {/* </Grid> */}
+                        </Grid>
                     </SoftBox>
+
+
 
 
                     <SoftBox mb={3} mt={5}>
