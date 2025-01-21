@@ -6,6 +6,9 @@ import SoftBox from "components/SoftBox";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import ChestRewards from "./chestRewards";
 import DailyRewardsData from "./dailyReward/data/DailyRewardsData";
+import LeagueRewardList from "./leagueRewards/components/LeagueReward";
+import LeagueRewardData from "./leagueRewards/data/LeagueRewardData";
+
 
 
 const PlatformManagement = () => {
@@ -17,8 +20,13 @@ const PlatformManagement = () => {
                 <ChestRewards />
             </SoftBox>
             <SoftBox>
-                <DailyReward profiles={DailyRewardsData} />
+                <DailyReward title={"Daily Rewards"} DailyReward={DailyRewardsData} />
             </SoftBox>
+
+            <SoftBox>
+                <LeagueRewardList title={"League Rewards"} LeagueRewards={LeagueRewardData} />
+            </SoftBox>
+
 
         </DashboardLayout>
     );

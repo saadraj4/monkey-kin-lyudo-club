@@ -14,7 +14,7 @@ import Booster from "assets/images/booster.png";
 import Avatar from "assets/images/avatar.png";
 import Frame from "assets/images/frame.png";
 import Dice from "assets/images/dice.png";
-import Bounty from "assets/images/bounty.jpeg";
+import Bounty from "assets/images/bounty.png";
 import Sidenav from "../SideNavbar";
 import Slider from "react-slick";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";

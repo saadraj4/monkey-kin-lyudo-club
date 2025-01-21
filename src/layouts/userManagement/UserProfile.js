@@ -16,14 +16,12 @@ import AffiliateInvitees from "./data/AffiliateInviteesData";
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Grid } from "@mui/material";
 import SoftButton from "../../components/SoftButton";
-import { useNavigate } from "react-router-dom";
 import Transactions from "./Transactions";
 import SideNavbar from "../SideNavbar";
 import SoftInput from "components/SoftInput";
 import image1 from "assets/images/team-1.jpg";
 
 function Tables() {
-    const navigate = useNavigate();
     const { columns, rows } = AffiliateInvitees;
 
     // Pagination state

@@ -18,6 +18,7 @@ const DailyRewardsData = [
     id: 2,
     image: marie,
     title: "Title",
+    name: "Day 2",
     description: "Description",
     date: "01/01/25"
   },
@@ -25,6 +26,8 @@ const DailyRewardsData = [
     id: 3,
     image: ivana,
     title: "Title",
+    name: "Day 3",
+
     description: "Description",
     date: "01/01/25"
   },
@@ -32,6 +35,8 @@ const DailyRewardsData = [
     id: 4,
     image: team4,
     title: "Title",
+    name: "Day 4",
+
     description: "Description",
     date: "01/01/25"
   },
@@ -39,6 +44,24 @@ const DailyRewardsData = [
     id: 5,
     image: team3,
     title: "Title",
+    name: "Day 5",
+    description: "Description",
+    date: "01/01/25"
+  },
+  {
+    id: 6,
+    image: team3,
+    title: "Title",
+    name: "Day 6",
+    description: "Description",
+    date: "01/01/25"
+    
+  },
+  {
+    id: 7,
+    image: team3,
+    title: "Title",
+    name: "Day 7",
     description: "Description",
     date: "01/01/25"
   },

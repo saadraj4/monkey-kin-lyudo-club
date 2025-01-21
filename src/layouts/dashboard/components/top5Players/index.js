@@ -113,7 +113,7 @@ function ProfilesList({ title, profiles }) {
                     </SoftTypography>
                   </td>
                   <td style={styles.td}>
-                    <SoftBox display="flex" alignItems="center">
+                    {badge < 4 && <SoftBox display="flex" alignItems="center">
                       {winAmount.type === "coins" && (
                         <>
                           <SoftAvatar
@@ -158,7 +158,7 @@ function ProfilesList({ title, profiles }) {
                           </SoftTypography>
                         </>
                       )}
-                    </SoftBox>
+                    </SoftBox>}
                   </td>
 
                 </tr>

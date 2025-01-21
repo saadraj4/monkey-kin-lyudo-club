@@ -3,36 +3,46 @@ import Grid from "@mui/material/Grid";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
-import { Modal } from "@mui/material";
+import { Modal, Checkbox, FormControlLabel } from "@mui/material";
 import SoftInput from "components/SoftInput";
 import { useState } from "react";
 
 function ChestRewards() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [value, setValue] = useState("30%"); // Value state for diamonds
+  const [addDiceFace, setAddDiceFace] = useState(false); // Checkbox state
 
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
 
   const handleSave = () => {
-    // Save the updated value and close the modal
+    // Save the updated value and checkbox state
     console.log("Updated Value:", value);
+    setValue(value);
+    console.log("Add Dice Face:", addDiceFace);
     handleClose();
+  };
+
+  const handleCheckboxChange = (event) => {
+    setAddDiceFace(event.target.checked);
   };
 
   return (
     <>
+      <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
+        Chest Reward
+      </SoftTypography>
       <Card>
         <SoftBox p={2}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={6}>
               <SoftBox display="flex" flexDirection="column">
-                <SoftTypography variant="h5" fontWeight="bold" gutterBottom>
+                <SoftTypography variant="h6" fontWeight="bold" gutterBottom>
                   Diamonds
                 </SoftTypography>
                 <SoftBox mb={1}>
                   <SoftTypography variant="body2" color="text">
-                    30 %
+                    {value}
                   </SoftTypography>
                 </SoftBox>
               </SoftBox>
@@ -76,6 +86,19 @@ function ChestRewards() {
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
+          {/* Checkbox for adding a dice face */}
+          <SoftBox mt={2}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={addDiceFace}
+                  onChange={handleCheckboxChange}
+                  color="primary"
+                />
+              }
+              label="Add a dice face"
+            />
+          </SoftBox>
           <SoftBox display="flex" justifyContent="flex-end" mt={2}>
             <SoftButton onClick={handleClose} variant="gradient" color="secondary" sx={{ mr: 2 }}>
               Cancel
@@ -86,7 +109,6 @@ function ChestRewards() {
           </SoftBox>
         </SoftBox>
       </Modal>
-
     </>
   );
 }
