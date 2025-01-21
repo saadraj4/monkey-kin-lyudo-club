@@ -1,147 +1,188 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import { Card, Grid, IconButton } from "@mui/material";
-import { Upload } from '@mui/icons-material';
-
-// import Card from "@mui/material";
+import { Upload } from "@mui/icons-material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// Soft UI Dashboard React components
+
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-
 import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
-import { useRef,useState } from "react";
-import Coin from "assets/images/Coins.jpeg";
+import { useRef, useState } from "react";
+import Coin from "assets/images/coins.png";
+import Diamond from "assets/images/diamond.png";
+import Booster from "assets/images/booster.png";
+import Avatar from "assets/images/avatar.png";
+import Frame from "assets/images/frame.png";
+import Dice from "assets/images/dice.png";
+import Bounty from "assets/images/bounty.jpeg";
 import Sidenav from "../SideNavbar";
 import Slider from "react-slick";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
-
 function Overview() {
-    const fileInputRef = useRef(null);  // Reference to the hidden file input
-    const [image, setImage] = useState(null);  // State to store the selected image
-    const handleUpload = () => {
+  const fileInputRef = useRef(null); // Reference to the hidden file input
+  const [image, setImage] = useState(null); // State to store the selected image
 
-        console.log("Image upload triggered");
-        fileInputRef.current.click();  // Trigger file input click
-    };
-    const handleFileChange = (event) => {
-        const file = event.target.files[0]; // Get the selected file
-        if (file) {
-            setImage(URL.createObjectURL(file)); // Create a temporary URL for the image
-        }
-    };
-    const settings = {
-        dots: true, // Show navigation dots
-        infinite: true, // Enable infinite looping
-        speed: 500, // Transition speed in ms
-        slidesToShow: 4, // Number of slides visible at a time
-        slidesToScroll: 1, // Number of slides to scroll per action
-        autoplay: true, // Enable autoplay
-        autoplaySpeed: 1000, // Time interval between transitions (in ms)
-        //   pauseonh
-        responsive: [
-            { breakpoint: 1024, settings: { slidesToShow: 3 } },
-            { breakpoint: 768, settings: { slidesToShow: 2 } },
-            { breakpoint: 480, settings: { slidesToShow: 1 } },
-        ],
-    };
-    const cardData = [
-        { id: "1", image: Coin, price: "100" },
-        { id: "2", image: Coin, price: "100" },
-        { id: "3", image: Coin, price: "100" },
-        { id: "4", image: Coin, price: "100" },
-        { id: "19", image: Coin, price: "100" },
-        { id: "20", image: Coin, price: "100" },
-    ];
+  const handleUpload = () => {
+    console.log("Image upload triggered");
+    fileInputRef.current.click(); // Trigger file input click
+  };
 
-    const sections = [
-        { name: "Coins", assetType: "Coins" },
-        { name: "Diamonds", assetType: "Diamonds" },
-        { name: "Boosters", assetType: "Boosters" },
-        { name: "Avatars", assetType: "Avatars" },
-        { name: "Dice", assetType: "Dice" },
-        { name: "Frames", assetType: "Frames" },
-        { name: "Bounty", assetType: "Bounty" },
-    ];
+  const handleFileChange = (event) => {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+      setImage(URL.createObjectURL(file)); // Create a temporary URL for the image
+    }
+  };
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1000,
+    responsive: [
+      { breakpoint: 1024, settings: { slidesToShow: 3 } },
+      { breakpoint: 768, settings: { slidesToShow: 2 } },
+      { breakpoint: 480, settings: { slidesToShow: 1 } },
+    ],
+  };
 
-    return (
-        <DashboardLayout>
-            <DashboardNavbar />
-            <Sidenav />
-            
-            <SoftBox mb={5}>
-                
-                    {sections.map((section, index) => (
-                        <div key={index}>
-                            <SoftBox pt={2} px={2} position="relative">
-                                {/* Title and Upload Button */}
-                                <SoftBox mb={1}>
-                                    <SoftTypography variant="button" fontWeight="regular" color="text">
-                                        {section.name}
-                                    </SoftTypography>
-                                </SoftBox>
+  // Card data specific to each section
+  const cardDataBySection = {
+    Coins: [
+      { id: "1", image: Coin, price: "100" },
+      { id: "2", image: Coin, price: "200" },
+      { id: "3", image: Coin, price: "200" },
+      { id: "4", image: Coin, price: "200" },
+      { id: "5", image: Coin, price: "200" },
+      { id: "6", image: Coin, price: "200" },
 
-                                {/* Upload Button */}
-                                <input
-                                    ref={fileInputRef}
-                                    type="file"
-                                    accept="image/*"
-                                    style={{ display: 'none' }} // Hide the input
-                                    onChange={handleFileChange}
-                                />
-                                <IconButton
-                                    onClick={() => handleUpload()}
-                                    sx={{
-                                        position: 'absolute',
-                                        top: '10px',
-                                        right: '10px',
-                                        fontSize: '2rem',
-                                    }}
-                                >
-                                    <Upload />
-                                </IconButton>
-                            </SoftBox>
+    ],
+    Diamonds: [
+        { id: "1", image: Diamond, price: "100" },
+        { id: "2", image: Diamond, price: "200" },
+        { id: "3", image: Diamond, price: "200" },
+        { id: "4", image: Diamond, price: "200" },
+        { id: "5", image: Diamond, price: "200" },
+        { id: "6", image: Diamond, price: "200" },
+    ],
+    Boosters: [
+        { id: "1", image: Booster, price: "100" },
+        { id: "2", image: Booster, price: "200" },
+        { id: "3", image: Booster, price: "200" },
+        { id: "4", image: Booster, price: "200" },
+        { id: "5", image: Booster, price: "200" },
+        { id: "6", image: Booster, price: "200" },
+    ],
+    Avatars: [
+        { id: "1", image: Avatar, price: "100" },
+        { id: "2", image: Avatar, price: "200" },
+        { id: "3", image: Avatar, price: "200" },
+        { id: "4", image: Avatar, price: "200" },
+        { id: "5", image: Avatar, price: "200" },
+        { id: "6", image: Avatar, price: "200" },
+    ],
+    Dice: [
+        { id: "1", image: Dice, price: "100" },
+        { id: "2", image: Dice, price: "200" },
+        { id: "3", image: Dice, price: "200" },
+        { id: "4", image: Dice, price: "200" },
+        { id: "5", image: Dice, price: "200" },
+        { id: "6", image: Dice, price: "200" },
+    ],
+    Frames: [
+        { id: "1", image: Frame, price: "100" },
+        { id: "2", image: Frame, price: "200" },
+        { id: "3", image: Frame, price: "200" },
+        { id: "4", image: Frame, price: "200" },
+        { id: "5", image: Frame, price: "200" },
+        { id: "6", image: Frame, price: "200" },
+    ],
+    Bounty: [ 
+        { id: "1", image: Bounty, price: "100" },
+        { id: "2", image: Bounty, price: "200" },
+        { id: "3", image: Bounty, price: "200" },
+        { id: "4", image: Bounty, price: "200" },
+        { id: "5", image: Bounty, price: "200" },
+        { id: "6", image: Bounty, price: "200" },
+    ],
+  };
 
-                            {/* Slider */}
-                            <SoftBox p={2}>
-                                <Slider {...settings}>
-                                    {cardData.map((card, index) => (
-                                        
-                                            <Grid item xs={12} md={6} xl={3} key={index}>
-                                                <DefaultProjectCard
-                                                    image={card.image}
-                                                    price={card.price}
-                                                    id={card.id}
-                                                />
-                                            </Grid>
+  const sections = Object.keys(cardDataBySection);
 
-                                    ))}
-                                </Slider>
-                            </SoftBox>
-                        </div>
-                    ))}
+  return (
+    <DashboardLayout>
+      <DashboardNavbar />
+      <Sidenav />
 
+      <SoftBox mb={5}>
+        {sections.map((section, index) => (
+          <div key={index}>
+            <SoftBox pt={2} px={2} position="relative">
+              {/* Title */}
+              <SoftBox mb={1}>
+                <SoftTypography variant="button" fontWeight="regular" color="text">
+                  {section}
+                </SoftTypography>
+              </SoftBox>
+
+              {/* Upload Button */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+              <IconButton
+                onClick={handleUpload}
+                sx={{
+                  position: "absolute",
+                  top: "10px",
+                  right: "10px",
+                  fontSize: "3rem",
+                }}
+              >
+                <Upload />
+              </IconButton>
             </SoftBox>
-        </DashboardLayout>
-    );
+
+            {/* Slider */}
+            <SoftBox p={2}>
+              {cardDataBySection[section].length > 0 ? (
+                <Slider {...settings}>
+                  {cardDataBySection[section].map((card, index) => (
+                    <Grid
+                      item
+                      xs={12}
+                      md={6}
+                      xl={3}
+                      key={index}
+                      sx={{ padding: "10px" }}
+                    >
+                      <DefaultProjectCard
+                        image={card.image}
+                        price={card.price}
+                        id={card.id}
+                        flag={true} // Include the flag prop if it's needed
+                      />
+                    </Grid>
+                  ))}
+                </Slider>
+              ) : (
+                <SoftTypography variant="body2" color="text">
+                  No items available in this category.
+                </SoftTypography>
+              )}
+            </SoftBox>
+          </div>
+        ))}
+      </SoftBox>
+    </DashboardLayout>
+  );
 }
 
 export default Overview;
