@@ -1,43 +1,45 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// react-routers components
-import { Link } from "react-router-dom";
-
-// prop-types is library for typechecking of props
+import { useState } from "react";
 import PropTypes from "prop-types";
-
-// @mui material components
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
-
-// Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
+import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import SoftInput from "components/SoftInput";
+import SoftButton from "components/SoftButton";
 
-// Soft UI Dashboard React base styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
+function ProfileInfoCard({ title, description, info, action }) {
 
-function ProfileInfoCard({ title, description, info, social, action }) {
+  const [open, setOpen] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [formData, setFormData] = useState(info);
+
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleSave = () => {
+    // Password validation logic
+    if (newPassword !== confirmPassword) {
+      alert("New password and confirm password do not match!");
+      return;
+    }
+    // Here you can call an API to verify the old password and update the new details
+    console.log("Old Password:", oldPassword);
+    console.log("New Password:", newPassword);
+    console.log("Updated Info:", formData);
+
+    // Close the modal after saving
+    handleClose();
+  };
+
   const labels = [];
   const values = [];
-  const { socialMediaColors } = colors;
-  const { size } = typography;
+
 
   // Convert this form `objectKey` of the object key in to this `object key`
   Object.keys(info).forEach((el) => {
@@ -56,7 +58,7 @@ function ProfileInfoCard({ title, description, info, social, action }) {
 
   // Render the card info items
   const renderItems = labels.map((label, key) => (
-    <SoftBox key={label} display="flex" py={1} pr={2}>
+    <SoftBox key={label} display="flex" py={1} pr={2} mt={1}>
       <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
         {label}: &nbsp;
       </SoftTypography>
@@ -66,38 +68,20 @@ function ProfileInfoCard({ title, description, info, social, action }) {
     </SoftBox>
   ));
 
-  // Render the card social media icons
-  const renderSocial = social.map(({ link, icon, color }) => (
-    <SoftBox
-      key={color}
-      component="a"
-      href={link}
-      target="_blank"
-      rel="noreferrer"
-      fontSize={size.lg}
-      color={socialMediaColors[color].main}
-      pr={1}
-      pl={0.5}
-      lineHeight={1}
-    >
-      {icon}
-    </SoftBox>
-  ));
-
   return (
     <Card sx={{ height: "100%" }}>
       <SoftBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={2}>
         <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
         </SoftTypography>
-        <SoftTypography component={Link} to={action.route} variant="body2" color="secondary">
-          <Tooltip title={action.tooltip} placement="top">
+        <SoftTypography variant="body2" color="secondary">
+          <Tooltip title={action.tooltip} placement="top" onClick={handleClickOpen}>
             <Icon>edit</Icon>
           </Tooltip>
         </SoftTypography>
       </SoftBox>
       <SoftBox p={2}>
-        <SoftBox mb={2} lineHeight={1}>
+        <SoftBox mb={1} lineHeight={1}>
           <SoftTypography variant="button" color="text" fontWeight="regular">
             {description}
           </SoftTypography>
@@ -108,13 +92,120 @@ function ProfileInfoCard({ title, description, info, social, action }) {
         <SoftBox>
           {renderItems}
           <SoftBox display="flex" py={1} pr={2}>
-            <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
-              social: &nbsp;
-            </SoftTypography>
-            {renderSocial}
+
           </SoftBox>
         </SoftBox>
       </SoftBox>
+
+      {/* Modal for editing information */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        width="sm"
+        sx={{
+          "& .MuiDialog-paper": {
+            // minWidth: "400px", 
+            maxWidth: "600px",
+            width: "80%",
+            height: "auto",
+            padding: "20px", // Add padding inside the modal
+            borderRadius: "8px",
+          },
+        }}
+      >
+        <DialogTitle
+          sx={{
+            fontSize: "1.5rem", // Adjust font size for title
+            fontWeight: "bold", // Make title bold
+            paddingBottom: "10px", // Add spacing below the title
+            textAlign: "center", // Center the title text
+          }}
+        >
+          Edit Information
+        </DialogTitle>
+        <DialogContent sx={{ paddingBottom: "16px" }}>
+
+          {/* Add other fields for user info as needed */}
+          {Object.keys(formData).map((key) => (
+            <>
+              <SoftTypography variant="h6">
+                {key}
+              </SoftTypography>
+
+              <SoftInput
+                key={key}
+                placeholder={key.replace(/([A-Z])/g, " $1")}
+                fullWidth
+                value={formData[key]}
+                onChange={(e) =>
+                  setFormData({ ...formData, [key]: e.target.value })
+                }
+                sx={{ mb: 2 }} // Increased margin-bottom for spacing between fields
+              />
+            </>
+          ))}
+
+          {/* Add form fields for user information */}
+          <SoftTypography variant="h6">
+            Old Password
+          </SoftTypography>
+          <SoftInput
+            placeholder="Old Password"
+            type="password"
+            fullWidth
+
+            onChange={(e) => setOldPassword(e.target.value)}
+            sx={{ mb: 2 }} // Increased margin-bottom for spacing between fields
+          />
+          <SoftTypography variant="h6">
+            New Password
+          </SoftTypography>
+          <SoftInput
+            placeholder="New Password"
+            type="password"
+            fullWidth
+
+            onChange={(e) => setNewPassword(e.target.value)}
+            sx={{ mb: 2 }} // Increased margin-bottom for spacing between fields
+          />
+          <SoftTypography variant="h6">
+            Confirm New Password
+          </SoftTypography>
+          <SoftInput
+            placeholder="Confirm Password"
+            type="password"
+            fullWidth
+
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            sx={{ mb: 3 }} // Increased margin-bottom for spacing between fields
+          />
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: "center", padding: "16px" }}>
+          <SoftButton
+            onClick={handleClose}
+            color="secondary"
+            variant="contained"
+            sx={{
+              padding: "8px 16px", // Adjust button padding
+              borderRadius: "4px", // Rounded corners for buttons
+            }}
+          >
+            Cancel
+          </SoftButton>
+          <SoftButton
+            onClick={handleSave}
+            color="info"
+            variant="gradient"
+            sx={{
+              padding: "8px 16px", // Adjust SoftButton padding
+              borderRadius: "4px", // Rounded corners for SoftButtons
+            }}
+          >
+            Save
+          </SoftButton>
+        </DialogActions>
+      </Dialog>
+
     </Card>
   );
 }
