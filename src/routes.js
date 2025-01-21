@@ -41,6 +41,7 @@ import GameRules from "./layouts/gameRules"
 import ShopComponent from "./layouts/shop"
 import Notifications from "./layouts/notifications"
 import SignoutIcon from "examples/Icons/Signout";
+import Analytics from "./layouts/analytics";
 
 const routes = [
   {
@@ -103,7 +104,7 @@ const routes = [
     key: "Analytics",
     route: "/Analytics",
     icon: <AnalyticsIcon size="12px" />,
-    component: <Notifications />,
+    component: <Analytics />,
     noCollapse: true,
   },
   { 

@@ -142,7 +142,7 @@ function Overview() {
                   position: "absolute",
                   top: "10px",
                   right: "10px",
-                  fontSize: "3rem",
+                  fontSize: "1.5rem",
                 }}
               >
                 <Upload />
