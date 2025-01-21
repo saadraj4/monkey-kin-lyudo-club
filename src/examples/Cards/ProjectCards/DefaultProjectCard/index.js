@@ -5,13 +5,13 @@ import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import SoftBox from "components/SoftBox";
+import SoftTypography from "components/SoftTypography";
 
-function DefaultProjectCard({ image, price, id, flag }) {
-
-  const onRemove = (id) => { 
+function DefaultProjectCard({ image, price, id, flag, title, coins }) {
+  const onRemove = (id) => {
     console.log(`Removing item with id: ${id}`);
-  }
-  
+  };
+
   return (
     <Card
       sx={{
@@ -23,27 +23,36 @@ function DefaultProjectCard({ image, price, id, flag }) {
         padding: 2, // Add padding to the card for spacing around elements
       }}
     >
-      <SoftBox 
-        position="relative" 
-        width="100%" 
-        height="auto" 
-        borderRadius="xl" 
-        display="flex" 
-        justifyContent="center" 
-        padding={2}  // Add padding around the image and other elements
+      {/* Title */}
+      <SoftBox display="flex" justifyContent="center" alignItems="center" mb={1}>
+        <SoftTypography fontWeight="medium" fontSize="1rem" textAlign="center">
+          {title}
+        </SoftTypography>
+      </SoftBox>
+
+      {/* Image Box */}
+      <SoftBox
+        position="relative"
+        width="100%"
+        height="auto"
+        borderRadius="xl"
+        display="flex"
+        justifyContent="center"
+        padding={2} // Add padding around the image and other elements
       >
         <CardMedia
           src={image}
           component="img"
           sx={{
-            width: "100%",    // Set width to leave some space around the image
-            maxWidth: "400px",  // Maximum width for the image
-            height: "auto",  // Let the height adjust based on the aspect ratio
-            objectFit: "contain",  // Ensures the image is contained and not stretched
-            objectPosition: "center",  // Centers the image within the container
-            margin: "0 auto",  // Center the image within its container
+            width: "100%", 
+            maxWidth: "400px", 
+            height: "auto", 
+            objectFit: "contain", 
+            objectPosition: "center", 
+            margin: "0 auto", 
           }}
         />
+
         {/* Cross Icon Button */}
         {flag && (
           <IconButton
@@ -63,6 +72,24 @@ function DefaultProjectCard({ image, price, id, flag }) {
           </IconButton>
         )}
       </SoftBox>
+
+      {/* Price (Coins) */}
+      {coins && (
+        <SoftBox display="flex" justifyContent="center" alignItems="center" pt={1}>
+          <SoftTypography
+            fontWeight="medium"
+            fontSize="1rem"
+            textAlign="center"
+            sx={{
+              backgroundColor: "rgba(0, 0, 0, 0.2)",
+              padding: "8px 12px",
+              borderRadius: "12px",
+            }}
+          >
+          {coins} 
+          </SoftTypography>
+        </SoftBox>
+      )}
     </Card>
   );
 }
@@ -71,8 +98,10 @@ function DefaultProjectCard({ image, price, id, flag }) {
 DefaultProjectCard.propTypes = {
   id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   flag: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  coins: PropTypes.string.isRequired,
 };
 
 export default DefaultProjectCard;

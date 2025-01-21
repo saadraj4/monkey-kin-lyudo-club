@@ -146,27 +146,17 @@ function index({ openGift, handleCloseGift }) {
           <SoftTypography sx={{ marginTop: 2 }} variant="body2">
             Message
           </SoftTypography>
-          <SoftBox
-            component="textarea"
-            rows={4}
-            style={{
-              width: '100%',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-              padding: '8px',
-              fontSize: '16px',
-            }}
-          />
+          <SoftInput placeholder="Message" variant="outlined" type="text" fullWidth multiline rows={4} />
         </DialogContent>
 
         <DialogActions>
-          <SoftBox mt={4} mb={1}>
+          <SoftBox mt={3} mb={1}>
             <SoftButton variant="gradient" color="secondary" fullWidth onClick={handleClose} sx={{ color: 'black' }}>
               Cancel
             </SoftButton>
           </SoftBox>
 
-          <SoftBox mt={4} mb={1}>
+          <SoftBox mt={3} mb={1}>
             <SoftButton variant="gradient" color="info" fullWidth onClick={handleSubmit} sx={{ color: 'black' }}>
               Send
             </SoftButton>

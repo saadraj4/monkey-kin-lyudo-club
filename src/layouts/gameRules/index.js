@@ -3,13 +3,12 @@ import Sidenav from "../SideNavbar";
 import SoftBox from "components/SoftBox";
 import { Grid, Modal } from '@mui/material';
 import SoftTypography from 'components/SoftTypography';
-import DefaultProjectCard from 'examples/Cards/ProjectCards/DefaultProjectCard';
-
-import Coins from 'assets/images/Coins.jpeg';
+import Ludo from "assets/images/ludo.jpeg";
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import SoftButton from 'components/SoftButton';
 import SoftInput from 'components/SoftInput';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
+import DefaultProjectCard from 'examples/Cards/ProjectCards/DefaultProjectCard';
 
 function index() {
     const [modalOpen, setModalOpen] = useState(false);
@@ -17,15 +16,15 @@ function index() {
     const [updatedCoins, setUpdatedCoins] = useState("");
 
     const Data = [
-        { id: 1, image: Coins, title: "Game", coins: "30 Coins" },
-        { id: 2, image: Coins, title: "Game", coins: "30 Coins" },
-        { id: 3, image: Coins, title: "Game", coins: "30 Coins" },
-        { id: 4, image: Coins, title: "Game", coins: "30 Coins" },
-        { id: 5, image: Coins, title: "Game", coins: "30 Coins" },
-        { id: 6, image: Coins, title: "Game", coins: "30 Coins" },
-        { id: 7, image: Coins, title: "Game", coins: "30 Coins" },
-        { id: 8, image: Coins, title: "Game", coins: "30 Coins" },
-        { id: 9, image: Coins, title: "Game", coins: "30 Coins" },
+        { id: 1, image: Ludo, title: "Moscow", coins: "30 Coins" },
+        { id: 2, image: Ludo, title: "Ganiva", coins: "30 Coins" },
+        { id: 3, image: Ludo, title: "Sydney", coins: "30 Coins" },
+        { id: 4, image: Ludo, title: "Dubai", coins: "30 Coins" },
+        { id: 5, image: Ludo, title: "Beijing", coins: "30 Coins" },
+        { id: 6, image: Ludo, title: "Rawalpindi", coins: "30 Coins" },
+        { id: 7, image: Ludo, title: "Paris", coins: "30 Coins" },
+        { id: 8, image: Ludo, title: "Cairo", coins: "30 Coins" },
+        { id: 9, image: Ludo, title: "Tokyo", coins: "30 Coins" },
     ];
 
     const handleGridClick = (card) => {
@@ -73,15 +72,7 @@ function index() {
                         <Grid container spacing={3}>
                             {Data.map((card, index) => (
                                 <Grid item xs={12} md={6} xl={3} key={index} onClick={() => handleGridClick(card)}>
-                                    <DefaultProjectCard image={card.image} flag={false}/>
-                                    <SoftBox display="flex" justifyContent="space-between" alignItems="center" pt={2}>
-                                        <SoftTypography variant="h6" fontWeight="medium">
-                                            {card.title}
-                                        </SoftTypography>
-                                        <SoftTypography variant="h6" fontWeight="medium" textAlign="right">
-                                            {card.coins}
-                                        </SoftTypography>
-                                    </SoftBox>
+                                    <DefaultProjectCard image={card.image} flag={false} title={card.title} coins={card.coins}/>
                                 </Grid>
                             ))}
                         </Grid>

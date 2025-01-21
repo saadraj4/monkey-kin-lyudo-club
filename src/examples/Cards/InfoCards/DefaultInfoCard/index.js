@@ -1,85 +1,83 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// prop-types is library for typechecking of props
 import PropTypes from "prop-types";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Divider from "@mui/material/Divider";
-import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
-function DefaultInfoCard({ color, icon, title, description, value }) {
-
+function DefaultInfoCard({ color, icon, title, value }) {
   return (
-    <Card>
-      <SoftBox p={2} mx={3} display="flex" justifyContent="center">
-        <SoftBox
-          display="grid"
-          justifyContent="center"
-          alignItems="center"
-          bgColor={color}
-          color="white"
-          shadow="md"
-          borderRadius="lg"
-          variant="gradient"
-        >
-          {/* Conditional rendering for icon */}
-          {typeof icon === "string" ? (
-            <img src={icon} alt={title} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-          ) : (
-            <Icon fontSize="default">{icon}</Icon>
-          )}
-
-
-        </SoftBox>
-
-
-      </SoftBox>
-      <SoftBox pb={2} px={2} textAlign="center" lineHeight={1.25}>
-        <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
+    <Card
+      sx={{
+        borderRadius: "16px",
+        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
+        width: "180px", // Increased card width
+        height: "230px", // Set a consistent height for larger size
+        textAlign: "center",
+        padding: "15px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      {/* Title */}
+      <SoftBox pb={1}>
+        <SoftTypography variant="h6" fontWeight="bold" color="text.primary">
           {title}
         </SoftTypography>
-       
-        {value && (
-          <SoftTypography variant="h5" fontWeight="medium" shadow="sm" mt={1} borderRadius="lg">
-            {value}
-          </SoftTypography>
+      </SoftBox>
+
+      {/* Icon */}
+      <SoftBox display="flex" justifyContent="center" alignItems="center" mb={1}>
+        {typeof icon === "string" ? (
+          <img
+            src={icon}
+            alt={title}
+            style={{
+              width: "80px", // Increased size for the icon
+              height: "80px",
+              objectFit: "cover",
+              borderRadius: "50%", // Circular icon
+            }}
+          />
+        ) : (
+          icon
         )}
+      </SoftBox>
+
+      {/* Value */}
+      <SoftBox mt={1}>
+        <SoftTypography
+          variant="h6"
+          fontWeight="bold"
+          color="text.primary"
+          sx={{
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+            padding: "8px 12px",
+            borderRadius: "12px",
+          }}
+        >
+          {value}
+        </SoftTypography>
       </SoftBox>
     </Card>
   );
 }
 
-// Setting default values for the props of DefaultInfoCard
+// Default Props
 DefaultInfoCard.defaultProps = {
   color: "info",
   value: "",
-  description: "",
 };
 
-// Typechecking props for the DefaultInfoCard
+// Prop Types
 DefaultInfoCard.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 

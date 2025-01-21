@@ -91,12 +91,12 @@ function index() {
             
                     </DialogTitle>
                     <DialogContent>
-                      <SoftTypography sx={{ marginTop: 2 }} variant="body2">
+                      <SoftTypography sx={{ marginTop: 1 }} variant="body2">
                         Notification Title
                       </SoftTypography>
                       {/* Player Name Field */}
                       <SoftInput
-                        placeholder="Player Name"
+                        placeholder="Notification Title"
                         variant="outlined"
                         fullWidth
                         value={newTitle}
@@ -108,11 +108,13 @@ function index() {
                       </SoftTypography>
                       {/* Email Field */}
                       <SoftInput
-                        placeholder="Email"
+                        placeholder="Notification Description"
                         variant="outlined"
                         fullWidth
                         value={newDescription}
                         onChange={(e) => setNewDescription(e.target.value)}
+                        multiline
+                        rows={3}
                       />
             
                       {/* Image Upload Field */}
@@ -130,7 +132,7 @@ function index() {
                           cursor: "pointer",
                           background: isDragActive ? "#f0f4ff" : "white",
                           position: "relative",
-                          height: "190px",
+                          height: "155px",
                           width: "100%",
                           overflow: "hidden",
                           display: "flex",
@@ -146,7 +148,7 @@ function index() {
                             style={{
                               width: "100%",
                               height: "100%",
-                              objectFit: "contain", // Ensure image doesn't overflow and stays within bounds
+                              objectFit: "contain",
                               borderRadius: "8px",
                             }}
                           />
@@ -178,7 +180,7 @@ function index() {
                           onClick={handleAddNotification}
                           sx={{ color: "black" }}
                         >
-                          Add Player
+                          Add Notification
                         </SoftButton>
                       </SoftBox>
                     </DialogActions>

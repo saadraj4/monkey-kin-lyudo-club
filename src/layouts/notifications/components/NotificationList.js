@@ -5,16 +5,19 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import SoftAvatar from "components/SoftAvatar";
 import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
 import SoftBox from "components/SoftBox";
+import { toast, ToastContainer } from "react-toastify"; // Import Toastify components
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
 
 function NotificationList({ title, Notifications }) {
   const handleReuse = (id) => {
     console.log(`Reuse notification with id: ${id}`);
+    // Display a success toast
+    toast.success("Notification reused!");
   };
 
   return (
@@ -27,7 +30,6 @@ function NotificationList({ title, Notifications }) {
       <SoftBox p={2}>
         <TableContainer>
           <Table>
-
             <TableBody>
               {Notifications.map(({ id, image, title, description, date }, index) => (
                 <TableRow key={index}>
@@ -75,7 +77,9 @@ function NotificationList({ title, Notifications }) {
           </Table>
         </TableContainer>
       </SoftBox>
-   </>
+      {/* ToastContainer to display toast messages */}
+      <ToastContainer position="top-right" autoClose={3000}/>
+    </>
   );
 }
 
