@@ -61,7 +61,7 @@ function Dashboard() {
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Total Revenue" }}
-                count="$103"
+                count="103"
                 percentage={{ color: "success", text: "+5%" }}
                 icon={{
                   color: "info",

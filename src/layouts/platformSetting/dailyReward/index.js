@@ -73,7 +73,7 @@ function DailyRewardList({ title, DailyReward }) {
 
   const renderDailyReward = DailyReward.map(({ id,image, name, description }, index) => (
     <Grid item xs={12} sm={6} key={index}> {/* Use Grid item for each profile */}
-      <SoftBox component="li" display="flex" alignItems="center" py={1} mb={1}>
+      <SoftBox component="li" display="flex" alignItems="center" py={1} mb={1} ml={2}  mr={1}>
         <SoftBox mr={2}>
           <SoftAvatar src={image} alt="something here" variant="rounded" shadow="md" />
         </SoftBox>

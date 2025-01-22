@@ -56,8 +56,8 @@ const routes = [
   {
     type: "collapse",
     name: "User Management",
-    key: "UserManagement",
-    route: "/UserManagement",
+    key: "User-Management",
+    route: "/User-Management",
     icon: <MulUser size="12px" />,
     component: <UserManagement />,
     noCollapse: true,
@@ -65,8 +65,8 @@ const routes = [
   {
     type: "collapse",
     name: "Assets",
-    key: "Assets",
-    route: "/Assets",
+    key: "Assets-Management",
+    route: "/Assets-Management",
     icon: <Cube size="16px" />,
     component: <AssetsManagement />,
     noCollapse: true,
@@ -74,8 +74,8 @@ const routes = [
   {
     type: "collapse",
     name: "Game Rules",
-    key: "gamerules",
-    route: "/gamerules",
+    key: "Game-Rules",
+    route: "/Game-Rules",
     icon: <GameRuleIcon size="12px" />,
     component: <GameRules />,
     noCollapse: true,

@@ -14,25 +14,13 @@ import SoftButton from "components/SoftButton";
 function ProfileInfoCard({ title, description, info, action }) {
 
   const [open, setOpen] = useState(false);
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [formData, setFormData] = useState(info);
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleSave = () => {
-    // Password validation logic
-    if (newPassword !== confirmPassword) {
-      alert("New password and confirm password do not match!");
-      return;
-    }
-    // Here you can call an API to verify the old password and update the new details
-    console.log("Old Password:", oldPassword);
-    console.log("New Password:", newPassword);
-    console.log("Updated Info:", formData);
-
+    consile.log(formData);
     // Close the modal after saving
     handleClose();
   };
@@ -144,41 +132,6 @@ function ProfileInfoCard({ title, description, info, action }) {
               />
             </>
           ))}
-
-          {/* Add form fields for user information */}
-          <SoftTypography variant="h6">
-            Old Password
-          </SoftTypography>
-          <SoftInput
-            placeholder="Old Password"
-            type="password"
-            fullWidth
-
-            onChange={(e) => setOldPassword(e.target.value)}
-            sx={{ mb: 2 }} // Increased margin-bottom for spacing between fields
-          />
-          <SoftTypography variant="h6">
-            New Password
-          </SoftTypography>
-          <SoftInput
-            placeholder="New Password"
-            type="password"
-            fullWidth
-
-            onChange={(e) => setNewPassword(e.target.value)}
-            sx={{ mb: 2 }} // Increased margin-bottom for spacing between fields
-          />
-          <SoftTypography variant="h6">
-            Confirm New Password
-          </SoftTypography>
-          <SoftInput
-            placeholder="Confirm Password"
-            type="password"
-            fullWidth
-
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            sx={{ mb: 3 }} // Increased margin-bottom for spacing between fields
-          />
         </DialogContent>
         <DialogActions sx={{ justifyContent: "center", padding: "16px" }}>
           <SoftButton

@@ -48,7 +48,7 @@ function configs(labels, datasets) {
               style: "normal",
               lineHeight: 2,
             },
-            color: "#fff",
+            color: "info",
           },
         },
         x: {
@@ -59,7 +59,15 @@ function configs(labels, datasets) {
             drawTicks: false,
           },
           ticks: {
-            display: false,
+            display: true, // Enable month labels
+            color: "info", // Adjust label color
+            font: {
+              size: 14,
+              family: "Roboto",
+              style: "normal",
+              lineHeight: 2,
+            },
+            padding: 10, // Add space between labels and axis
           },
         },
       },

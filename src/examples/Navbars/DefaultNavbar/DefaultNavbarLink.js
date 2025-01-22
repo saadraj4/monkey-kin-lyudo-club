@@ -27,6 +27,7 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
 function DefaultNavbarLink({ icon, name, route, light }) {
+  console.log(`name: ${name}, route: ${route}`);
   return (
     <SoftBox
       component={Link}
