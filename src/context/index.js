@@ -1,17 +1,4 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 
 /**
   This file is used for controlling the global states of the components,
@@ -27,7 +14,7 @@ import PropTypes from "prop-types";
 const SoftUI = createContext(null);
 
 // Setting custom name for the context which is visible on react dev tools
-SoftUI.displayName = "SoftUIContext";
+SoftUI.displayName = "Monkey King";
 
 // Soft UI Dashboard React reducer
 function reducer(state, action) {
