@@ -166,7 +166,7 @@ function Overview() {
                         image={card.image}
                         price={card.price}
                         id={card.id}
-                        flag={true} // Include the flag prop if it's needed
+                        flag={true}
                       />
                     </Grid>
                   ))}

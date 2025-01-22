@@ -6,11 +6,10 @@ import SoftBox from 'components/SoftBox'
 import { Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, MenuItem, Select } from '@mui/material'
 import SoftTypography from 'components/SoftTypography'
 import DefaultInfoCard from 'examples/Cards/InfoCards/DefaultInfoCard'
-import Coins from "assets/images/coins.png";
-import Diamonds from "assets/images/diamond.png";
-import Boosters from "assets/images/booster.png";
-
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar'
+import Coins from 'assets/images/coins.png'
+import Diamonds from 'assets/images/diamonds.png'
+import Boosters from 'assets/images/boosters.png'
 import SoftInput from 'components/SoftInput'
 
 function index() {
@@ -19,6 +18,30 @@ function index() {
     const [openGift, setOpenGift] = useState(false);
     const handleOpenGift = () => setOpenGift(true); // Open the Gift modal
     const handleCloseGift = () => setOpenGift(false); // Close the Gift modal
+
+    const CoinsData = [ 
+        { id: 1, image: Coins, price: "$10", coins: "10k" },
+        { id: 2, image: Coins, price: "$10", coins: "10k" },
+        { id: 3, image: Coins, price: "$10", coins: "10k" },
+        { id: 4, image: Coins, price: "$10", coins: "10k" },
+        { id: 5, image: Coins, price: "$10", coins: "10k" },
+    ];
+    
+    const DiamondsData = [
+        { id: 1, image: Diamonds, price: "$10", coins: "10k" },
+        { id: 2, image: Diamonds, price: "$10", coins: "10k" },
+        { id: 3, image: Diamonds, price: "$10", coins: "10k" },
+        { id: 4, image: Diamonds, price: "$10", coins: "10k" },
+        { id: 5, image: Diamonds, price: "$10", coins: "10k" },
+    ];
+    
+    const BoostersData = [
+        { id: 1, image: Boosters, price: "$10", coins: "10k" },
+        { id: 2, image: Boosters, price: "$10", coins: "10k" },
+        { id: 3, image: Boosters, price: "$10", coins: "10k" },
+        { id: 4, image: Boosters, price: "$10", coins: "10k" },
+        { id: 5, image: Boosters, price: "$10", coins: "10k" },
+    ];
 
     // Map assets to their respective variants and image URLs
     const assetVariants = {
@@ -70,27 +93,6 @@ function index() {
     const openVariantDropdown = () => {
         document.getElementById('variant-select').click();
     };
-    const CoinsData = [
-        { id: 1, image: Coins, price: "$10", coins: "10k" },
-        { id: 2, image: Coins, price: "$10", coins: "10k" },
-        { id: 3, image: Coins, price: "$10", coins: "10k" },
-        { id: 4, image: Coins, price: "$10", coins: "10k" },
-
-    ];
-    const DiamondsData = [
-        { id: 1, image: Diamonds, price: "$10", coins: "10k" },
-        { id: 2, image: Diamonds, price: "$10", coins: "10k" },
-        { id: 3, image: Diamonds, price: "$10", coins: "10k" },
-        { id: 4, image: Diamonds, price: "$10", coins: "10k" },
-
-    ];
-    const BoostersData = [
-        { id: 1, image: Boosters, price: "$10", coins: "10k" },
-        { id: 2, image: Boosters, price: "$10", coins: "10k" },
-        { id: 3, image: Boosters, price: "$10", coins: "10k" },
-        { id: 4, image: Boosters, price: "$10", coins: "10k" },
-
-    ];
     return (
         <DashboardLayout>
             <SideNav />
@@ -118,16 +120,20 @@ function index() {
                     </SoftBox>
 
                 </SoftBox>
-                <SoftBox p={2}>
+                <SoftBox p={3}>
                     <Grid container spacing={3}>
                         {CoinsData.map((card, index) => (
-                            <Grid item xs={12} md={6} xl={3} key={index}>
-                                <DefaultInfoCard
-                                    icon={card.image}
-                                    title={card.coins}
-                                    value={card.price}
-                                />
-                            </Grid>
+                            <SoftBox key={index} mr={2} mb={1}>
+                                <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
+                                    <DefaultInfoCard
+                                        id={card.id}
+                                        icon={card.image}
+                                        title={card.coins}
+                                        value={card.price}
+                                    />
+                                </Grid>
+                            </SoftBox>
+
                         ))}
                     </Grid>
                 </SoftBox>
@@ -147,13 +153,16 @@ function index() {
                 <SoftBox p={2}>
                     <Grid container spacing={3}>
                         {DiamondsData.map((card, index) => (
-                            <Grid item xs={12} md={6} xl={3} key={index}>
-                                <DefaultInfoCard
-                                    icon={card.image}
-                                    title={card.coins}
-                                    value={card.price}
-                                />
-                            </Grid>
+                            <SoftBox key={index} mr={2} mb={1}>
+
+                                <Grid item xs={12} md={6} xl={3}>
+                                    <DefaultInfoCard
+                                        icon={card.image}
+                                        title={card.coins}
+                                        value={card.price}
+                                    />
+                                </Grid>
+                            </SoftBox>
                         ))}
                     </Grid>
                 </SoftBox>
@@ -172,14 +181,17 @@ function index() {
                 </SoftBox>
                 <SoftBox p={2}>
                     <Grid container spacing={3}>
+
                         {BoostersData.map((card, index) => (
-                            <Grid item xs={12} md={6} xl={3} key={index}>
-                                <DefaultInfoCard
-                                    icon={card.image}
-                                    title={card.coins}
-                                    value={card.price}
-                                />
-                            </Grid>
+                            <SoftBox key={index} mr={2} mb={1}>
+                                <Grid item xs={12} md={6} xl={3} key={index}>
+                                    <DefaultInfoCard
+                                        icon={card.image}
+                                        title={card.coins}
+                                        value={card.price}
+                                    />
+                                </Grid>
+                            </SoftBox>
                         ))}
                     </Grid>
                 </SoftBox>

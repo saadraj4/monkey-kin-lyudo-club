@@ -1,13 +1,15 @@
 import PropTypes from "prop-types";
-
-// @mui material components
 import Card from "@mui/material/Card";
-
-// Soft UI Dashboard React components
+import CloseIcon from "@mui/icons-material/Close";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
+import { IconButton } from "@mui/material";
 
-function DefaultInfoCard({ color, icon, title, value }) {
+function DefaultInfoCard({ id,color, icon, title, value }) {
+  
+  const onRemove = (id) => {
+    console.log(`Removing item with id: ${id}`);
+  };
   return (
     <Card
       sx={{
@@ -46,6 +48,21 @@ function DefaultInfoCard({ color, icon, title, value }) {
         ) : (
           icon
         )}
+        <IconButton
+            sx={{
+              position: "absolute",
+              top: 1,
+              right: 1,
+              backgroundColor: "white",
+              color: "black",
+              "&:hover": {
+                backgroundColor: "rgba(255, 255, 255, 0.8)",
+              },
+            }}
+            onClick={() => onRemove(id)}
+          >
+            <CloseIcon />
+          </IconButton>
       </SoftBox>
 
       {/* Value */}
@@ -75,6 +92,7 @@ DefaultInfoCard.defaultProps = {
 
 // Prop Types
 DefaultInfoCard.propTypes = {
+  id: PropTypes.number.isRequired,
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   title: PropTypes.string.isRequired,
