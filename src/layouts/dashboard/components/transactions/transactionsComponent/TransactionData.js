@@ -1,7 +1,7 @@
 
 import Coins from "assets/images/Coins.jpeg";
 
-const profilesListData = [
+const TransactionData = [
   {
     image: Coins,
     id: "Player1",
@@ -64,4 +64,4 @@ const profilesListData = [
   },
 ];
 
-export default profilesListData;
+export default TransactionData;
