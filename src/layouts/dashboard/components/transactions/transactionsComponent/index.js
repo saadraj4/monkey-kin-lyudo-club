@@ -13,9 +13,9 @@ import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
 import SoftButton from "components/SoftButton";
 
-function ProfilesList({ title, profiles }) {
+function TransactionList({ title, Transaction }) {
   const navigate = useNavigate();
-  const renderProfiles = profiles.map(({ image, id, description, date }) => (
+  const renderTransaction = Transaction.map(({ image, id, description, date }) => (
     <SoftBox key={id} component="li" display="flex" alignItems="center" py={1} mb={1}>
       <SoftBox mr={2}>
         <SoftAvatar src={image} alt="something here" variant="rounded" shadow="md" />
@@ -30,16 +30,16 @@ function ProfilesList({ title, profiles }) {
           {description}
         </SoftTypography>
         <SoftTypography variant="caption" color="text">
-        {id}
+          {id}
 
         </SoftTypography>
       </SoftBox>
       <SoftBox ml="auto">
-        
-          <SoftButton variant="text" color="info">
-            {date}
-          </SoftButton>
-       
+
+        <SoftButton variant="text" color="info">
+          {date}
+        </SoftButton>
+
       </SoftBox>
     </SoftBox>
   ));
@@ -47,37 +47,30 @@ function ProfilesList({ title, profiles }) {
   return (
     <Card sx={{ height: "100%" }}>
       <SoftBox
-    pt={2}
-    px={2}
-    display="flex"
-    alignItems="center"
-    justifyContent="space-between"
-  >
+        pt={2}
+        px={2}
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
         </SoftTypography>
-        <SoftButton
-      variant="text"
-      color="info"
-      size="small"
-      onClick={() => navigate("/dashboard/transactions")} // Add desired functionality
-    >
-      See All
-    </SoftButton>
+
       </SoftBox>
       <SoftBox p={2}>
         <SoftBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          {renderProfiles}
+          {renderTransaction}
         </SoftBox>
       </SoftBox>
     </Card>
   );
 }
 
-// Typechecking props for the ProfilesList
-ProfilesList.propTypes = {
+// Typechecking props for the TransactionList
+TransactionList.propTypes = {
   title: PropTypes.string.isRequired,
-  profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  Transaction: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default ProfilesList;
+export default TransactionList;

@@ -74,14 +74,29 @@ function index({ openGift, handleCloseGift }) {
           <SoftTypography sx={{ marginTop: 2 }} variant="body2">
             Select Asset
           </SoftTypography>
-          <SoftBox onClick={openAssetDropdown}>
+          <SoftBox onClick={openAssetDropdown}
+            sx={{
+              position: "relative", // Make SoftBox the parent container
+              cursor: "pointer",    // Show pointer cursor for better UX
+            }}
+          >
+            <SoftBox
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: 1, // Ensure it sits above the Select component
+              }}
+            />
             <FormControl fullWidth variant="outlined" sx={{ marginBottom: 1 }}>
               <Select
                 id="asset-select"
                 value={selectedAsset}
                 onChange={handleAssetChange}
-                label="Asset"
-                defaultValue=""
+                placeholder="Asset"
+                 defaultValue=""
                 aria-label="Select an asset"
               >
                 {Object.keys(assetVariants).map((asset) => (
@@ -110,22 +125,22 @@ function index({ openGift, handleCloseGift }) {
               >
                 {selectedAsset
                   ? assetVariants[selectedAsset].map((variant) => (
-                      <MenuItem key={variant.name} value={variant.name}>
-                        <SoftBox sx={{ display: 'flex', alignItems: 'center' }}>
-                          <img
-                            src={variant.imageUrl}
-                            alt={variant.name}
-                            style={{ width: 20, height: 20, marginRight: 8 }}
-                          />
-                          <SoftTypography variant="body2">{variant.name}</SoftTypography>
-                        </SoftBox>
-                      </MenuItem>
-                    ))
+                    <MenuItem key={variant.name} value={variant.name}>
+                      <SoftBox sx={{ display: 'flex', alignItems: 'center' }}>
+                        <img
+                          src={variant.imageUrl}
+                          alt={variant.name}
+                          style={{ width: 20, height: 20, marginRight: 8 }}
+                        />
+                        <SoftTypography variant="body2">{variant.name}</SoftTypography>
+                      </SoftBox>
+                    </MenuItem>
+                  ))
                   : [
-                      <MenuItem key="placeholder" value="" disabled>
-                        Select an asset first
-                      </MenuItem>,
-                    ]}
+                    <MenuItem key="placeholder" value="" disabled>
+                      Select an asset first
+                    </MenuItem>,
+                  ]}
               </Select>
             </FormControl>
           </SoftBox>

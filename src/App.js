@@ -31,6 +31,7 @@ import routes from "routes";
 import OTPVerification from "./layouts/authentication/components/OTP-Input";
 import UserProfile from "./layouts/userManagement/UserProfile";
 import ResetPassword from "./layouts/authentication/forget-password";
+import Transaction from "./layouts/dashboard/components/transactions";
 // Soft UI Dashboard React contexts
 import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
@@ -158,7 +159,8 @@ export default function App() {
       <Route path="/NotFound" element={<NotFound />} />
       <Route path="/authentication/Reset-Password" element={<ResetPassword />} />
       <Route path="/user-profile/:id" element={<UserProfile />} />
-      
+      <Route path="/dashboard/transactions" element={<Transaction />} />
+
         {getRoutes(routes)}
         <Route path="*" element={<Navigate to="/NotFound" />} />
       </Routes>
