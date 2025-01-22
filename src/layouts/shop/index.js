@@ -7,9 +7,9 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, M
 import SoftTypography from 'components/SoftTypography'
 import DefaultInfoCard from 'examples/Cards/InfoCards/DefaultInfoCard'
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar'
-import Coins from 'assets/images/coins.png'
-import Diamonds from 'assets/images/diamonds.png'
-import Boosters from 'assets/images/boosters.png'
+import Coins from "assets/images/coins.png"
+import Diamonds from "assets/images/diamond.png"
+import Boosters from "assets/images/booster.png"
 import SoftInput from 'components/SoftInput'
 
 function index() {
