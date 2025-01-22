@@ -28,6 +28,8 @@ function UserManagement() {
   const [newImage, setNewImage] = useState(null);
   const [newEmail, setNewEmail] = useState("");
   const [previewImage, setPreviewImage] = useState(null);
+  const [searchText, setSearchText] = useState("");
+
 
   // Calculate the index for slicing the rows
   const indexOfLastRow = currentPage * rowsPerPage;
@@ -55,7 +57,6 @@ function UserManagement() {
   const handleOpenModal = () => {
     setOpenModal(true);
   };
-  const [searchText, setSearchText] = useState("");
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && searchText.trim()) {
