@@ -1,7 +1,7 @@
 import SoftBox from "components/SoftBox";
 import SoftButton from "components/SoftButton";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,34 +9,39 @@ const OTPVerification = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [isActive, setIsActive] = useState(false);  // Track if the button should be active
   const navigate = useNavigate();
-  // const [dataget,setData] = useState({});
 
-  
+
+  toast.success("Admin Login OTP has been successfully sent to your email!", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+
+
 
   const handleInputChange = (e, index) => {
     const value = e.target.value;
     let newOtp = [...otp];
-
     if (value.length > 1) {
       newOtp[index] = "";
       return;
     }
-
     newOtp[index] = value;
     setOtp(newOtp);
-
     if (value !== "" && index < 5) {
       document.getElementById(`otp-input-${index + 1}`).focus();
     }
-
     if (e.key === "Backspace" && index > 0 && value === "") {
       document.getElementById(`otp-input-${index - 1}`).focus();
     }
-
     // Check if all fields are filled
     setIsActive(newOtp.every(val => val !== ""));  // Update button status
   };
-
   useEffect(() => {
     document.getElementById("otp-input-0").focus();
   }, []);
