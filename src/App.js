@@ -155,7 +155,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
       <Route path="/" element={<Navigate to="/authentication/sign-in" />} />
-      <Route path="/authentication/otp-verification" element={<OTPVerification />} />
+      <Route path="/admin/login-verify" element={<OTPVerification />} />
       <Route path="/NotFound" element={<NotFound />} />
       <Route path="/authentication/Reset-Password" element={<ResetPassword />} />
       <Route path="/user-profile/:id" element={<UserProfile />} />

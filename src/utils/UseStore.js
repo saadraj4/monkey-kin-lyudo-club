@@ -26,13 +26,13 @@ const useStore = create((set) => ({
   postData: async (apiEndpoint, payload) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post(BASEURL + apiEndpoint, payload);
-      
-      set({ isLoading: false });
+      const response = await axios.post(`${BASEURL}${apiEndpoint}`, payload);
+      set({ isLoading: false,data: response.data });
       // Optionally, you can update data after a successful POST
-      set((state) => ({
-        data: [...state.data, response.data],
-      }));
+      // set((state) => ({
+      //   data: [...state.data, response.data],
+      // }));
+      return response.data;
     } catch (error) {
       set({
         error: error.response?.data?.message || error.message,
