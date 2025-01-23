@@ -11,8 +11,11 @@ import { useState } from "react";
 
 function TransactionList({ title, Transaction }) {
 
-  const [searchText, setSearchText] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [filteredTransactions, setFilteredTransactions] = useState(Transaction);
 
+  
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && searchText.trim()) {
       handleSearch();
@@ -20,7 +23,17 @@ function TransactionList({ title, Transaction }) {
 
   };
   const handleSearch = () => {
-    console.log("Search Triggered:", searchText);
+    if (startDate && endDate) {
+      const filtered = Transaction.filter((transaction) => {
+        const transactionDate = new Date(transaction.date);
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        return transactionDate >= start && transactionDate <= end;
+      });
+      setFilteredTransactions(filtered);
+    } else {
+      console.log("Please select both start and end dates.");
+    }
   };
 
   const renderTransaction = Transaction.map(({ image, id, description, date }) => (
@@ -56,14 +69,23 @@ function TransactionList({ title, Transaction }) {
     <>
       <SoftBox display="flex" alignItems="center" mt={2} mb={2}>
         {/* Search Bar */}
-        <SoftBox sx={{ width: "90%" }}>
+        <SoftBox sx={{ width: "40%", marginRight: 2 }}>
           <SoftInput
             fullWidth
-            variant="outlined"
-            placeholder="Search Player"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            onKeyDown={handleKeyDown}
+            type="date"
+            placeholder="Start Date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </SoftBox>
+
+        <SoftBox sx={{ width: "40%", marginRight: 2 }}>
+          <SoftInput
+            fullWidth
+            type="date"
+            placeholder="End Date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
           />
         </SoftBox>
 
