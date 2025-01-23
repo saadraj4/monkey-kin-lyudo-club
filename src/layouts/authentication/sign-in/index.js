@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
@@ -6,6 +6,9 @@ import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
 import { Card } from "@mui/material";
 import Logo from "assets/images/logo.jpeg";
+import useStore from "utils/UseStore";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -14,14 +17,30 @@ function SignIn() {
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
+  // const {data, postData} = useStore();
+  // useEffect(() => {
+  //   postData("/api/admin/login", { email, password });
+  // }, [postData]);
 
   const handleLogin = () => {
     if (email.toLowerCase() === "admin@gmail.com" && password === "admin") {
       navigate("/authentication/otp-verification");
     }
-    else {
-      alert("Invalid email or password");
+    if (data.success) {
+      navigate("/authentication/otp-verification");
     }
+    else {
+          toast.error("Invalid Email or Password", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
     setEmail("");
     setPassword("");
   };
@@ -30,6 +49,8 @@ function SignIn() {
   const isButtonDisabled = email === "" || password === "";
 
   return (
+    <>
+    <ToastContainer />
     <Card
       style={{
         display: "flex",
@@ -117,6 +138,7 @@ function SignIn() {
 
       </SoftBox>
     </Card>
+    </>
   );
 }
 

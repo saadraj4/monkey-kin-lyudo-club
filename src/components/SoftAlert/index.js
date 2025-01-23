@@ -35,7 +35,7 @@ function SoftAlert({ color, dismissible, children, ...rest }) {
 
   // The base template for the alert
   const alertTemplate = (mount = true) => (
-    <Fade in={mount} timeout={300}>
+    <Fade in={mount} timeout={3000}>
       <SoftAlertRoot ownerState={{ color }} {...rest}>
         <SoftBox display="flex" alignItems="center" color="white">
           {children}

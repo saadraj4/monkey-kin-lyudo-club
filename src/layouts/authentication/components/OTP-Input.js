@@ -9,68 +9,9 @@ const OTPVerification = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [isActive, setIsActive] = useState(false);  // Track if the button should be active
   const navigate = useNavigate();
+  // const [dataget,setData] = useState({});
 
-  const styles = {
-    wrapper: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "100vh",
-      background: "#fff",
-    },
-    container: {
-      background: "#fff",
-      padding: "30px 65px",
-      borderRadius: "12px",
-      rowGap: "20px",
-      boxShadow: "0 5px 10px rgba(0, 0, 0, 0.2)",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    header: {
-      height: "65px",
-      width: "65px",
-      background: "#2175ff",
-      color: "#fff",
-      fontSize: "2.5rem",
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    h4: {
-      fontSize: "1.25rem",
-      color: "#333",
-      fontWeight: "500",
-    },
-    inputField: {
-      display: "flex",
-      flexDirection: "row",
-      columnGap: "10px",
-    },
-    input: {
-      height: "45px",
-      width: "42px",
-      borderRadius: "6px",
-      outline: "none",
-      fontSize: "1.125rem",
-      textAlign: "center",
-      border: "1px solid #ddd",
-    },
-    button: {
-      marginTop: "25px",
-      width: "100%",
-      color: "#fff",
-      fontSize: "1rem",
-      border: "none",
-      padding: "9px 0",
-      cursor: "pointer",
-      borderRadius: "6px",
-      transition: "all 0.2s ease",
-    },
-  };
+  
 
   const handleInputChange = (e, index) => {
     const value = e.target.value;
@@ -166,4 +107,65 @@ const OTPVerification = () => {
   );
 };
 
+const styles = {
+  wrapper: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    background: "#fff",
+  },
+  container: {
+    background: "#fff",
+    padding: "30px 65px",
+    borderRadius: "12px",
+    rowGap: "20px",
+    boxShadow: "0 5px 10px rgba(0, 0, 0, 0.2)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  header: {
+    height: "65px",
+    width: "65px",
+    background: "#2175ff",
+    color: "#fff",
+    fontSize: "2.5rem",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  h4: {
+    fontSize: "1.25rem",
+    color: "#333",
+    fontWeight: "500",
+  },
+  inputField: {
+    display: "flex",
+    flexDirection: "row",
+    columnGap: "10px",
+  },
+  input: {
+    height: "45px",
+    width: "42px",
+    borderRadius: "6px",
+    outline: "none",
+    fontSize: "1.125rem",
+    textAlign: "center",
+    border: "1px solid #ddd",
+  },
+  button: {
+    marginTop: "25px",
+    width: "100%",
+    color: "#fff",
+    fontSize: "1rem",
+    border: "none",
+    padding: "9px 0",
+    cursor: "pointer",
+    borderRadius: "6px",
+    transition: "all 0.2s ease",
+  },
+};
 export default OTPVerification;

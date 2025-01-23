@@ -1,16 +1,26 @@
+
+
+// prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
+
+// @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
-import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
+
+// Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
-import { ConvertNumber } from "../.././../../components/ConvertNumber";
+
+import { ConvertNumber } from "../../../../utils/ConvertNumber";
 
 function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction }) {
+
   if (title.text === "Total Revenue") {
+
     count = ConvertNumber(count);
-  }
+
+  } 
   return (
     <Card>
       <SoftBox bgColor={bgColor} variant="gradient">
@@ -20,7 +30,7 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
               <Grid item>
                 <SoftBox
                   variant="gradient"
-                  bgColor={bgColor === "white" ? icon.color : "white"}
+                  bgColor="info"
                   color={bgColor === "white" ? "white" : "dark"}
                   width="3rem"
                   height="3rem"
@@ -30,12 +40,9 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
                   alignItems="center"
                   shadow="md"
                 >
-                  {typeof icon.component === "string" ? <img src={icon.component} 
-                  alt="icon" style={{ width: "100%" }} /> 
-                  :
-                    <Icon fontSize="small" color="inherit">
-                      {PeopleAltSharpIcon}
-                    </Icon>}
+                  <Icon fontSize="small" color="info">
+                    {icon.component}
+                  </Icon>
                 </SoftBox>
               </Grid>
             ) : null}
@@ -56,7 +63,7 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
                   color="black"
                 >
                   {count}{" "}
-
+                  
                 </SoftTypography>
               </SoftBox>
             </Grid>
@@ -64,8 +71,8 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
               <Grid item xs={4}>
                 <SoftBox
                   variant="gradient"
-                  bgColor={bgColor === "white" ? icon.color : "white"}
-                  color={bgColor === "white" ? "white" : "dark"}
+                  bgColor="info"
+                  color="black"
                   width="3rem"
                   height="3rem"
                   marginLeft="auto"
@@ -75,11 +82,9 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
                   alignItems="center"
                   shadow="md"
                 >
-                  { typeof icon.component === "string" ? <img src={icon.component}
-                  alt="icon" style={{ width: "100%" }} />:
-                    <Icon fontSize="small" color="inherit">
-                    {PeopleAltSharpIcon}
-                  </Icon>}
+                  <Icon fontSize="small" color="info">
+                    {icon.component}
+                  </Icon>
                 </SoftBox>
               </Grid>
             ) : null}
@@ -136,7 +141,7 @@ MiniStatisticsCard.propTypes = {
   }),
   icon: PropTypes.shape({
     color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
-    component: PropTypes.oneOfType([PropTypes.node, PropTypes.string])
+    component: PropTypes.node.isRequired,
   }).isRequired,
   direction: PropTypes.oneOf(["right", "left"]),
 };
