@@ -12,8 +12,8 @@ const OTPVerification = () => {
   const [email, setEmail] = useState();
   const navigate = useNavigate();
   const location = useLocation();
-  const { fetchData, data, isLoading, error,postData } = useStore();
-  const storedEmail = localStorage.getItem('loginEmail');  
+  const { fetchData, data, isLoading, error, postData } = useStore();
+  const storedEmail = localStorage.getItem('loginEmail');
   const queryParams = new URLSearchParams(location.search);
   const otpFromQuery = queryParams.get('otp');
   const emailFromQuery = queryParams.get('email');
@@ -44,7 +44,7 @@ const OTPVerification = () => {
     }
     newOtp[index] = value;
     setOtp(newOtp);
-    if (value !== "" && index < 5){
+    if (value !== "" && index < 5) {
       document.getElementById(`otp-input-${index + 1}`).focus();
     }
     if (e.key === "Backspace" && index > 0 && value === "") {
@@ -63,7 +63,7 @@ const OTPVerification = () => {
     console.log(response);
     if (response.success) {
       toast.success(response.message);
-      localStorage.setItem("admin",data.admin);
+      localStorage.setItem("admin", data.admin);
       navigate("/dashboard");
     } else {
       toast.error(response.message);
@@ -74,12 +74,12 @@ const OTPVerification = () => {
 
   const handleResendOtp = async () => {
     const response = await postData("/api/admin/resend-otp", { email });
-    if(response && response.success){
+    if (response && response.success) {
       toast.success(response.message)
-  }
-  else{
-    toast.error(response.message)
-  }
+    }
+    else {
+      toast.error(response.message)
+    }
   };
   return (
     <>
@@ -121,16 +121,16 @@ const OTPVerification = () => {
               </SoftButton>
             </SoftBox>
             <SoftBox mt={2}>
-          <SoftButton
-            variant="text"
-            color="info"
-            fullWidth
-            onClick={handleResendOtp} // Define this function to handle OTP resend logic
-            
-          >
-            Resend OTP
-          </SoftButton>
-        </SoftBox>
+              <SoftButton
+                variant="text"
+                color="info"
+                fullWidth
+                onClick={handleResendOtp} // Define this function to handle OTP resend logic
+
+              >
+                Resend OTP
+              </SoftButton>
+            </SoftBox>
           </form>
         </div>
       </div>

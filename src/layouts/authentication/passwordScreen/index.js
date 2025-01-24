@@ -18,10 +18,23 @@ function index() {
     const handleConfirmPasswordChange = (e) => setconfirmPassword(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
     const { data, postData, isLoading, error } = useStore();
-
-    const handleReset = async () => {
-        console.log("trigger")
-        navigate("/")
+    const storedEmail = localStorage.getItem('email');
+    const otp = localStorage.getItem('otpvalue');
+    const handleSubmit = async () => {
+        if (password !== confirmPassword) {
+            toast.error("Passwords do not match");
+            return;
+        }
+        else {
+            const response = await postData("/api/admin/reset-password-otp", { email: storedEmail, otp: otp, password: password, confirmPassword: confirmPassword });
+            if (response.success) {
+                toast.success(response.message);
+                navigate("/")
+            }
+            else {
+                toast.error(response.message);
+            }
+        }
 
     };
 
@@ -86,7 +99,7 @@ function index() {
                             variant="gradient"
                             color="info"
                             fullWidth
-                            onClick={handleReset}
+                            onClick={handleSubmit}
                             disabled={isButtonDisabled} // Disable button if password or confirmpassword is empty
                         >
                             Change Password
