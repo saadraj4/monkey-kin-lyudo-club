@@ -27,8 +27,19 @@ function SignIn() {
     
     
     if (response && response.success) {
-      
-      navigate("/admin/login-verify", { state: response.message });
+      toast.success("Admin Login OTP has been successfully sent to your email!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      localStorage.setItem('loginMessage', response.message);
+      localStorage.setItem('loginEmail', email);
+      navigate("/admin/login-verify");
     }
     else {
       toast.error(error || "Login failed", {
