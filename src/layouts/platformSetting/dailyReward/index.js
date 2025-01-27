@@ -6,11 +6,12 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
 import SoftButton from "components/SoftButton";
-import { Dialog, DialogActions, DialogContent, DialogTitle, FormControl, MenuItem, Select } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputAdornment, MenuItem, Select } from "@mui/material";
 import SoftInput from "components/SoftInput";
 import Coin from "assets/images/coins.png"
 import Diamond from "assets/images/diamond.png"
 import Booster from "assets/images/booster.png"
+import ArrowDropDownCircleTwoToneIcon from "@mui/icons-material/ArrowDropDownCircleTwoTone";
 
 function DailyRewardList({ title, DailyReward }) {
   const [selectedAsset, setSelectedAsset] = useState('');
@@ -71,9 +72,9 @@ function DailyRewardList({ title, DailyReward }) {
     document.getElementById('variant-select').click();
   };
 
-  const renderDailyReward = DailyReward.map(({ id,image, name, description }, index) => (
+  const renderDailyReward = DailyReward.map(({ id, image, name, description }, index) => (
     <Grid item xs={12} sm={6} key={index}> {/* Use Grid item for each profile */}
-      <SoftBox component="li" display="flex" alignItems="center" py={1} mb={1} ml={2}  mr={1}>
+      <SoftBox component="li" display="flex" alignItems="center" py={1} mb={1} ml={2} mr={1}>
         <SoftBox mr={2}>
           <SoftAvatar src={image} alt="something here" variant="rounded" shadow="md" />
         </SoftBox>
@@ -107,7 +108,7 @@ function DailyRewardList({ title, DailyReward }) {
 
   return (
     <>
-      
+
       <Card sx={{ height: "100%" }}>
         <SoftBox pt={2} px={2}>
           <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
@@ -138,7 +139,14 @@ function DailyRewardList({ title, DailyReward }) {
                   onChange={handleAssetChange}
                   label="Asset"
                   defaultValue=""
-                  
+                  input={<SoftInput variant="outlined" />}
+                  startAdornment={
+                    <InputAdornment position="start" sx={{ display: 'flex', alignItems: 'center', color: 'black', fontSize: "1.5rem",}}>
+                      <ArrowDropDownCircleTwoToneIcon sx={{ color: 'black', fontSize: 30,marginLeft:"28.5rem", marginTop:"1rem"  }} />
+                    </InputAdornment>
+                  }
+
+
                 >
                   {Object.keys(assetVariants).map((asset) => (
                     <MenuItem key={asset} value={asset}>
@@ -163,6 +171,13 @@ function DailyRewardList({ title, DailyReward }) {
                   defaultValue=""
                   disabled={!selectedAsset}
                   aria-label="Select a variant"
+                  input={<SoftInput variant="outlined" />}
+                  startAdornment={
+                                  <InputAdornment position="start" sx={{ display: 'flex', alignItems: 'center', color: 'black', fontSize: "1.5rem",}}>
+                                    <ArrowDropDownCircleTwoToneIcon sx={{ color: 'black', fontSize: 30,marginLeft:"28.5rem", marginTop:"1rem"  }} />
+                                  </InputAdornment>
+                                }
+
                 >
                   {selectedAsset
                     ? assetVariants[selectedAsset].map((variant) => (

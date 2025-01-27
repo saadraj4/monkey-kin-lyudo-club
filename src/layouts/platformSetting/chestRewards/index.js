@@ -7,10 +7,16 @@ import { Modal, Checkbox, FormControlLabel } from "@mui/material";
 import SoftInput from "components/SoftInput";
 import { useState } from "react";
 
+// You can use a dice face array or simply use images/icons for dice faces
+const diceFaces = [
+  "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"
+];
+
 function ChestRewards() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [value, setValue] = useState("30%"); // Value state for diamonds
   const [addDiceFace, setAddDiceFace] = useState(false); // Checkbox state
+  const [diceFace, setDiceFace] = useState(diceFaces[0]); // Default dice face (⚀)
 
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
@@ -25,6 +31,12 @@ function ChestRewards() {
 
   const handleCheckboxChange = (event) => {
     setAddDiceFace(event.target.checked);
+    // Set random dice face when checkbox is checked
+    if (event.target.checked) {
+      setDiceFace(diceFaces[Math.floor(Math.random() * 6)]);
+    } else {
+      setDiceFace(diceFaces[0]); // Reset to default dice face when unchecked
+    }
   };
 
   return (
@@ -45,6 +57,14 @@ function ChestRewards() {
                     {value}
                   </SoftTypography>
                 </SoftBox>
+                {/* Conditionally render the dice face immediately below the value */}
+                {addDiceFace && (
+                  <SoftBox mt={1} display="flex" justifyContent="start">
+                    <SoftTypography variant="h6" fontWeight="bold">
+                      {diceFace} {/* Display the random dice face */}
+                    </SoftTypography>
+                  </SoftBox>
+                )}
               </SoftBox>
             </Grid>
             <Grid item xs={12} lg={3} sx={{ position: "relative", ml: "auto" }}>
@@ -57,6 +77,7 @@ function ChestRewards() {
           </Grid>
         </SoftBox>
       </Card>
+
       <Modal
         open={isModalOpen}
         onClose={handleClose}

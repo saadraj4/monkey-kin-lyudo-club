@@ -3,7 +3,7 @@ import SideNav from '../SideNavbar';
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import SoftButton from 'components/SoftButton';
 import SoftBox from 'components/SoftBox';
-import { Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, MenuItem, Select } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, InputAdornment, MenuItem, Select } from '@mui/material';
 import SoftTypography from 'components/SoftTypography';
 import DefaultInfoCard from 'examples/Cards/InfoCards/DefaultInfoCard';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
@@ -11,6 +11,7 @@ import Coins from 'assets/images/coins.png';
 import Diamonds from 'assets/images/diamond.png';
 import Boosters from 'assets/images/booster.png';
 import SoftInput from 'components/SoftInput';
+import ArrowDropDownCircleTwoToneIcon from '@mui/icons-material/ArrowDropDownCircleTwoTone';
 
 function Index() {
     const [selectedAsset, setSelectedAsset] = useState('');
@@ -184,6 +185,11 @@ function Index() {
                             }}
                             displayEmpty
                             input={<SoftInput variant="outlined" />}
+                            startAdornment={
+                                <InputAdornment position="start" sx={{ display: 'flex', alignItems: 'center', color: 'black', fontSize: "1.5rem",}}>
+                                  <ArrowDropDownCircleTwoToneIcon sx={{ color: 'black', fontSize: 30,marginLeft:"28.5rem", marginTop:"1rem"  }} />
+                                </InputAdornment>
+                              }
                         >
 
                             {Object.keys(assetVariants).map((asset) => (
@@ -213,6 +219,11 @@ function Index() {
                             displayEmpty
                             disabled={!selectedAsset}
                             input={<SoftInput variant="outlined" />}
+                            startAdornment={
+                                            <InputAdornment position="start" sx={{ display: 'flex', alignItems: 'center', color: 'black', fontSize: "1.5rem",}}>
+                                              <ArrowDropDownCircleTwoToneIcon sx={{ color: 'black', fontSize: 30,marginLeft:"28.5rem", marginTop:"1rem"  }} />
+                                            </InputAdornment>
+                                          }
 
                         >
 

@@ -14,24 +14,55 @@ import Sidenav from "../SideNavbar";
 import Player from "assets/players.png"
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import PeopleSharpIcon from '@mui/icons-material/PeopleSharp';
+import { useEffect, useState } from "react";
+import UseStore from "utils/UseStore";
 
 function Dashboard() {
+  const [registeredPlayers, setRegisteredPlayers] = useState(null); // State to hold the number of registered players
+  const [totalCoins, setTotalCoins] = useState(null); // State to hold the number of registered players
+  const [onlinePlayer, setonlinePlayer] = useState(null); // State to hold the number of registered players
+
+  const { fetchData } = UseStore(); // Fetch data from the store
+  useEffect(() => {
+    // Fetch the number of registered players
+    const fetchRegisteredPlayers = async () => {
+      const response = await fetchData("/api/player/registered-count");
+      setRegisteredPlayers(response.totalRegisteredPlayers);
+    }
+
+    const TotalWinningCoins = async () => {
+      const response = await fetchData("/api/admin/game-winning-total-coins");
+      setTotalCoins(response.totalWinningFee);
+    }
+
+    const getOnlinePlayers = async () => {
+    const response = await fetchData("/api/player/online");
+    setonlinePlayer(response.online_players);
+    }
+    fetchRegisteredPlayers();
+    TotalWinningCoins();
+    getOnlinePlayers();
+  }, []);
+
+
+
+
   const data = [
     {
       title: "No. of Players",
-      count: "500",
+      count: registeredPlayers !== null ? registeredPlayers : "Loading...",
       percentage: { color: "success", text: "+55%" },
       icon: { color: "info", component: PeopleSharpIcon },
     },
     {
       title: "Fee Coins",
-      count: "2300",
+      count: totalCoins !== null ? totalCoins : "Loading...",
       percentage: { color: "success", text: "+3%" },
       icon: { color: "info", component: Player },
     },
     {
       title: "Online Player",
-      count: "346",
+      count: onlinePlayer !== null ? onlinePlayer : "Loading...",
       percentage: { color: "error", text: "-2%" },
       icon: { color: "info", component: Player },
     },
@@ -42,7 +73,7 @@ function Dashboard() {
       icon: { color: "info", component: Player },
     },
   ]
-  
+
   return (
     <>
       <Sidenav />

@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import Pagination from "@mui/material/Pagination";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Tabs, Tab } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 
 // Soft UI Dashboard React components
@@ -25,10 +25,14 @@ function UserManagement() {
   const rowsPerPage = 5; // Show 5 rows per page
   const [openModal, setOpenModal] = useState(false); // State to open/close modal
   const [newPlayer, setNewPlayer] = useState(""); // State to store the new player's name
+  const [firstName, setFirstName] = useState(""); // State to store the new player's first name
+  const [lastName, setLastName] = useState(""); // State to store the new player's last name
   const [newImage, setNewImage] = useState(null);
   const [newEmail, setNewEmail] = useState("");
   const [previewImage, setPreviewImage] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const [selectedTab, setSelectedTab] = useState(0); // State for tab selection
+
 
 
   // Calculate the index for slicing the rows
@@ -52,7 +56,11 @@ function UserManagement() {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
-
+  // handle tab change
+  const handleTabChange = (event, newValue) => {
+    setSelectedTab(newValue);
+    setCurrentPage(1); // Reset pagination when switching tabs
+  };
   // Open Modal
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -69,18 +77,25 @@ function UserManagement() {
     setOpenModal(false);
   };
 
-  // Handle New Player Input Change
-  const handleInputChange = (event) => {
-    setNewPlayer(event.target.value);
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
   };
+
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
+  };
+
+
   const handleImageChange = (file) => {
     // Get the selected file
     setNewImage(file);
   };
 
-const handleSearch = () => {
-  console.log("Search Triggered:", searchText);
-};
+  const handleSearch = () => {
+    console.log("Search Triggered:", searchText);
+  };
+
+
 
 
 
@@ -92,15 +107,22 @@ const handleSearch = () => {
         type: "Bot", // You can set additional attributes for the bot player
       };
 
-      // Add the new player to the rows (this could be saved to state or updated in the backend)
-      // For simplicity, we're adding to the original rows here, but you'd want to handle this differently in a real app
       rows.push(newPlayerData);
 
-      // Reset the newPlayer input and close the modal
       setNewPlayer("");
       handleCloseModal();
     }
   };
+
+  const filteredRealUsers = rows.filter(row => row.is_bot === false);
+const filteredBotPlayers = rows.filter(row => row.is_bot === true);
+
+const filteredRows = selectedTab === 0
+  ? filteredRealUsers.slice(indexOfFirstRow, indexOfLastRow) // Real users paginated
+  : filteredBotPlayers.slice(indexOfFirstRow, indexOfLastRow); // Bot players paginated
+
+  const totalRows = selectedTab === 0 ? filteredRealUsers.length : filteredBotPlayers.length;
+
 
   return (
     <DashboardLayout>
@@ -154,6 +176,31 @@ const handleSearch = () => {
                 Search
               </SoftButton>
             </SoftBox>
+            <SoftBox mt={2}>
+              <Tabs
+                value={selectedTab}
+                onChange={handleTabChange}
+                indicatorColor="info"
+                textColor="primary"
+                centered
+
+
+              >
+                <Tab label="Real Users" sx={{
+                  '&.Mui-selected': {
+                    color: 'black', 
+                    backgroundColor: 'info.main'
+                  },
+                }} />
+                <Tab label="Bot Players" sx={{
+                  '&.Mui-selected': {
+                    color: 'black', 
+                    backgroundColor: 'info.main'
+                  },
+                }} />
+              </Tabs>
+            </SoftBox>
+
           </SoftBox>
 
           {/* Table */}
@@ -165,15 +212,15 @@ const handleSearch = () => {
                     `${borderWidth[1]} solid ${borderColor}`,
                 },
               },
-            }}
-          >
-            <Table columns={columns} rows={currentRows} />
+            }}>
+
+            <Table columns={columns} rows={filteredRows} />
           </SoftBox>
 
           {/* Pagination */}
           <SoftBox display="flex" justifyContent="center" mt={3}>
             <Pagination
-              count={Math.ceil(rows.length / rowsPerPage)} // Calculate number of pages
+              count={Math.ceil(totalRows / rowsPerPage)} // Calculate number of pages
               page={currentPage}
               onChange={handlePageChange}
               color="info"
@@ -195,17 +242,30 @@ const handleSearch = () => {
 
         </DialogTitle>
         <DialogContent>
-          <SoftTypography sx={{ marginTop: 2 }} variant="body2">
-            Player Name
-          </SoftTypography>
-          {/* Player Name Field */}
-          <SoftInput
-            placeholder="Player Name"
-            variant="outlined"
-            fullWidth
-            value={newPlayer}
-            onChange={handleInputChange}
-          />
+          <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+            <div style={{ flex: 1 }}>
+              <SoftTypography variant="body2">First Name</SoftTypography>
+              {/* First Name Field */}
+              <SoftInput
+                placeholder="First Name"
+                variant="outlined"
+                fullWidth
+                value={firstName}
+                onChange={handleFirstNameChange}
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <SoftTypography variant="body2">Last Name</SoftTypography>
+              {/* Last Name Field */}
+              <SoftInput
+                placeholder="Last Name"
+                variant="outlined"
+                fullWidth
+                value={lastName}
+                onChange={handleLastNameChange}
+              />
+            </div>
+          </div>
 
           <SoftTypography sx={{ marginTop: 2 }} variant="body2">
             Email
@@ -219,11 +279,10 @@ const handleSearch = () => {
             onChange={(e) => setNewEmail(e.target.value)}
           />
 
-          {/* Image Upload Field */}
           <SoftTypography sx={{ marginTop: 2 }} variant="body2">
             Player Image
           </SoftTypography>
-
+          {/* Image Upload Field */}
           <div
             {...getRootProps()}
             style={{
@@ -261,6 +320,7 @@ const handleSearch = () => {
             )}
           </div>
         </DialogContent>
+
         <DialogActions>
           <SoftBox mt={4} mb={1}>
             <SoftButton
