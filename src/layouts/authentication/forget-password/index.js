@@ -3,6 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useStore from "utils/UseStore";
 import { useNavigate } from "react-router-dom";
+import { LoginAPI } from "utils/constants";
 
 const ForgetPasswordForm = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ const ForgetPasswordForm = () => {
       return;
     }
     else{
-      const response = await postData("/api/admin/request-reset-otp", { email });
+      const response = await postData(LoginAPI.request_Password, { email });
       
       if(response.success){
         toast.success(response.message);

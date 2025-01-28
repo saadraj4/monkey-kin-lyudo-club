@@ -1,30 +1,32 @@
 import { useState } from "react";
-import Card from "@mui/material/Card";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import Pagination from "@mui/material/Pagination";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Tabs, Tab } from "@mui/material";
 import { useDropzone } from "react-dropzone";
-
-// Soft UI Dashboard React components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Table from "examples/Tables/Table";
-
-// Data
-import authorsTableData from "./data/UserTableData";
+import axios from "axios";
+import { BASEURL, ImageURLAPI } from "utils/constants";
+import UserTableData from "./data/UserTableData";
 import SoftButton from "components/SoftButton";
 import SideNav from "../SideNavbar"
 import SoftInput from "components/SoftInput";
+import UseStore from "utils/UseStore";
+import { UserAPI } from "utils/constants";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 
 function UserManagement() {
 
-  const { columns, rows } = authorsTableData;
+  const { columns, rows } = UserTableData();
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5; // Show 5 rows per page
   const [openModal, setOpenModal] = useState(false); // State to open/close modal
-  const [newPlayer, setNewPlayer] = useState(""); // State to store the new player's name
   const [firstName, setFirstName] = useState(""); // State to store the new player's first name
   const [lastName, setLastName] = useState(""); // State to store the new player's last name
   const [newImage, setNewImage] = useState(null);
@@ -32,22 +34,19 @@ function UserManagement() {
   const [previewImage, setPreviewImage] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [selectedTab, setSelectedTab] = useState(0); // State for tab selection
-
+  const [imageURL, setImageURL] = useState("https://via.placeholder.com/150"); // State to store the image URL
+  const { postData,fetchData } = UseStore();
 
 
   // Calculate the index for slicing the rows
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
-  const onDrop = (acceptedFiles) => {
-    if (acceptedFiles.length > 0) {
-      const file = acceptedFiles[0];
-      const previewUrl = URL.createObjectURL(file);
-      setPreviewImage(previewUrl);
-
-      // Trigger callback to parent component (if needed)
-      handleImageChange(file);
-    }
+  const onDrop = async (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    const previewUrl = URL.createObjectURL(file);
+    setPreviewImage(previewUrl);
+    handleImageChange(file);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: "image/*", multiple: false });
@@ -86,46 +85,75 @@ function UserManagement() {
   };
 
 
-  const handleImageChange = (file) => {
-    // Get the selected file
-    setNewImage(file);
+  const handleImageChange = async (file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("category", "bot-image");
+    const response = await postData(ImageURLAPI, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Set the correct headers for file uploads
+      },
+    });
+
+    if (response.success) {
+      console.log("response url", response.imageUrl);
+
+      // Set the image URL
+      setImageURL(response.imageUrl);
+      setNewImage(file);
+    }
+    else {
+      toast.error("Failed to upload image");
+    }
   };
 
-  const handleSearch = () => {
-    console.log("Search Triggered:", searchText);
+  const handleSearch = async () => {
+    const response = await fetchData(UserAPI.search_player + searchText);
+
+    console.log("Search Response:", response);
   };
-
-
 
 
 
   // Handle Add New Player
-  const handleAddPlayer = () => {
-    if (newPlayer) {
-      const newPlayerData = {
-        name: newPlayer,
-        type: "Bot", // You can set additional attributes for the bot player
-      };
-
-      rows.push(newPlayerData);
-
-      setNewPlayer("");
-      handleCloseModal();
+  const handleAddPlayer = async () => {
+    const newPlayerData = {
+      first_name: firstName,
+      last_name: lastName,
+      email: newEmail,
+      avatar: imageURL,
+      is_bot: true,
+    };
+    const response = await postData(UserAPI.create_player, newPlayerData);
+    console.log(response);
+    if (response && response.success) {
+      toast.success(response.message);
     }
+    else {
+      toast.error(response.message);
+    }
+
+    setFirstName("");
+    setLastName("");
+    setNewEmail("");
+    setPreviewImage(null);
+    handleCloseModal();
+
   };
 
   const filteredRealUsers = rows.filter(row => row.is_bot === false);
-const filteredBotPlayers = rows.filter(row => row.is_bot === true);
+  const filteredBotPlayers = rows.filter(row => row.is_bot === true);
 
-const filteredRows = selectedTab === 0
-  ? filteredRealUsers.slice(indexOfFirstRow, indexOfLastRow) // Real users paginated
-  : filteredBotPlayers.slice(indexOfFirstRow, indexOfLastRow); // Bot players paginated
+  const filteredRows = selectedTab === 0
+    ? filteredRealUsers.slice(indexOfFirstRow, indexOfLastRow) // Real users paginated
+    : filteredBotPlayers.slice(indexOfFirstRow, indexOfLastRow); // Bot players paginated
 
   const totalRows = selectedTab === 0 ? filteredRealUsers.length : filteredBotPlayers.length;
 
 
   return (
     <DashboardLayout>
+      <ToastContainer />
       <SideNav />
       <DashboardNavbar />
       <SoftBox py={3}>
@@ -188,13 +216,13 @@ const filteredRows = selectedTab === 0
               >
                 <Tab label="Real Users" sx={{
                   '&.Mui-selected': {
-                    color: 'black', 
+                    color: 'black',
                     backgroundColor: 'info.main'
                   },
                 }} />
                 <Tab label="Bot Players" sx={{
                   '&.Mui-selected': {
-                    color: 'black', 
+                    color: 'black',
                     backgroundColor: 'info.main'
                   },
                 }} />
@@ -242,8 +270,8 @@ const filteredRows = selectedTab === 0
 
         </DialogTitle>
         <DialogContent>
-          <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
-            <div style={{ flex: 1 }}>
+          <SoftBox style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+            <SoftBox style={{ flex: 1 }}>
               <SoftTypography variant="body2">First Name</SoftTypography>
               {/* First Name Field */}
               <SoftInput
@@ -253,8 +281,8 @@ const filteredRows = selectedTab === 0
                 value={firstName}
                 onChange={handleFirstNameChange}
               />
-            </div>
-            <div style={{ flex: 1 }}>
+            </SoftBox>
+            <SoftBox style={{ flex: 1 }}>
               <SoftTypography variant="body2">Last Name</SoftTypography>
               {/* Last Name Field */}
               <SoftInput
@@ -264,8 +292,8 @@ const filteredRows = selectedTab === 0
                 value={lastName}
                 onChange={handleLastNameChange}
               />
-            </div>
-          </div>
+            </SoftBox>
+          </SoftBox>
 
           <SoftTypography sx={{ marginTop: 2 }} variant="body2">
             Email
@@ -283,7 +311,7 @@ const filteredRows = selectedTab === 0
             Player Image
           </SoftTypography>
           {/* Image Upload Field */}
-          <div
+          <SoftBox
             {...getRootProps()}
             style={{
               border: "2px dashed #3a3bf1",
@@ -318,7 +346,7 @@ const filteredRows = selectedTab === 0
             ) : (
               <p>Drag & drop an image, or click to select one</p>
             )}
-          </div>
+          </SoftBox>
         </DialogContent>
 
         <DialogActions>

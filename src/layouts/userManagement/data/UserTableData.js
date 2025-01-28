@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 // Soft UI Dashboard React components
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
@@ -12,142 +12,68 @@ import team4 from "assets/images/team-4.jpg";
 import SoftButton from "components/SoftButton";
 import Gift from "../gift";
 
+// import UseStore from "utils/UseStore";
+import { UserAPI } from "utils/constants";
+import UseStore from "utils/UseStore";
+import { toast,ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const authorsTableData = {
+const UserTableData = () => {
+  const [userData, setUserData] = useState([
+    { image: team2, name: "John Michael", email: "john@creative-tim.com", id: 1, rate: "35%", streak: 4, is_bot: false },
+    { image: team3, name: "Alexa Liras", email: "alexa@creative-tim.com", id: 2, rate: "35%", streak: 0, is_bot: false },
+    { image: team4, name: "Laurent Perrier", email: "laurent@creative-tim.com", id: 3, rate: "35%", streak: 7, is_bot: false },
+    { image: team3, name: "Michael Levi", email: "michael@creative-tim.com", id: 4, rate: "35%", streak: 10, is_bot: false },
+    { image: team2, name: "Richard Gran", email: "richard@creative-tim.com", id: 5, rate: "35%", streak: 0, is_bot: true },
+    { image: team4, name: "Miriam Eric", email: "miriam@creative-tim.com", id: 6, rate: "35%", streak: 0, is_bot: true },
+    { image: team4, name: "Miriam Eric", email: "miriam@creative-tim.com", id: 7, rate: "35%", streak: 10, is_bot: true },
+    { image: team4, name: "Miriam Eric", email: "miriam@creative-tim.com", id: 8, rate: "35%", streak: 0, is_bot: false },
+    { image: team4, name: "Miriam Eric", email: "miriam@creative-tim.com", id: 9, rate: "35%", streak: 0, is_bot: true },
+    { image: team4, name: "Miriam Eric", email: "miriam@creative-tim.com", id: 10, rate: "35%", streak: 0, is_bot: false },
+  ]);
+  const {fetchData} = UseStore();
+  // Fetch data from backend
+  useEffect(() => {
+    const fetchPlayers = async () => {
+      try {
+        const response = await fetchData(UserAPI.get_all_players);
+        setUserData(response.players); // Update state with backend data
+      } catch (error) {
+        toast.error("Error fetching user data");
+      }
+    };
 
-  columns: [
+    fetchPlayers();
+  }, []);
+
+  // Columns Configuration
+  const columns = [
     { name: "user", align: "left" },
     { name: "rate", align: "left" },
     { name: "streak", align: "center" },
     { name: "action", align: "center" },
-    { name: "status", align: "center" }
-  ],
+    { name: "status", align: "center" },
+  ];
 
-  rows: [
-    {
-      user: <Author image={team2} name="John Michael" email="john@creative-tim.com" id={1} />,
-      rate: <Function rate={"35%"} />,
-      streak: (
-        <SoftBadge variant="gradient" badgeContent="4" color="success" container />
-      ),
-      action: <GiftComponent id={1} />,
-      status: <StatusButton id={1} />,
-      is_bot: false
-    },
-    {
-      user: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" id={2} />,
-      rate: <Function rate={"35%"} />,
-      streak: (
-        <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
-      ),
+  // Rows Generation with Map
+  const rows = userData.map((user) => ({
+    user: <Author image={user.avatar} name={user.first_name} email={user.email} id={user._id} />,
+    rate: <Function rate={user.win_rate} />,
+    streak: <StreakBadge streak={user.streak} />,
+    action: <GiftComponent id={user.id} />,
+    status: <StatusButton id={user.id} isBot={user.is_bot} />,
+    is_bot: user.is_bot,
+  }));
+  <ToastContainer/>
 
-      action: <GiftComponent id={2} />,
-      status: <StatusButton id={2} />,
-      is_bot: false
-    },
-    {
-      user: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" id={3} />,
-      rate: <Function rate={"35%"} />,
-      streak: (
-        <SoftBadge variant="gradient" badgeContent="7" color="success" container />
-      ),
-
-      action: <GiftComponent id={3} />,
-      status: <StatusButton id={3} />,
-      is_bot: false
-    },
-    {
-      user: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" id={4} />,
-      rate: <Function rate={"35%"} />,
-      streak: (
-        <SoftBadge variant="gradient" badgeContent="10" color="success" container />
-      ),
-
-      action: <GiftComponent id={4} />,
-      status: <StatusButton id={4} />,
-      is_bot: false
-    },
-    {
-      user: <Author image={team2} name="Richard Gran" email="richard@creative-tim.com" id={5} />,
-      rate: <Function rate={"35%"} />,
-      streak: (
-        <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
-      ),
-
-      action: <GiftComponent id={5} />,
-      status: <StatusButton id={5} />,
-      is_bot: true
-    },
-    {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={6} />,
-      rate: <Function rate={"35%"} />,
-
-
-      streak: (
-        <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
-      ),
-      action: <GiftComponent id={6} />,
-      status: <StatusButton id={6} />,
-      is_bot: true
-    },
-    {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={7} />,
-      rate: <Function rate={"35%"} />,
-      streak: (
-        <SoftBadge variant="gradient" badgeContent="10" color="success" container />
-      ),
-
-      action: <GiftComponent id={7} />,
-      status: <StatusButton id={7} />,
-      is_bot: true
-    },
-    {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={8} />,
-      rate: <Function rate={"35%"} />,
-      streak: (
-        <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
-      ),
-
-      action: <GiftComponent id={8} />,
-      status: <StatusButton id={8} />,
-      is_bot: false
-    },
-    {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={9} />,
-      rate: <Function rate={"35%"} />,
-
-      reward: (
-        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          14/09/20
-        </SoftTypography>
-      ),
-      streak: (
-        <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
-      ),
-      action: <GiftComponent id={9} />,
-      status: <StatusButton id={9} />,
-      is_bot: true
-    },
-
-    {
-      user: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" id={10} />,
-      rate: <Function rate={"35%"} />,
-
-      reward: (
-        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          14/09/20
-        </SoftTypography>
-      ),
-      streak: (
-        <SoftBadge variant="gradient" badgeContent="0" color="secondary" container />
-      ),
-      action: <GiftComponent id={10} />,
-      status: <StatusButton id={10} />,
-      is_bot: false
-    },
-
-  ]
+  return {
+    columns,
+    rows,
+  };
 };
+
+
+
 function StatusButton(id) {
   const [status, setStatus] = useState("Active");
 
@@ -232,15 +158,26 @@ function Function({ rate }) {
   return (
     <SoftBox display="flex" flexDirection="column">
       <SoftTypography variant="regular" fontWeight="medium" color="text">
-        {rate}
+        {`${rate}`}
       </SoftTypography>
     </SoftBox>
   );
 }
 
+function StreakBadge({ streak }) {
+  const color = streak === 0 ? "secondary" : "success";
+  return (
+    <SoftBadge
+      variant="gradient"
+      badgeContent={`${streak}`}
+      color={color}
+      container
+    />
+  );
+}
 const handleViewClick = (row) => {
   window.location.href = `/user-profile/${row}`;
 };
 
 
-export default authorsTableData;
+export default UserTableData;

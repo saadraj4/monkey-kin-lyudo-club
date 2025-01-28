@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useStore from "../../../utils/UseStore";
+import { LoginAPI } from "utils/constants";
 
 const OTPVerification = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -73,7 +74,7 @@ const OTPVerification = () => {
 
 
   const handleResendOtp = async () => {
-    const response = await postData("/api/admin/resend-otp", { email });
+    const response = await postData(LoginAPI.resend_login_otp, { email });
     if (response && response.success) {
       toast.success(response.message)
     }

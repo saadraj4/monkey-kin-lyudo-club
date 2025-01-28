@@ -9,8 +9,7 @@ import Logo from "assets/images/logo.jpeg";
 import useStore from "utils/UseStore";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import { BASEURL } from "utils/constants";
+import { LoginAPI } from "utils/constants";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ function SignIn() {
 
   const handleLogin = async () => {
 
-    const response = await postData("/api/admin/login", { email, password });
+    const response = await postData(LoginAPI.login, { email, password });
     
     
     if (response && response.success) {
