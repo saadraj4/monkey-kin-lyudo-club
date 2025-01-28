@@ -31,5 +31,10 @@ export const NotificationAPI={
     get_all_notifications:"/api/admin/notification/all"
 }
 
+export const GameRulesAPI = {
+    get_all: "/api/admin/game-management/all",
+    update_game: "/api/admin/game-management/update"
+}
+
 
 
