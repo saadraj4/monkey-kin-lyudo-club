@@ -35,16 +35,16 @@ function ChestRewards() {
 
   const handleSave = async () => {
     const requestData = { reward_percentage: value, is_dice_face: addDiceFace };
-    console.log("payload",requestData);
-    const response = await updateData(SettingsAPI.update_chest_reward, rewardId,requestData);
-    if (response) {
-      toast.success(toast.message);
+
+    const response = await updateData(SettingsAPI.update_chest_reward, rewardId, requestData);
+    if (response.success) {
+      toast.success(response.message);
+      handleClose();
     }
     else {
-      toast.error(toast.message);
+      toast.error(response.message);
     }
 
-    handleClose();
   };
 
   const handleCheckboxChange = (event) => {
@@ -136,7 +136,7 @@ function ChestRewards() {
             <SoftButton onClick={handleClose} variant="gradient" color="secondary" sx={{ mr: 2 }}>
               Cancel
             </SoftButton>
-            <SoftButton onClick={handleSave} color="info" variant="gradient">
+            <SoftButton onClick={() => handleSave()} color="info" variant="gradient">
               Save
             </SoftButton>
           </SoftBox>

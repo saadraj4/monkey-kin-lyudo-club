@@ -1,5 +1,7 @@
 // export const BASEURL = "http://192.168.1.254:9091"
 
+import { Update } from "@mui/icons-material";
+
 // export const 
 export const BASEURL = "http://192.168.1.8:9091"
 export const ImageURLAPI = "/api/admin/image-upload";
@@ -45,8 +47,9 @@ export const ShopsAPI={
 
 export const SettingsAPI={
     get_chest_reward:"/api/admin/chest-box",
+    get_daily_reward:"/api/admin/daily-booster-reward/all",
     update_chest_reward: "/api/admin/chest-box/update",
-
+    Update_daily_reward:"/api/admin/daily-booster-reward/update"
 }
 
 
