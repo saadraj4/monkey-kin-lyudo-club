@@ -5,7 +5,7 @@ import SoftButton from 'components/SoftButton'
 import SoftBox from 'components/SoftBox'
 import NotificationList from './components/NotificationList'
 // import NotificationListData from './data/NotificationsListData'
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
+import { Dialog, DialogActions, DialogContent, DialogTitle, Pagination } from '@mui/material'
 import SoftTypography from 'components/SoftTypography'
 import SoftInput from 'components/SoftInput'
 import { useDropzone } from "react-dropzone";
@@ -25,15 +25,18 @@ function index() {
   const { postData, fetchData } = UseStore();
   const [NotificationListData, setNotificationListData] = useState([]);
   const [previewImage, setPreviewImage] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1); // Track current page
+  const [totalPages, setTotalPages] = useState(1); // Track total pages
   const [isLoading, setIsLoading] = useState(true);
   const [toastNotificationShown, setToastNotificationShown] = useState(false);
-
+ 
 
   useEffect(() => {
     const fetchNotificationData = async () => {
-      const response = await fetchData(NotificationAPI.get_all_notifications);
+      const response = await fetchData(`${NotificationAPI.get_all_notifications}?page=${currentPage}`);
       if (response.success) {
         setNotificationListData(response.notifications);
+        setTotalPages(response.pagination.totalPages)
         setIsLoading(false);
       }
       else {
@@ -42,9 +45,12 @@ function index() {
     }
     fetchNotificationData();
 
-  }, []);
+  }, [currentPage, fetchData]);
 
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value); // Update current page when user navigates
+  };
 
   const onDrop = (acceptedFiles) => {
     if (acceptedFiles.length > 0) {
@@ -150,6 +156,13 @@ function index() {
           ) : (
             <NotificationList title={"Notifications History"} Notifications={NotificationListData} />
           )}
+          <Pagination
+            count={totalPages} // Total number of pages
+            page={currentPage} // Current page
+            onChange={handlePageChange} // Handle page change
+            color="info"
+            sx={{ marginTop: 3 }}
+          />
         </SoftBox>
 
       </SoftBox>

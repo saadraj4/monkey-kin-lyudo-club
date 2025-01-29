@@ -6,54 +6,23 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
 import SoftButton from "components/SoftButton";
-import { Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputAdornment, MenuItem, Select } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import SoftInput from "components/SoftInput";
-import Coin from "assets/images/coins.png"
-import Diamond from "assets/images/diamond.png"
-import Booster from "assets/images/booster.png"
-import ArrowDropDownCircleTwoToneIcon from "@mui/icons-material/ArrowDropDownCircleTwoTone";
+// import UseStore from "store/UseStore";
+
 
 function DailyRewardList({ title, DailyReward }) {
-  const [selectedAsset, setSelectedAsset] = useState('');
-  const [selectedVariant, setSelectedVariant] = useState('');
+
   const [openReward, setOpenReward] = useState(false);
+  // const {fetchData} = UseStore();
+
 
   const handleOpenReward = () => setOpenReward(true); // Open the Reward modal
   const handleCloseReward = () => setOpenReward(false); // Close the Reward modal
 
-  // Map assets to their respective variants and image URLs
-  const assetVariants = {
-    Coins: [
-      { name: 'Gold Coin', imageUrl: Coin },
-      { name: 'Silver Coin', imageUrl: Coin },
-      { name: 'Bronze Coin', imageUrl: Coin },
-    ],
-    Diamonds: [
-      { name: 'Red Diamond', imageUrl: Diamond },
-      { name: 'Blue Diamond', imageUrl: Diamond },
-      { name: 'Green Diamond', imageUrl: Diamond },
-    ],
-    Boosters: [
-      { name: 'Speed Booster', imageUrl: Booster },
-      { name: 'Energy Booster', imageUrl: Booster },
-      { name: 'Shield Booster', imageUrl: Booster },
-    ],
-  };
-
-  // Handle asset change
-  const handleAssetChange = (event) => {
-    setSelectedAsset(event.target.value);
-    setSelectedVariant(''); // Reset variant when asset changes
-  };
-
-  // Handle variant change
-  const handleVariantChange = (event) => {
-    setSelectedVariant(event.target.value);
-  };
-
   // Handle submit
   const handleSubmit = (id) => {
-    console.log('Reward updated', { asset: selectedAsset, variant: selectedVariant });
+    console.log('Reward updated');
     handleCloseReward();
   };
 
@@ -63,14 +32,6 @@ function DailyRewardList({ title, DailyReward }) {
     handleCloseReward();
   };
 
-  // Function to open the select dropdown on field click
-  const openAssetDropdown = () => {
-    document.getElementById('asset-select').click();
-  };
-
-  const openVariantDropdown = () => {
-    document.getElementById('variant-select').click();
-  };
 
   const renderDailyReward = DailyReward.map(({ id, image, name, description }, index) => (
     <Grid item xs={12} sm={6} key={index}> {/* Use Grid item for each profile */}
@@ -121,89 +82,19 @@ function DailyRewardList({ title, DailyReward }) {
           </Grid>
         </SoftBox>
       </Card>
+
+
       <Dialog open={openReward} onClose={handleClose} maxWidth="sm" fullWidth>
         <SoftBox>
           <DialogTitle display="flex" alignItems="center" justifyContent="center" fontWeight="bold" fontSize="20px">
             Edit Rewards
           </DialogTitle>
           <DialogContent>
-            {/* Asset Dropdown */}
-            <SoftTypography sx={{ marginTop: 2 }} variant="body2">
-              Select Asset
-            </SoftTypography>
-            <SoftBox onClick={openAssetDropdown}>
-              <FormControl fullWidth variant="outlined" sx={{ marginBottom: 1 }}>
-                <Select
-                  id="asset-select"
-                  value={selectedAsset}
-                  onChange={handleAssetChange}
-                  label="Asset"
-                  defaultValue=""
-                  input={<SoftInput variant="outlined" />}
-                  startAdornment={
-                    <InputAdornment position="start" sx={{ display: 'flex', alignItems: 'center', color: 'black', fontSize: "1.5rem",}}>
-                      <ArrowDropDownCircleTwoToneIcon sx={{ color: 'black', fontSize: 30,marginLeft:"28.5rem", marginTop:"1rem"  }} />
-                    </InputAdornment>
-                  }
-
-
-                >
-                  {Object.keys(assetVariants).map((asset) => (
-                    <MenuItem key={asset} value={asset}>
-                      {asset}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </SoftBox>
-
-            {/* Variant Dropdown */}
-            <SoftTypography sx={{ marginTop: 2 }} variant="body2">
-              Select Variant
-            </SoftTypography>
-            <SoftBox onClick={openVariantDropdown}>
-              <FormControl fullWidth variant="outlined" sx={{ marginBottom: 1 }}>
-                <Select
-                  id="variant-select"
-                  value={selectedVariant}
-                  onChange={handleVariantChange}
-                  label="Variant"
-                  defaultValue=""
-                  disabled={!selectedAsset}
-                  aria-label="Select a variant"
-                  input={<SoftInput variant="outlined" />}
-                  startAdornment={
-                                  <InputAdornment position="start" sx={{ display: 'flex', alignItems: 'center', color: 'black', fontSize: "1.5rem",}}>
-                                    <ArrowDropDownCircleTwoToneIcon sx={{ color: 'black', fontSize: 30,marginLeft:"28.5rem", marginTop:"1rem"  }} />
-                                  </InputAdornment>
-                                }
-
-                >
-                  {selectedAsset
-                    ? assetVariants[selectedAsset].map((variant) => (
-                      <MenuItem key={variant.name} value={variant.name}>
-                        <SoftBox sx={{ display: 'flex', alignItems: 'center' }}>
-                          <img
-                            src={variant.imageUrl}
-                            alt={variant.name}
-                            style={{ width: 20, height: 20, marginRight: 8 }}
-                          />
-                          <SoftTypography variant="body2">{variant.name}</SoftTypography>
-                        </SoftBox>
-                      </MenuItem>
-                    ))
-                    : [
-                      <MenuItem key="placeholder" value="" disabled>
-                        Select an asset first
-                      </MenuItem>,
-                    ]}
-                </Select>
-              </FormControl>
-            </SoftBox>
+            
 
             {/* Quantity / Hours Input */}
             <SoftTypography sx={{ marginTop: 2 }} variant="body2">
-              Quantity / Hours
+                Hours
             </SoftTypography>
             <SoftInput
               variant="outlined"
@@ -211,13 +102,7 @@ function DailyRewardList({ title, DailyReward }) {
               placeholder="Enter quantity or hours"
               fullWidth
               onWheel={(e) => e.target.blur()}
-            />
-
-            {/* Message Input */}
-            <SoftTypography sx={{ marginTop: 2 }} variant="body2">
-              Message
-            </SoftTypography>
-            <SoftInput placeholder="Message" variant="outlined" type="text" fullWidth multiline rows={4} />
+            />            
           </DialogContent>
 
           <DialogActions>

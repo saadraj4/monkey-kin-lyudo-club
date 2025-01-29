@@ -37,4 +37,21 @@ export const GameRulesAPI = {
 }
 
 
+export const ShopsAPI={
+    get_all: "/api/admin/shop-package/all",
 
+}
+
+
+export const SettingsAPI={
+    get_chest_reward:"/api/admin/chest-box",
+    update_chest_reward: "/api/admin/chest-box/update",
+
+}
+
+
+export const AdminProfileAPI={
+    get_profile: "/api/admin",
+    update_password:"/api/admin/change-password",
+    update_admin:"/api/admin/update"
+}

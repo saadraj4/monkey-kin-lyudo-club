@@ -23,16 +23,21 @@ function Overview() {
   const fileInputRef = useRef(null); // Reference to the hidden file input
   const [image, setImage] = useState(null); // State to store the selected image
 
-  const handleUpload = () => {
-    console.log("Image upload triggered");
+  const handleUpload = (section) => {
     fileInputRef.current.click(); // Trigger file input click
+    console.log("Image upload triggered in upload",section); // Trigger file input click
+
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event,section) => {
     const file = event.target.files[0]; // Get the selected file
-    if (file) {
-      setImage(URL.createObjectURL(file)); // Create a temporary URL for the image
-    }
+    const formData = new FormData(); // Create a new FormData instance
+    formData.append("image", file); // Append the file to the FormData instance
+    formData.append("category", section); // Append the file to the FormData instance
+    console.log("Image upload triggered in cgnage",section); // Trigger file input click
+    // if (file) {
+    //   setImage(URL.createObjectURL(file)); // Create a temporary URL for the image
+    // }
   };
 
   const settings = {
@@ -134,10 +139,10 @@ function Overview() {
                 type="file"
                 accept="image/*"
                 style={{ display: "none" }}
-                onChange={handleFileChange}
+                onChange={(event) => handleFileChange(event,section)}
               />
               <IconButton
-                onClick={handleUpload}
+                onClick={() => handleUpload(section)}
                 sx={{
                   position: "absolute",
                   top: "10px",

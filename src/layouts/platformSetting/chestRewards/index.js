@@ -5,42 +5,55 @@ import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
 import { Modal, Checkbox, FormControlLabel } from "@mui/material";
 import SoftInput from "components/SoftInput";
-import { useState } from "react";
-
-// You can use a dice face array or simply use images/icons for dice faces
-const diceFaces = [
-  "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"
-];
+import { useEffect, useState } from "react";
+import UseStore from "utils/UseStore";
+import { SettingsAPI } from "utils/constants";
+import { toast, ToastContainer } from "react-toastify";
 
 function ChestRewards() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
-  const [value, setValue] = useState("30%"); // Value state for diamonds
+  const [value, setValue] = useState(); // Value state for diamonds
   const [addDiceFace, setAddDiceFace] = useState(false); // Checkbox state
-  const [diceFace, setDiceFace] = useState(diceFaces[0]); // Default dice face (⚀)
+  const [rewardId, setRewardId] = useState();
+
+  const { fetchData, updateData } = UseStore();
+
+  useEffect(() => {
+    const fetchChestReward = async () => {
+      const response = await fetchData(SettingsAPI.get_chest_reward);
+
+      setValue(response.chestBox.reward_percentage);
+      setAddDiceFace(response.chestBox.is_dice_face);
+      setRewardId(response.chestBox._id);
+    }
+
+    fetchChestReward();
+  }, []);
 
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
 
-  const handleSave = () => {
-    // Save the updated value and checkbox state
-    console.log("Updated Value:", value);
-    setValue(value);
-    console.log("Add Dice Face:", addDiceFace);
+  const handleSave = async () => {
+    const requestData = { reward_percentage: value, is_dice_face: addDiceFace };
+    console.log("payload",requestData);
+    const response = await updateData(SettingsAPI.update_chest_reward, rewardId,requestData);
+    if (response) {
+      toast.success(toast.message);
+    }
+    else {
+      toast.error(toast.message);
+    }
+
     handleClose();
   };
 
   const handleCheckboxChange = (event) => {
     setAddDiceFace(event.target.checked);
-    // Set random dice face when checkbox is checked
-    if (event.target.checked) {
-      setDiceFace(diceFaces[Math.floor(Math.random() * 6)]);
-    } else {
-      setDiceFace(diceFaces[0]); // Reset to default dice face when unchecked
-    }
   };
 
   return (
     <>
+      <ToastContainer />
       <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
         Chest Reward
       </SoftTypography>
@@ -52,20 +65,19 @@ function ChestRewards() {
                 <SoftTypography variant="h6" fontWeight="bold" gutterBottom>
                   Diamonds
                 </SoftTypography>
-                <SoftBox mb={1}>
+                <SoftBox mb={1} display="flex" justifyContent="space-between" alignItems="center">
                   <SoftTypography variant="body2" color="text">
-                    {value}
+                    {value}%
                   </SoftTypography>
-                </SoftBox>
-                {/* Conditionally render the dice face immediately below the value */}
-                {addDiceFace && (
-                  <SoftBox mt={1} display="flex" justifyContent="start">
+
+                  {addDiceFace && (
                     <SoftTypography variant="h6" fontWeight="bold">
-                      {diceFace} {/* Display the random dice face */}
+                      DiceFace {addDiceFace ? "Added" : "Not added"}
                     </SoftTypography>
-                  </SoftBox>
-                )}
+                  )}
+                </SoftBox>
               </SoftBox>
+
             </Grid>
             <Grid item xs={12} lg={3} sx={{ position: "relative", ml: "auto" }}>
               <SoftBox>

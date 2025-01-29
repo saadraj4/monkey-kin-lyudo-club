@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideNav from '../SideNavbar';
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import SoftButton from 'components/SoftButton';
@@ -12,35 +12,31 @@ import Diamonds from 'assets/images/diamond.png';
 import Boosters from 'assets/images/booster.png';
 import SoftInput from 'components/SoftInput';
 import ArrowDropDownCircleTwoToneIcon from '@mui/icons-material/ArrowDropDownCircleTwoTone';
+import UseStore from 'utils/UseStore';
+import {ShopsAPI} from 'utils/constants';
+import { ConvertNumber } from 'utils/ConvertNumber';
 
 function Index() {
+    const {fetchData} = UseStore();
     const [selectedAsset, setSelectedAsset] = useState('');
     const [selectedVariant, setSelectedVariant] = useState('');
     const [openGift, setOpenGift] = useState(false);
+    const [packages, setPackages] = useState([]);
+    const [filteredPackages, setFilteredPackages] = useState([]);
 
-    const CoinsData = [
-        { id: 1, image: Coins, price: "$10", coins: "10k" },
-        { id: 2, image: Coins, price: "$10", coins: "10k" },
-        { id: 3, image: Coins, price: "$10", coins: "10k" },
-        { id: 4, image: Coins, price: "$10", coins: "10k" },
-        { id: 5, image: Coins, price: "$10", coins: "10k" },
-    ];
 
-    const DiamondsData = [
-        { id: 1, image: Diamonds, price: "$10", coins: "10k" },
-        { id: 2, image: Diamonds, price: "$10", coins: "10k" },
-        { id: 3, image: Diamonds, price: "$10", coins: "10k" },
-        { id: 4, image: Diamonds, price: "$10", coins: "10k" },
-        { id: 5, image: Diamonds, price: "$10", coins: "10k" },
-    ];
-
-    const BoostersData = [
-        { id: 1, image: Boosters, price: "$10", coins: "10k" },
-        { id: 2, image: Boosters, price: "$10", coins: "10k" },
-        { id: 3, image: Boosters, price: "$10", coins: "10k" },
-        { id: 4, image: Boosters, price: "$10", coins: "10k" },
-        { id: 5, image: Boosters, price: "$10", coins: "10k" },
-    ];
+    useEffect(() => {
+        const fetchpackages = async () =>{
+            const response = await fetchData(ShopsAPI.get_all);
+            setPackages(response.shopPackages);
+        };
+        fetchpackages();
+    },[]);
+    
+    const CoinsData = packages.filter((item) => item.package_type === "coin");
+    const DiamondsData = packages.filter((item) => item.package_type === "diamond");
+    const BoostersData = packages.filter((item) => item.package_type === "defender");
+    
 
     const assetVariants = {
         Coins: [
@@ -100,9 +96,9 @@ function Index() {
                             <SoftBox key={index} mr={2} mb={1}>
                                 <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
                                     <DefaultInfoCard
-                                        id={card.id}
-                                        icon={card.image}
-                                        title={card.coins}
+                                        id={card._id}
+                                        icon={card.image_url}
+                                        title={card.quantity}
                                         value={card.price}
                                     />
                                 </Grid>
@@ -131,8 +127,9 @@ function Index() {
 
                                 <Grid item xs={12} md={6} xl={3}>
                                     <DefaultInfoCard
-                                        icon={card.image}
-                                        title={card.coins}
+                                        id={card._id}
+                                        icon={card.image_url}
+                                        title={card.quantity}
                                         value={card.price}
                                     />
                                 </Grid>
@@ -159,8 +156,9 @@ function Index() {
                             <SoftBox key={index} mr={2} mb={1}>
                                 <Grid item xs={12} md={6} xl={3} key={index}>
                                     <DefaultInfoCard
-                                        icon={card.image}
-                                        title={card.coins}
+                                        id={card._id}
+                                        icon={card.image_url}
+                                        title={card.quantity}
                                         value={card.price}
                                     />
                                 </Grid>
@@ -248,12 +246,12 @@ function Index() {
                     <SoftTypography sx={{ marginTop: 2 }} variant="body2">
                         Quantity / Hours
                     </SoftTypography>
-                    <SoftInput placeholder="Enter quantity or hours" type="number" fullWidth />
+                    <SoftInput placeholder="Enter quantity or hours" type="number" fullWidth onWheel={(e)=>e.target.blur()}/>
 
                     <SoftTypography sx={{ marginTop: 2 }} variant="body2">
-                        Message
+                        Price
                     </SoftTypography>
-                    <SoftInput placeholder="Message" multiline rows={4} fullWidth />
+                    <SoftInput placeholder="Price" fullWidth />
                 </DialogContent>
 
                 <DialogActions>

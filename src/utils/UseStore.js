@@ -67,6 +67,20 @@ const useStore = create((set) => ({
     }
   },
 
+  // Update Admin
+  updateAdmin: async (apiEndpoint, payload) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await axios.put(`${BASEURL}${apiEndpoint}`, payload);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      set({
+        error: error.response?.data?.message || error.message,
+        isLoading: false,
+      });
+    }
+  },
   // Clear data
   clearData: () => set({ data: [], error: null }),
 }));
