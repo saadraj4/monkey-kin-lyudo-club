@@ -16,7 +16,9 @@ function ProfilesList({ title, profiles }) {
         </SoftTypography>
       </SoftBox>
       <SoftBox p={2}>
-          <LoadingSpinner />
+          <SoftTypography variant="body2" color="text">
+            No Data Available
+          </SoftTypography>
       </SoftBox>
     </Card>
   );

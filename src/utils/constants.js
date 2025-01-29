@@ -1,17 +1,8 @@
 // export const BASEURL = "http://192.168.1.254:9091"
 
-import { Update } from "@mui/icons-material";
-
 // export const 
 export const BASEURL = "http://192.168.1.8:9091"
 export const ImageURLAPI = "/api/admin/image-upload";
-export const DashboardAPI = {
-    registeredPlayers: "/api/player/registered-count",
-    totalWinningCoins: "/api/admin/game-winning-total-coins",
-    onlinePlayers: "/api/player/online",
-    recentRegistrations: "/api/player/latest-registrations",
-    leaguePlayers: "/api/admin/league",
-};
 
 export const LoginAPI = {
     login: "/api/admin/login",
@@ -21,10 +12,23 @@ export const LoginAPI = {
     resend_reset_otp: "/api/admin/resend-reset-otp-pass",
 }
 
+export const DashboardAPI = {
+    registeredPlayers: "/api/player/registered-count",
+    totalWinningCoins: "/api/admin/game-winning-total-coins",
+    onlinePlayers: "/api/player/online",
+    recentRegistrations: "/api/player/latest-registrations",
+    leaguePlayers: "/api/admin/league",
+};
+
 export const UserAPI={
     create_player:"/api/player/create",
     search_player:"/api/player/all?full_name=",
     get_all_players:"/api/player/all"
+}
+
+export const AssetAPI={
+    create_asset:"/api/admin/assets/create",
+    get_all_assets:"/api/admin/assets/all"
 }
 
 export const NotificationAPI={
